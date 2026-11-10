@@ -19,19 +19,20 @@ recoverability, knowledge distillation and retrained sensor removal.
 ```
 
 **Every number in the paper is machine-checked.** `verify_results.py` recomputes all
-**57 claims** from the reference artifacts shipped in `expected/` and compares them with the
-value printed in the manuscript. It currently reports `57/57 checks passed`.
+**63 claims** from the reference artifacts shipped in `expected/` and compares them with the
+value printed in the manuscript. It currently reports `63/63 checks passed`.
 
 What was verified when this repository was assembled:
 
 | check | result |
 |---|---|
-| claims ledger against shipped artifacts | **57/57** pass, no corpus needed |
+| claims ledger against shipped artifacts | **63/63** pass, no corpus needed |
 | frozen folds vs the subject lists recorded in the original run artifacts | identical, all 6 folds |
 | Table I re-run, 12 fold-seeds, both models | EMA-only **78.22** (published 78.71), full **88.16** (88.28) |
 | SAIT-EMA 405-way re-run from public data | **39.45 ± 7.92** (published 39.31 ± 8.17) |
 | ten figure builders on the shipped artifacts | reproduce the manuscript figures |
 | paired tests re-derived from artifacts | reproduce the paper's values exactly |
+| tone / F0 ceiling probes re-run | 73.07 EMA vs 73.03, 73.77 full vs 73.93 (probe-level sklearn drift) |
 
 ---
 

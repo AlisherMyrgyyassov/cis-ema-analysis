@@ -1,8 +1,10 @@
 # Artifacts: which script produces which number
 
-Two tables. The first maps every claim in the paper to the artifact that holds it and the
-file that regenerates it. The second is the same for figures. `verify_results.py` reads
-`expected/claims.json`, which is the machine-readable form of the first table.
+Every claim in the paper, the artifact that holds it, and the value quoted in the
+manuscript. `expected/claims.json` is the machine-readable form of this table and
+`verify_results.py` checks all of it.
+
+**63 claims.**
 
 ## Claims
 
@@ -65,6 +67,12 @@ file that regenerates it. The second is the same for figures. `verify_results.py
 | `sait_dom_l2n` | Section IV-G | `sait/domain_native_l2.json` | 34.19 |
 | `sait_cal_k1` | Section IV-G | `sait/calib_fair.json` | 23.76 |
 | `sait_cal_k50` | Section IV-G | `sait/calib_fair.json` | 46.18 |
+| `tone_oracle_ema` | Section IV-D | `cis/f0_baseline/tone_syllable_oracle.json` | 73.94 |
+| `tone_oracle_full` | Section IV-D | `cis/f0_baseline/tone_syllable_oracle.json` | 73.97 |
+| `f0_psz_nosyl` | Section IV-D | `cis/f0_baseline/f0_tone_baseline.json` | 65.69 |
+| `f0_psz_prior` | Section IV-D | `cis/f0_baseline/f0_tone_baseline.json` | 64.98 |
+| `f0_psz_syl` | Section IV-D | `cis/f0_baseline/f0_tone_baseline.json` | 82.11 |
+| `f0_mean_only` | Section IV-D | `cis/f0_baseline/f0_tone_baseline.json` | 81.25 |
 
 ## Figures
 
@@ -97,8 +105,8 @@ cp -r expected/cis/arch expected/cis/montage_subset expected/cis/scaling \
 cp expected/cis/results/*.json paper/results/
 python -m src.paper_figures --out paper/figures
 python scripts/make_scaling_figure.py && python scripts/make_montage_figure.py
+python scripts/make_taslp_figures.py
 ```
 
-This was used to check this repository: all ten generated figures match the manuscript's
-files at the pixel-dimension level (two differ by a few pixels of text layout from a
-matplotlib version change).
+All thirteen generated figures match the manuscript's files at pixel-dimension level
+(two differ by a few pixels of text layout from a matplotlib version change).

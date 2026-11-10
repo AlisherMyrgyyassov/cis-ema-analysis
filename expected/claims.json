@@ -918,6 +918,96 @@
         46.18
       ],
       "tol": 0.05
+    },
+    {
+      "id": "tone_oracle_ema",
+      "label": "Syllable-oracle representation probe, EMA",
+      "where": "Section IV-D",
+      "artifact": "cis/f0_baseline/tone_syllable_oracle.json",
+      "extract": {
+        "kind": "dotted",
+        "path": "ema_syl.probe_mean",
+        "scale": 100
+      },
+      "paper": [
+        73.94
+      ],
+      "tol": 0.05
+    },
+    {
+      "id": "tone_oracle_full",
+      "label": "Syllable-oracle representation probe, full",
+      "where": "Section IV-D",
+      "artifact": "cis/f0_baseline/tone_syllable_oracle.json",
+      "extract": {
+        "kind": "dotted",
+        "path": "full_syl.probe_mean",
+        "scale": 100
+      },
+      "paper": [
+        73.97
+      ],
+      "tol": 0.05
+    },
+    {
+      "id": "f0_psz_nosyl",
+      "label": "F0 statistics without syllable identity",
+      "where": "Section IV-D",
+      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+      "extract": {
+        "kind": "dotted",
+        "path": "variants.psz_full.probe_mean",
+        "scale": 100
+      },
+      "paper": [
+        65.69
+      ],
+      "tol": 0.05
+    },
+    {
+      "id": "f0_psz_prior",
+      "label": "Per-syllable prior on the F0 probe subset",
+      "where": "Section IV-D",
+      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+      "extract": {
+        "kind": "dotted",
+        "path": "variants.psz_full.baseline_mean",
+        "scale": 100
+      },
+      "paper": [
+        64.98
+      ],
+      "tol": 0.05
+    },
+    {
+      "id": "f0_psz_syl",
+      "label": "F0 statistics with syllable identity",
+      "where": "Section IV-D",
+      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+      "extract": {
+        "kind": "dotted",
+        "path": "variants.psz_syl_full.probe_mean",
+        "scale": 100
+      },
+      "paper": [
+        82.11
+      ],
+      "tol": 0.05
+    },
+    {
+      "id": "f0_mean_only",
+      "label": "Mean pitch alone with syllable identity",
+      "where": "Section IV-D",
+      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+      "extract": {
+        "kind": "dotted",
+        "path": "variants.psz_syl_mean_only.probe_mean",
+        "scale": 100
+      },
+      "paper": [
+        81.25
+      ],
+      "tol": 0.05
     }
   ]
 }

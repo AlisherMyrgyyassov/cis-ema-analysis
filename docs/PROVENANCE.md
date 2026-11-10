@@ -35,18 +35,25 @@ Three things were edited:
 3. **Output locations.** Run artifacts and tables are written under `runs/paper/` and
    `paper/results/` relative to the repository root, as before, but now through the resolver.
 
+4. **One import bug fixed.** `scripts/within_syllable_tone.py` imported `src.*` without the
+   `sys.path` bootstrap every other script has, so it failed with `ModuleNotFoundError` when
+   invoked as `python scripts/within_syllable_tone.py` — the form the upstream README
+   documents. Three lines were added. It changes no numeric result: the script now runs and
+   reproduces the paper's tone numbers (below).
+
 No model, no preprocessing step, no metric and no hyperparameter was modified.
 
 ## Verification performed when building this repository
 
 | check | result |
 |---|---|
-| every script imports and exposes `--help` | pass; 5 builders (`build_scaled6`, `build_center_calib`, `f0_tone_baseline`, `make_taslp_figures`, `make_scaling_figure`) have no argument parser and do work on invocation, so they were checked by running them against the reference artifacts instead |
+| every script imports and exposes `--help` | pass; 6 scripts (`build_scaled6`, `build_center_calib`, `f0_tone_baseline`, `make_taslp_figures`, `make_scaling_figure`, `within_syllable_tone`) have no argument parser and do work on invocation, so they were checked by running them against the reference artifacts instead |
 | `python scripts/run_exp1.py --fold 0 --seeds 0 --epochs 1` | pass; pooled baselines reproduced to 0.01 (LogReg 84.03 vs 84.04, RF 82.78 vs 82.77) |
 | full Table I re-run (6 folds × 2 seeds, both models) | EMA-only **78.22** vs 78.71 published; full **88.16** vs 88.28; mean Δ −0.49 / −0.12, per-run scatter ±4 with both signs — training noise on a newer torch, not a shifted pipeline (numbers in `REPRODUCING.md`) |
-| `python verify_results.py` (ledger vs `expected/`) | 57/57 claims pass |
+| `python verify_results.py` (ledger vs `expected/`) | 63/63 claims pass |
 | figure builders on the shipped artifacts | all ten generated figures match the manuscript's at pixel-dimension level |
 | `python -m src.analysis_stats` on the shipped artifacts | reproduces the paper's paired tests exactly (+4.14 p=0.001, +1.47 p=0.011, +0.97 p=0.087, +8.20 p=0.010, +9.10 p=0.001) |
+| `scripts/within_syllable_tone.py` after the import fix | runs; reproduces §IV-D tone (73.07 EMA / 73.77 full vs 73.03 / 73.93, probed with sklearn 1.9 instead of the original version) |
 | frozen folds vs the subject lists recorded inside the run artifacts | identical for all 6 folds |
 | SAIT-EMA 405-way re-run from the public feature table (12 fold-seeds) | **39.45 ± 7.92** vs 39.31 ± 8.17 published; per-fold pattern reproduced, including the intrinsically hard fold 2 |
 

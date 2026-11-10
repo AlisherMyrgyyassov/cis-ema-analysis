@@ -116,6 +116,15 @@ python scripts/sait_calib.py        # calibration k-curve, saturates near k = 50
 Targets: `robust_z` **39.31 ± 8.17**, `center_only` **44.44 ± 5.16**, `raw` **23.93 ± 12.28**,
 full 106-channel **74.83 ± 12.47**.
 
+Re-running the first of those here (12 fold-seeds, 405 classes) gave **39.45 ± 7.92** against
+the published 39.31 ± 8.17 — including the intrinsic difficulty of fold 2 (24.5 → 23.5) and
+fold 5. This is the arm to trust if you want to confirm the pipeline works without any
+restricted data:
+
+```bash
+python verify_results.py --runs runs/sait --tol 0.5     # 1/1 passed, 56 skipped
+```
+
 ## What a deviation means
 
 Re-runs are **not bit-identical.** CUDA kernels and multi-threaded BLAS reorder

@@ -48,6 +48,7 @@ No model, no preprocessing step, no metric and no hyperparameter was modified.
 | figure builders on the shipped artifacts | all ten generated figures match the manuscript's at pixel-dimension level |
 | `python -m src.analysis_stats` on the shipped artifacts | reproduces the paper's paired tests exactly (+4.14 p=0.001, +1.47 p=0.011, +0.97 p=0.087, +8.20 p=0.010, +9.10 p=0.001) |
 | frozen folds vs the subject lists recorded inside the run artifacts | identical for all 6 folds |
+| SAIT-EMA 405-way re-run from the public feature table (12 fold-seeds) | **39.45 ± 7.92** vs 39.31 ± 8.17 published; per-fold pattern reproduced, including the intrinsically hard fold 2 |
 
 `verify_results.py --runs <dir>` additionally compares a fresh run against the shipped
 artifacts; see `REPRODUCING.md` for the measured deviation.

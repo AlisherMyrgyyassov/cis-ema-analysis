@@ -22,6 +22,17 @@ recoverability, knowledge distillation and retrained sensor removal.
 **57 claims** from the reference artifacts shipped in `expected/` and compares them with the
 value printed in the manuscript. It currently reports `57/57 checks passed`.
 
+What was verified when this repository was assembled:
+
+| check | result |
+|---|---|
+| claims ledger against shipped artifacts | **57/57** pass, no corpus needed |
+| frozen folds vs the subject lists recorded in the original run artifacts | identical, all 6 folds |
+| Table I re-run, 12 fold-seeds, both models | EMA-only **78.22** (published 78.71), full **88.16** (88.28) |
+| SAIT-EMA 405-way re-run from public data | **39.45 ± 7.92** (published 39.31 ± 8.17) |
+| ten figure builders on the shipped artifacts | reproduce the manuscript figures |
+| paired tests re-derived from artifacts | reproduce the paper's values exactly |
+
 ---
 
 ## What is and is not reproducible from this repository

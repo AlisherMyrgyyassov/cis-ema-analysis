@@ -124,14 +124,25 @@ def resolve(artifact, runs_dir):
 
 
 def check_claims(ledger, runs_dir, tol, quiet):
-    rows, failures = [], 0
+    """Compare every claim with its artifact.
+
+    In ``--runs`` mode a claim whose artifact is not present in that directory is
+    reported as *skipped*, not failed: reproducing the whole paper at once is not
+    the normal workflow, and a partial re-run should still give a usable verdict.
+    """
+    rows, failures, skipped = [], 0, 0
     cache: dict[Path, dict] = {}
     for claim in ledger["claims"]:
         paper = claim["paper"]
         wanted = claim.get("artifacts") or [claim["artifact"]]
         paths = [resolve(a, runs_dir) for a in wanted]
-        if any(p is None or not p.is_file() for p in paths):
-            missing = [a for a, p in zip(wanted, paths) if p is None or not p.is_file()]
+        absent = [p is None or not p.is_file() for p in paths]
+        if any(absent):
+            missing = [a for a, a_ in zip(wanted, absent) if a_]
+            if runs_dir is not None:
+                rows.append((claim["id"], claim["where"], "SKIP", "", "", "not in this run"))
+                skipped += 1
+                continue
             rows.append((claim["id"], claim["where"], "MISSING", "", "", f"absent: {missing[0]}"))
             failures += 1
             continue
@@ -160,7 +171,7 @@ def check_claims(ledger, runs_dir, tol, quiet):
         rows.append((claim["id"], claim["where"], "ok" if ok else "MISMATCH",
                      shown, target, "" if ok else f"Δ={d_value:.2f}"))
         failures += 0 if ok else 1
-    return rows, failures
+    return rows, failures, skipped
 
 
 def check_folds(folds_path, expected_folds, quiet):
@@ -210,14 +221,15 @@ def main() -> int:
     print(f"  source commit {ledger['provenance']['source_repo_commit'][:12]}, "
           f"{len(ledger['claims'])} claims\n")
 
-    rows, failures = check_claims(ledger, args.runs, args.tol, args.quiet)
+    rows, failures, skipped = check_claims(ledger, args.runs, args.tol, args.quiet)
 
     w_id = max(len(r[0]) for r in rows) + 1
     w_where = max(len(r[1]) for r in rows) + 1
     for cid, where, status, got, want, note in rows:
-        if args.quiet and status == "ok":
+        if args.quiet and status in ("ok", "SKIP"):
             continue
-        mark = {"ok": "  ok  ", "MISMATCH": " FAIL ", "MISSING": " MISS ", "ERROR": " ERR  "}[status]
+        mark = {"ok": "  ok  ", "MISMATCH": " FAIL ", "MISSING": " MISS ",
+                "SKIP": " skip ", "ERROR": " ERR  "}[status]
         line = f"{mark} {cid:<{w_id}} {where:<{w_where}} got {got:>10s}  paper {want:>10s}"
         if note:
             line += f"  {note}"
@@ -233,8 +245,9 @@ def main() -> int:
     else:
         print("  ok   folds: subject assignment matches folds/cis_folds.json")
 
-    total = len(rows)
+    total = len(rows) - skipped
     print(f"\n{total - failures}/{total} checks passed"
+          + (f", {skipped} skipped (no artifact in this run)" if skipped else "")
           + ("" if failures == 0 else f" — {failures} failure(s)"))
     return 0 if failures == 0 else 1
 

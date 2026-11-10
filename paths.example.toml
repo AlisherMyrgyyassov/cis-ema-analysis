@@ -1,0 +1,43 @@
+# Copy this file to `paths.toml` and edit the paths you need.
+#
+#   cp paths.example.toml paths.toml
+#
+# Every key is optional: anything omitted falls back to the default in the
+# comment beside it, and anything you set here can be overridden per-shell with
+# the environment variable named in the last comment.
+#
+# Windows paths need forward slashes or escaped backslashes: "C:/data/CIS-EMA".
+
+[paths]
+
+# Derived CIS-EMA corpus: features.csv, manifest.csv, meta.json, utterances/
+# default: data/CIS-EMA                                    env: CIS_EMA_DATASET
+cis_dataset = "data/CIS-EMA"
+
+# Raw CIS-EMA recordings, one folder per subject: posR/, wav/, TG/
+# default: data/raw/CIS-EMA                                env: CIS_EMA_RAW
+cis_raw = "data/raw/CIS-EMA"
+
+# Stimulus list (155 street names, item number -> tone-marked syllable)
+# default: data/raw/CIS-EMA/stimuli.xlsx                   env: CIS_EMA_STIMULI
+cis_stimuli = "data/raw/CIS-EMA/stimuli.xlsx"
+
+# Derived SAIT-EMA corpus (public download -> Dataset/ with features_mono.csv)
+# default: data/SAIT-EMA/Dataset                           env: SAIT_EMA_DATASET
+sait_dataset = "data/SAIT-EMA/Dataset"
+
+# Raw SAIT-EMA download (speaker archives + TextGrids)
+# default: data/SAIT-EMA                                   env: SAIT_EMA_RAW
+sait_raw = "data/SAIT-EMA"
+
+# Where experiment artifacts (checkpoints, per-run JSON) are written
+# default: runs/paper                                      env: EMA_RUNS
+# runs = "runs/paper"
+
+# Where summary tables are written
+# default: paper/results                                   env: EMA_RESULTS
+# results = "paper/results"
+
+# Where generated figures are written
+# default: paper/figures                                   env: EMA_FIGURES
+# figures = "paper/figures"

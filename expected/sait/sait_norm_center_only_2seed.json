@@ -1,0 +1,122 @@
+{
+  "tag": "sait_norm_center_only",
+  "task": "syllable",
+  "view": "ema",
+  "scope": "native",
+  "n_classes": 405,
+  "n_features": 59,
+  "acc_mean": 44.44,
+  "acc_std": 5.16,
+  "f1_mean": 40.63,
+  "maj_mean": 0.87,
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 0,
+      "test_acc": 50.92,
+      "test_f1": 47.29,
+      "maj_acc": 0.87,
+      "val_acc": 49.74,
+      "n_test": 1147
+    },
+    {
+      "fold": 1,
+      "seed": 0,
+      "test_acc": 43.21,
+      "test_f1": 38.19,
+      "maj_acc": 0.87,
+      "val_acc": 37.11,
+      "n_test": 1148
+    },
+    {
+      "fold": 2,
+      "seed": 0,
+      "test_acc": 34.67,
+      "test_f1": 34.7,
+      "maj_acc": 0.87,
+      "val_acc": 42.11,
+      "n_test": 1148
+    },
+    {
+      "fold": 3,
+      "seed": 0,
+      "test_acc": 44.46,
+      "test_f1": 39.59,
+      "maj_acc": 0.87,
+      "val_acc": 46.34,
+      "n_test": 1147
+    },
+    {
+      "fold": 4,
+      "seed": 0,
+      "test_acc": 48.26,
+      "test_f1": 41.8,
+      "maj_acc": 0.87,
+      "val_acc": 42.89,
+      "n_test": 1148
+    },
+    {
+      "fold": 5,
+      "seed": 0,
+      "test_acc": 39.23,
+      "test_f1": 34.76,
+      "maj_acc": 0.87,
+      "val_acc": 54.14,
+      "n_test": 1147
+    },
+    {
+      "fold": 0,
+      "seed": 1,
+      "test_acc": 50.04,
+      "test_f1": 46.59,
+      "maj_acc": 0.87,
+      "val_acc": 49.83,
+      "n_test": 1147
+    },
+    {
+      "fold": 1,
+      "seed": 1,
+      "test_acc": 44.25,
+      "test_f1": 38.57,
+      "maj_acc": 0.87,
+      "val_acc": 34.76,
+      "n_test": 1148
+    },
+    {
+      "fold": 2,
+      "seed": 1,
+      "test_acc": 38.76,
+      "test_f1": 39.46,
+      "maj_acc": 0.87,
+      "val_acc": 44.03,
+      "n_test": 1148
+    },
+    {
+      "fold": 3,
+      "seed": 1,
+      "test_acc": 43.5,
+      "test_f1": 38.7,
+      "maj_acc": 0.87,
+      "val_acc": 52.96,
+      "n_test": 1147
+    },
+    {
+      "fold": 4,
+      "seed": 1,
+      "test_acc": 52.96,
+      "test_f1": 49.07,
+      "maj_acc": 0.87,
+      "val_acc": 39.76,
+      "n_test": 1148
+    },
+    {
+      "fold": 5,
+      "seed": 1,
+      "test_acc": 42.98,
+      "test_f1": 38.84,
+      "maj_acc": 0.87,
+      "val_acc": 53.53,
+      "n_test": 1147
+    }
+  ]
+}

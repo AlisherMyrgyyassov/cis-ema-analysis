@@ -1,0 +1,84 @@
+{
+  "n_subjects": 33,
+  "mean_baseline_subj_acc": 0.7879309169359396,
+  "rows": [
+    {
+      "cell": "5a uttmean all (lambda=0.3)",
+      "label": "5a uttmean all",
+      "lmbda": 0.3,
+      "fold_delta": -0.0019710873049926434,
+      "fold_p": 0.5767510317759726,
+      "fold_d": -0.24356555978419378,
+      "subj_delta": -0.0016863501314732109,
+      "subj_p": 0.6903350620967124,
+      "subj_ci_low": -0.009584535785093292,
+      "subj_ci_high": 0.006496981823198919,
+      "n_subjects": 33
+    },
+    {
+      "cell": "5a uttmean all (lambda=1.0)",
+      "label": "5a uttmean all",
+      "lmbda": 1.0,
+      "fold_delta": 0.0008020210904740958,
+      "fold_p": 0.9043350316138575,
+      "fold_d": 0.05160577085693272,
+      "subj_delta": 0.0018632641454590531,
+      "subj_p": 0.6338915639013243,
+      "subj_ci_low": -0.005875537111133111,
+      "subj_ci_high": 0.009314836371691159,
+      "n_subjects": 33
+    },
+    {
+      "cell": "5a uttmean voiced (lambda=0.3)",
+      "label": "5a uttmean voiced",
+      "lmbda": 0.3,
+      "fold_delta": -0.008000348661211335,
+      "fold_p": 0.2217859778705264,
+      "fold_d": -0.5695489690264908,
+      "subj_delta": -0.007574670961047968,
+      "subj_p": 0.05151720915089893,
+      "subj_ci_low": -0.014807519956983858,
+      "subj_ci_high": -0.00029383037760682165,
+      "n_subjects": 33
+    },
+    {
+      "cell": "5a uttmean voiced (lambda=1.0)",
+      "label": "5a uttmean voiced",
+      "lmbda": 1.0,
+      "fold_delta": 0.000941272624625659,
+      "fold_p": 0.8715893137815082,
+      "fold_d": 0.06944886462332991,
+      "subj_delta": 0.002069481448092666,
+      "subj_p": 0.6356982983584003,
+      "subj_ci_low": -0.00653159683961658,
+      "subj_ci_high": 0.010386746003316915,
+      "n_subjects": 33
+    },
+    {
+      "cell": "5b perframe (lambda=0.3)",
+      "label": "5b perframe",
+      "lmbda": 0.3,
+      "fold_delta": 0.003291955942447744,
+      "fold_p": 0.4903349600954031,
+      "fold_d": 0.3037409209616292,
+      "subj_delta": 0.0035076290671076883,
+      "subj_p": 0.4006915394992769,
+      "subj_ci_low": -0.004832740377344787,
+      "subj_ci_high": 0.011340428695077344,
+      "n_subjects": 33
+    },
+    {
+      "cell": "5b perframe (lambda=1.0)",
+      "label": "5b perframe",
+      "lmbda": 1.0,
+      "fold_delta": 0.008074932197973042,
+      "fold_p": 0.03287350910164202,
+      "fold_d": 1.1935815505379122,
+      "subj_delta": 0.007850204125994471,
+      "subj_p": 0.0898020514932544,
+      "subj_ci_low": -0.0007401734645241889,
+      "subj_ci_high": 0.016753044986953236,
+      "n_subjects": 33
+    }
+  ]
+}

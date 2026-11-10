@@ -1,0 +1,68 @@
+{
+  "tag": "sait_vowel_native",
+  "task": "vowel",
+  "view": "ema",
+  "scope": "native",
+  "n_classes": 57,
+  "n_features": 41,
+  "acc_mean": 71.33,
+  "acc_std": 6.37,
+  "f1_mean": 60.21,
+  "maj_mean": 12.02,
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 0,
+      "test_acc": 80.56,
+      "test_f1": 69.46,
+      "maj_acc": 12.03,
+      "val_acc": 77.35,
+      "n_test": 1147
+    },
+    {
+      "fold": 1,
+      "seed": 0,
+      "test_acc": 77.09,
+      "test_f1": 61.67,
+      "maj_acc": 12.02,
+      "val_acc": 63.24,
+      "n_test": 1148
+    },
+    {
+      "fold": 2,
+      "seed": 0,
+      "test_acc": 63.85,
+      "test_f1": 57.58,
+      "maj_acc": 12.02,
+      "val_acc": 76.11,
+      "n_test": 1148
+    },
+    {
+      "fold": 3,
+      "seed": 0,
+      "test_acc": 71.67,
+      "test_f1": 61.24,
+      "maj_acc": 12.03,
+      "val_acc": 86.24,
+      "n_test": 1147
+    },
+    {
+      "fold": 4,
+      "seed": 0,
+      "test_acc": 71.78,
+      "test_f1": 63.41,
+      "maj_acc": 12.02,
+      "val_acc": 59.81,
+      "n_test": 1148
+    },
+    {
+      "fold": 5,
+      "seed": 0,
+      "test_acc": 63.03,
+      "test_f1": 47.89,
+      "maj_acc": 12.03,
+      "val_acc": 81.52,
+      "n_test": 1147
+    }
+  ]
+}

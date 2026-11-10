@@ -1,0 +1,31 @@
+{
+  "chance": {
+    "chance_acc": 0.023255813953488372,
+    "majority_acc_mean": 0.03333469628698429,
+    "majority_acc_std": 0.0013483167381788857
+  },
+  "logistic_regression": {
+    "test_acc_mean": 0.8404438307567564,
+    "test_acc_std": 0.032495912218823704,
+    "test_f1_mean": 0.8286929762025229,
+    "test_f1_std": 0.03166443654859679
+  },
+  "random_forest": {
+    "test_acc_mean": 0.8277411555095066,
+    "test_acc_std": 0.044496898469825116,
+    "test_f1_mean": 0.753232620297129,
+    "test_f1_std": 0.04155233334012719
+  },
+  "bilstm_ema_only": {
+    "test_acc_mean": 0.7871282300100929,
+    "test_acc_std": 0.044136477292045784,
+    "test_f1_mean": 0.7848642587112246,
+    "test_f1_std": 0.04675578273033196
+  },
+  "bilstm_full": {
+    "test_acc_mean": 0.8827709647145433,
+    "test_acc_std": 0.03356490533069549,
+    "test_f1_mean": 0.8704561091925934,
+    "test_f1_std": 0.04081454162947642
+  }
+}

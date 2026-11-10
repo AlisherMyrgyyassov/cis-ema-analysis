@@ -1,0 +1,21 @@
+# Optional stacks for the two stages that ingest raw audio.
+#
+# These are NOT needed to reproduce the paper's tables: the acoustic features are
+# already extracted in `features.csv`, so every experiment and every check in
+# `verify_results.py` runs with requirements.txt alone.
+#
+# Install when you want to rebuild a corpus from its raw recordings:
+#   pip install -r requirements-extras.txt
+#
+# Versions here are the ones the reference corpora were built with. They are not
+# pinned by a re-verification on this machine (installing Praat and librosa pulls
+# a large dependency tree), so if you rebuild a feature table and see different
+# acoustic columns, check these first.
+
+# --- preprocessing/prepare_dataset.py: F0, formants, MFCC, energy ----------
+praat-parselmouth>=0.4.3
+librosa>=0.10
+soundfile>=0.12
+
+# --- src/exp1_ssl.py: the self-supervised audio ceiling --------------------
+transformers>=4.52

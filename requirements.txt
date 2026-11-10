@@ -1,0 +1,21 @@
+# Core analysis stack — everything needed to run the experiments and verify the results.
+# Pinned to the environment the reference artifacts in expected/ were produced and
+# re-verified in (2026-11), so a fresh run lands on the same numbers.
+#
+# Python 3.11+ required (src/paths.py uses tomllib). Verified on 3.14.5.
+
+# --- numerical core -------------------------------------------------------
+numpy==2.5.4
+pandas==3.1.1
+scipy==1.18.1
+scikit-learn==1.9.1
+
+# --- deep learning --------------------------------------------------------
+# A CPU-only wheel works for every experiment except the SSL audio ceiling,
+# which is slow but still correct. Replace with your platform wheel if needed:
+#   pip install torch==2.11.0 --index-url https://download.pytorch.org/whl/cu128
+torch==2.11.0
+
+# --- figures and the tone join -------------------------------------------
+matplotlib==3.11.2
+openpyxl==3.1.5

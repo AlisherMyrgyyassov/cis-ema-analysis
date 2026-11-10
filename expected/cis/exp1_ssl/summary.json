@@ -1,0 +1,220 @@
+{
+  "hubert_large": {
+    "test_acc_mean": 0.9413127199931983,
+    "test_acc_std": 0.011109669138317511,
+    "test_f1_mean": 0.9373428613837165,
+    "test_f1_std": 0.013294980625083573,
+    "model": "TencentGameMate/chinese-hubert-large",
+    "folds": [
+      {
+        "fold": 0,
+        "seed": 0,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9543650793650794,
+        "test_acc": 0.941747572815534,
+        "test_f1": 0.9326536910549236
+      },
+      {
+        "fold": 0,
+        "seed": 1,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9384920634920635,
+        "test_acc": 0.9201725997842503,
+        "test_f1": 0.9117644656950546
+      },
+      {
+        "fold": 1,
+        "seed": 0,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9459016393442623,
+        "test_acc": 0.9541284403669725,
+        "test_f1": 0.9553318379957172
+      },
+      {
+        "fold": 1,
+        "seed": 1,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9393442622950819,
+        "test_acc": 0.9462647444298821,
+        "test_f1": 0.9476826461052956
+      },
+      {
+        "fold": 2,
+        "seed": 0,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9378068739770867,
+        "test_acc": 0.9330453563714903,
+        "test_f1": 0.9236440434217422
+      },
+      {
+        "fold": 2,
+        "seed": 1,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9492635024549918,
+        "test_acc": 0.9470842332613391,
+        "test_f1": 0.9441634530241279
+      },
+      {
+        "fold": 3,
+        "seed": 0,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9524752475247524,
+        "test_acc": 0.9394594594594594,
+        "test_f1": 0.9278949628671843
+      },
+      {
+        "fold": 3,
+        "seed": 1,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9584158415841584,
+        "test_acc": 0.9308108108108109,
+        "test_f1": 0.9244313340947875
+      },
+      {
+        "fold": 4,
+        "seed": 0,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9454225352112676,
+        "test_acc": 0.9586028460543338,
+        "test_f1": 0.9548271355667507
+      },
+      {
+        "fold": 4,
+        "seed": 1,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9401408450704225,
+        "test_acc": 0.9560155239327296,
+        "test_f1": 0.949610777668819
+      },
+      {
+        "fold": 5,
+        "seed": 0,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9653916211293261,
+        "test_acc": 0.9368421052631579,
+        "test_f1": 0.9438410449202814
+      },
+      {
+        "fold": 5,
+        "seed": 1,
+        "model": "TencentGameMate/chinese-hubert-large",
+        "val_acc": 0.9544626593806922,
+        "test_acc": 0.9315789473684211,
+        "test_f1": 0.9322689441899119
+      }
+    ]
+  },
+  "xlsr_53": {
+    "test_acc_mean": 0.9280425647090816,
+    "test_acc_std": 0.008013722989660558,
+    "test_f1_mean": 0.9189822794757269,
+    "test_f1_std": 0.008698902968385965,
+    "model": "facebook/wav2vec2-large-xlsr-53",
+    "folds": [
+      {
+        "fold": 0,
+        "seed": 0,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9404761904761905,
+        "test_acc": 0.9158576051779935,
+        "test_f1": 0.9044543405515312
+      },
+      {
+        "fold": 0,
+        "seed": 1,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9345238095238095,
+        "test_acc": 0.9223300970873787,
+        "test_f1": 0.9118509510086885
+      },
+      {
+        "fold": 1,
+        "seed": 0,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9245901639344263,
+        "test_acc": 0.9344692005242464,
+        "test_f1": 0.9351455014921867
+      },
+      {
+        "fold": 1,
+        "seed": 1,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.921311475409836,
+        "test_acc": 0.9370904325032765,
+        "test_f1": 0.9352543785772984
+      },
+      {
+        "fold": 2,
+        "seed": 0,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9247135842880524,
+        "test_acc": 0.9362850971922246,
+        "test_f1": 0.9203226749270571
+      },
+      {
+        "fold": 2,
+        "seed": 1,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9328968903436988,
+        "test_acc": 0.9362850971922246,
+        "test_f1": 0.9246343505712721
+      },
+      {
+        "fold": 3,
+        "seed": 0,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9425742574257425,
+        "test_acc": 0.9254054054054054,
+        "test_f1": 0.9158482691893153
+      },
+      {
+        "fold": 3,
+        "seed": 1,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9445544554455445,
+        "test_acc": 0.9264864864864865,
+        "test_f1": 0.9145789801560139
+      },
+      {
+        "fold": 4,
+        "seed": 0,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9190140845070423,
+        "test_acc": 0.9379042690815006,
+        "test_f1": 0.915750770350762
+      },
+      {
+        "fold": 4,
+        "seed": 1,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.9172535211267606,
+        "test_acc": 0.9275549805950841,
+        "test_f1": 0.9160149434584138
+      },
+      {
+        "fold": 5,
+        "seed": 0,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.941712204007286,
+        "test_acc": 0.9228070175438596,
+        "test_f1": 0.9208243211031193
+      },
+      {
+        "fold": 5,
+        "seed": 1,
+        "model": "facebook/wav2vec2-large-xlsr-53",
+        "val_acc": 0.941712204007286,
+        "test_acc": 0.9140350877192982,
+        "test_f1": 0.9131078723230639
+      }
+    ]
+  },
+  "wav2vec2_reference": {
+    "model": "kehanlu/mandarin-wav2vec2",
+    "test_acc_mean": 0.8499794849662243,
+    "test_acc_std": 0.01981053380375666,
+    "test_f1_mean": 0.7914094785481738,
+    "test_f1_std": 0.02170777444563638
+  },
+  "primary": "hubert_large"
+}

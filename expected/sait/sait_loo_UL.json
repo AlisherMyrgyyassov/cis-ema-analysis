@@ -1,0 +1,68 @@
+{
+  "tag": "sait_loo_UL",
+  "task": "syllable",
+  "view": "ema",
+  "scope": "native",
+  "n_classes": 405,
+  "n_features": 33,
+  "acc_mean": 42.6,
+  "acc_std": 3.97,
+  "f1_mean": 37.95,
+  "maj_mean": 0.87,
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 0,
+      "test_acc": 45.51,
+      "test_f1": 42.91,
+      "maj_acc": 0.87,
+      "val_acc": 43.82,
+      "n_test": 1147
+    },
+    {
+      "fold": 1,
+      "seed": 0,
+      "test_acc": 44.51,
+      "test_f1": 38.46,
+      "maj_acc": 0.87,
+      "val_acc": 33.1,
+      "n_test": 1148
+    },
+    {
+      "fold": 2,
+      "seed": 0,
+      "test_acc": 34.41,
+      "test_f1": 32.54,
+      "maj_acc": 0.87,
+      "val_acc": 40.63,
+      "n_test": 1148
+    },
+    {
+      "fold": 3,
+      "seed": 0,
+      "test_acc": 42.98,
+      "test_f1": 38.23,
+      "maj_acc": 0.87,
+      "val_acc": 48.26,
+      "n_test": 1147
+    },
+    {
+      "fold": 4,
+      "seed": 0,
+      "test_acc": 46.43,
+      "test_f1": 39.99,
+      "maj_acc": 0.87,
+      "val_acc": 44.03,
+      "n_test": 1148
+    },
+    {
+      "fold": 5,
+      "seed": 0,
+      "test_acc": 41.76,
+      "test_f1": 35.59,
+      "maj_acc": 0.87,
+      "val_acc": 48.04,
+      "n_test": 1147
+    }
+  ]
+}

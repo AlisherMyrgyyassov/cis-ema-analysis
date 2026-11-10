@@ -1,0 +1,40 @@
+[
+  {
+    "name": "ensC_a09_ck",
+    "teacher_seeds": [
+      0,
+      1
+    ],
+    "T": 4.0,
+    "alpha": 0.9,
+    "lf": 0.0,
+    "shuffle": false,
+    "acc": 0.80258398603956,
+    "acc_std": 0.0432123903524843
+  },
+  {
+    "name": "ensC_single_a09",
+    "teacher_seeds": [
+      0
+    ],
+    "T": 4.0,
+    "alpha": 0.9,
+    "lf": 0.0,
+    "shuffle": false,
+    "acc": 0.8013568102804229,
+    "acc_std": 0.04574817206634747
+  },
+  {
+    "name": "ensC_shuf_a09",
+    "teacher_seeds": [
+      0,
+      1
+    ],
+    "T": 4.0,
+    "alpha": 0.9,
+    "lf": 0.0,
+    "shuffle": true,
+    "acc": 0.06559284044377979,
+    "acc_std": 0.017166816422142232
+  }
+]

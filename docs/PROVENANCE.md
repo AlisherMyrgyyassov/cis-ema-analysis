@@ -1,0 +1,96 @@
+# Provenance
+
+Where this repository came from, what was changed to make it runnable, and what was
+deliberately left out. Written so that a reader — or a reviewer, or you in two years — can
+tell the difference between "the paper did this" and "the cleanup did this".
+
+## Source
+
+| | |
+|---|---|
+| source repository | `ema-syllables` (private working repository) |
+| commit | `7d87075048eeb9b0bfa82517502bec9395bd14a8` |
+| snapshotted | 2026-11-10 |
+| reference artifacts | copied from that commit's `runs/` and `paper/results/` into `expected/` |
+
+## What changed, and nothing else
+
+The guiding rule was **minimise the diff, not maximise the tidiness**. Every refactor is an
+opportunity to change a number silently, so the modules and script names are the ones that
+produced the paper.
+
+Three things were edited:
+
+1. **Paths.** `src/paths.py` is new and resolves every dataset location from an environment
+   variable, then `paths.toml`, then a repository-relative default. `src/config.py` keeps its
+   public names (`DATA_DIR`, `RAW_DIR`, `STIMULI_PATH`, `RUNS_DIR`, `RESULTS_DIR`) and now
+   derives them from `src/paths.py`. Thirteen scripts and six preprocessing modules that had
+   absolute Windows paths now call the same resolver; their argparse signatures are otherwise
+   untouched.
+2. **Folds.** `folds/cis_folds.json` was exported once via `scripts/export_folds.py` and is
+   now loaded by `src/data/cv.py`. The generator is kept as `compute_folds()` so the file can
+   be re-derived and audited, but experiments read the frozen file. Reason: the split used to
+   depend on `numpy.random.RandomState` behaviour, and a numpy upgrade must not be able to
+   reshuffle the test speakers without anyone noticing.
+3. **Output locations.** Run artifacts and tables are written under `runs/paper/` and
+   `paper/results/` relative to the repository root, as before, but now through the resolver.
+
+No model, no preprocessing step, no metric and no hyperparameter was modified.
+
+## Verification performed when building this repository
+
+| check | result |
+|---|---|
+| every script imports and exposes `--help` | pass (3 figure/table builders are run-me scripts, not CLIs) |
+| `python scripts/run_exp1.py --fold 0 --seeds 0 --epochs 1` | pass; pooled baselines reproduced to 0.01 (LogReg 84.03 vs 84.04, RF 82.78 vs 82.77) |
+| `python verify_results.py` (ledger vs `expected/`) | 57/57 claims pass |
+| frozen folds vs the subject lists recorded inside the run artifacts | identical for all 6 folds |
+
+`verify_results.py --runs <dir>` additionally compares a fresh run against the shipped
+artifacts; see `REPRODUCING.md` for the measured deviation.
+
+## Deliberately not included
+
+| excluded | why |
+|---|---|
+| `legacy/`, `paper/archive_v0/`, `docs/archive/` | superseded 5-coil / V0 pipelines and old drafts; keeping them invites the wrong file being used |
+| `runs/` checkpoints, `variants/` feature tables (15 GB) | regenerable; the summaries that matter are the ones in `expected/` |
+| ~45 exploratory scripts (`build_anchor_centroid_features`, `rederive_psz`, `y_perclass_compare`, …) | variant exploration and one-off diagnostics, not on any path to a reported number |
+| `src/tone_analysis.py` (naive tone probe) | kept in the paper as a *confounded* comparison; its results are already in `expected/cis/tone/tone_analysis.json` |
+| internal documentation (`docs/STATUS.md`, `decisions.md`) | working notes containing superseded numbers; `docs/` here was rewritten for a reader |
+| the HuBERT fine-tuning runs | fold-level summaries are shipped; retraining needs the restricted audio and multi-GB weights, and reproduces only the 94.13 ceiling |
+
+The scripts that remain map one-to-one onto a table or figure, or onto a step that produces
+one. If you need a script that is missing, it is in the source commit above.
+
+## Quirks you will trip over
+
+These are real inconsistencies in the original project. They are documented rather than
+"fixed", because fixing them would change the artifacts.
+
+* **`sait_syllable_native_2seed.json` is the `center_only` − y (41-channel) run.** Its `tag`
+  says `sait_syllable_native`, its `n_features` is 41, and it holds the 47.36 ± 7.41 figure
+  the paper reports for the best EMA-only Mandarin model. The filename predates the naming
+  scheme; `verify_results.py` claim `sait_center_dropy` points at it.
+* **Scaling curves are split across two files per point.** `spk_k06.json` and
+  `spk_k06_s1.json` are seed 0 and seed 1; the paper quotes the two-seed mean, so the claim
+  merges both (`"artifacts": [...]` in `expected/claims.json`). The architecture artifacts
+  (`arch/*.json`) already contain both seeds.
+* **406-class SAIT artifacts are superseded.** One unlabelled item was counted as an extra
+  class before the fix; anything tagged 406 is archived upstream and is not referenced here.
+* **Fig. 1 (montage) and Fig. 6 (cross-corpus coils) are not generated by any script.** They
+  were assembled for the manuscript from `export_coil_panels.py` output and hand-drawn
+  schematic outlines. Do not expect a command that regenerates them.
+* **`scripts/build_zscore_features.py` writes its CSV in place.** An interrupted run truncates
+  the variant table. Check the row count after any interrupted build.
+* **Item 114 of the stimulus list is excluded** from tone analyses (the character has two
+  readings across speakers). `EXCLUDED_TONE_ITEMS = (114,)` in `src/config.py`.
+* **Tone-5 is rare** (32 of 4,884 utterances). The syllable-controlled probe is reported with
+  and without it upstream; only the main variant is shipped here.
+
+## If you re-run and the numbers move
+
+Small deviations are expected, not a bug — see the tolerance discussion in
+`REPRODUCING.md`. The largest single source is the torch version: the reference artifacts
+were produced on a 2025-era stack and this repository was re-verified on torch 2.11. Per-run
+accuracy moves by roughly ±1 point, fold means by less, and the 12-run mean by less again.

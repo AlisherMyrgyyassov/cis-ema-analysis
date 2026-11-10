@@ -1,0 +1,202 @@
+{
+  "full vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.09564273470445046,
+    "std_diff": 0.020255601449782036,
+    "paired_t": 11.565980808375606,
+    "paired_t_p": 8.476599206218005e-05,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 4.721791892324079
+  },
+  "full vs EMA-only (F1)": {
+    "n_pairs": 6,
+    "mean_diff": 0.08559185048136896,
+    "std_diff": 0.01798455034622478,
+    "paired_t": 11.65758141203428,
+    "paired_t_p": 8.158631783991383e-05,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 4.759187682141675
+  },
+  "full vs HuBERT (acc)": {
+    "n_pairs": 6,
+    "mean_diff": -0.058541755278654996,
+    "std_diff": 0.037852654315534605,
+    "paired_t": -3.7883057786185037,
+    "paired_t_p": 0.012780586347394879,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": -1.54656935783452
+  },
+  "full vs XLSR-53 (acc)": {
+    "n_pairs": 6,
+    "mean_diff": -0.04527159999453815,
+    "std_diff": 0.03418543090426691,
+    "paired_t": -3.2438473610745966,
+    "paired_t_p": 0.02285140096601323,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": -1.324295139645679
+  },
+  "EMA-only vs HuBERT (acc)": {
+    "n_pairs": 6,
+    "mean_diff": -0.15418448998310547,
+    "std_diff": 0.05173805742045483,
+    "paired_t": -7.299719887831699,
+    "paired_t_p": 0.0007554166208070654,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": -2.9800981650147533
+  },
+  "probe onset (pooled) full vs EMA": {
+    "n_pairs": 6,
+    "mean_diff": 0.10468567061969593,
+    "std_diff": 0.018774399994731638,
+    "paired_t": 13.658304737902698,
+    "paired_t_p": 3.773068012967012e-05,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 5.575979559586258
+  },
+  "probe vowel (pooled) full vs EMA": {
+    "n_pairs": 6,
+    "mean_diff": 0.05150340323243855,
+    "std_diff": 0.029531713154047224,
+    "paired_t": 4.271918031920705,
+    "paired_t_p": 0.007924270793957964,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 1.7440032334743227
+  },
+  "probe place (pooled) full vs EMA": {
+    "n_pairs": 6,
+    "mean_diff": 0.07427873810331147,
+    "std_diff": 0.017565891010835166,
+    "paired_t": 10.357858134193725,
+    "paired_t_p": 0.00014438824414176197,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 4.228577875911079
+  },
+  "probe manner (pooled) full vs EMA": {
+    "n_pairs": 6,
+    "mean_diff": 0.06688936998382798,
+    "std_diff": 0.009217835791219884,
+    "paired_t": 17.774760734258262,
+    "paired_t_p": 1.0343531729183207e-05,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 7.256515682377908
+  },
+  "EMA + MFCC-aux uttmean(all) (lambda=0.3) vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": -0.0019710873049926434,
+    "std_diff": 0.008092635537206159,
+    "paired_t": -0.5966113404603484,
+    "paired_t_p": 0.5767510317759726,
+    "wilcoxon_W": 7.0,
+    "wilcoxon_p": 0.5625,
+    "cohens_d": -0.24356555978419378
+  },
+  "EMA + MFCC-aux uttmean(all) (lambda=1.0) vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.0008020210904740958,
+    "std_diff": 0.015541306274562633,
+    "paired_t": 0.12640780639060945,
+    "paired_t_p": 0.9043350316138575,
+    "wilcoxon_W": 8.0,
+    "wilcoxon_p": 0.6875,
+    "cohens_d": 0.05160577085693272
+  },
+  "EMA + MFCC-aux uttmean(voiced) (lambda=0.3) vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": -0.008000348661211335,
+    "std_diff": 0.014046814401782674,
+    "paired_t": -1.3951043577424416,
+    "paired_t_p": 0.2217859778705264,
+    "wilcoxon_W": 6.0,
+    "wilcoxon_p": 0.4375,
+    "cohens_d": -0.5695489690264908
+  },
+  "EMA + MFCC-aux uttmean(voiced) (lambda=1.0) vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.000941272624625659,
+    "std_diff": 0.013553463107876482,
+    "paired_t": 0.1701142815553355,
+    "paired_t_p": 0.8715893137815082,
+    "wilcoxon_W": 9.0,
+    "wilcoxon_p": 0.84375,
+    "cohens_d": 0.06944886462332991
+  },
+  "EMA + MFCC-aux perframe (lambda=0.3) vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.003291955942447744,
+    "std_diff": 0.010838038983097266,
+    "paired_t": 0.7440102704276749,
+    "paired_t_p": 0.4903349600954031,
+    "wilcoxon_W": 6.0,
+    "wilcoxon_p": 0.4375,
+    "cohens_d": 0.3037409209616292
+  },
+  "EMA + MFCC-aux perframe (lambda=1.0) vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.008074932197973042,
+    "std_diff": 0.006765295754731066,
+    "paired_t": 2.923665765650014,
+    "paired_t_p": 0.03287350910164202,
+    "wilcoxon_W": 1.0,
+    "wilcoxon_p": 0.0625,
+    "cohens_d": 1.1935815505379122
+  },
+  "pooled-LR +true means vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.04141894267382414,
+    "std_diff": 0.014940452900159103,
+    "paired_t": 6.79064255377267,
+    "paired_t_p": 0.0010538741439864274,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 2.7722682135432986
+  },
+  "pooled-RF +true means vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.014676581140475634,
+    "std_diff": 0.009137539757160697,
+    "paired_t": 3.934334177265552,
+    "paired_t_p": 0.011022293001006643,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 1.6061852018064318
+  },
+  "BiLSTM +true means(broadcast) vs EMA-only (acc)": {
+    "n_pairs": 6,
+    "mean_diff": 0.009727023482296723,
+    "std_diff": 0.011199962358668991,
+    "paired_t": 2.1273503860711593,
+    "paired_t_p": 0.08669453998282685,
+    "wilcoxon_W": 1.0,
+    "wilcoxon_p": 0.0625,
+    "cohens_d": 0.8684871582536461
+  },
+  "tone within-syllable EMA vs per-syllable majority": {
+    "n_pairs": 6,
+    "mean_diff": 0.08202048276859734,
+    "std_diff": 0.0500068293238174,
+    "paired_t": 4.017617872527551,
+    "paired_t_p": 0.010144681170366624,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 1.6401856281636358
+  },
+  "tone within-syllable full vs per-syllable majority": {
+    "n_pairs": 6,
+    "mean_diff": 0.09099926443149219,
+    "std_diff": 0.03236079755682265,
+    "paired_t": 6.888018270698018,
+    "paired_t_p": 0.0009872775855831416,
+    "wilcoxon_W": 0.0,
+    "wilcoxon_p": 0.03125,
+    "cohens_d": 2.8120216836094243
+  }
+}

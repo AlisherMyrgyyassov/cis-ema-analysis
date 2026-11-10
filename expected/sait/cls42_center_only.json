@@ -1,0 +1,54 @@
+{
+  "tag": "mono42_center",
+  "task": "syllable",
+  "view": "ema",
+  "scope": "native",
+  "n_classes": 42,
+  "n_features": 59,
+  "acc_mean": 54.71,
+  "acc_std": 7.59,
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 0,
+      "test_acc": 58.93,
+      "val_acc": 64.58,
+      "n_test": 336
+    },
+    {
+      "fold": 1,
+      "seed": 0,
+      "test_acc": 58.04,
+      "val_acc": 37.5,
+      "n_test": 336
+    },
+    {
+      "fold": 2,
+      "seed": 0,
+      "test_acc": 38.39,
+      "val_acc": 68.15,
+      "n_test": 336
+    },
+    {
+      "fold": 3,
+      "seed": 0,
+      "test_acc": 59.82,
+      "val_acc": 66.37,
+      "n_test": 336
+    },
+    {
+      "fold": 4,
+      "seed": 0,
+      "test_acc": 59.52,
+      "val_acc": 57.14,
+      "n_test": 336
+    },
+    {
+      "fold": 5,
+      "seed": 0,
+      "test_acc": 53.57,
+      "val_acc": 63.99,
+      "n_test": 336
+    }
+  ]
+}

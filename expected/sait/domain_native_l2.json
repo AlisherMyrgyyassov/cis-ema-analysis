@@ -1,0 +1,137 @@
+{
+  "corpus": "SAIT-EMA",
+  "n_features": 41,
+  "n_classes": 405,
+  "directions": {
+    "native->l2": {
+      "acc_mean": 42.47,
+      "acc_std": 0.11,
+      "f1_mean": 40.23,
+      "maj_mean": 0.87
+    },
+    "l2->native": {
+      "acc_mean": 34.19,
+      "acc_std": 0.64,
+      "f1_mean": 31.79,
+      "maj_mean": 0.87
+    }
+  },
+  "runs": [
+    {
+      "direction": "native->l2",
+      "seed": 0,
+      "acc": 42.58,
+      "f1": 40.96,
+      "maj": 0.87,
+      "n_train": 5738,
+      "n_test": 3443,
+      "train_speakers": [
+        "A_F001",
+        "A_M001",
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "M001",
+        "M002",
+        "M003",
+        "M004"
+      ],
+      "test_speakers": [
+        "L_F001",
+        "L_F002",
+        "L_F003",
+        "L_M001",
+        "L_M002",
+        "L_M003"
+      ]
+    },
+    {
+      "direction": "l2->native",
+      "seed": 0,
+      "acc": 33.55,
+      "f1": 30.97,
+      "maj": 0.87,
+      "n_train": 2296,
+      "n_test": 6885,
+      "train_speakers": [
+        "L_F001",
+        "L_F002",
+        "L_M001",
+        "L_M002"
+      ],
+      "test_speakers": [
+        "A_F001",
+        "A_M001",
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "M001",
+        "M002",
+        "M003",
+        "M004",
+        "M005"
+      ]
+    },
+    {
+      "direction": "native->l2",
+      "seed": 1,
+      "acc": 42.35,
+      "f1": 39.49,
+      "maj": 0.87,
+      "n_train": 5738,
+      "n_test": 3443,
+      "train_speakers": [
+        "A_F001",
+        "A_M001",
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "M001",
+        "M002",
+        "M003",
+        "M004"
+      ],
+      "test_speakers": [
+        "L_F001",
+        "L_F002",
+        "L_F003",
+        "L_M001",
+        "L_M002",
+        "L_M003"
+      ]
+    },
+    {
+      "direction": "l2->native",
+      "seed": 1,
+      "acc": 34.83,
+      "f1": 32.61,
+      "maj": 0.87,
+      "n_train": 2296,
+      "n_test": 6885,
+      "train_speakers": [
+        "L_F001",
+        "L_F002",
+        "L_M001",
+        "L_M002"
+      ],
+      "test_speakers": [
+        "A_F001",
+        "A_M001",
+        "F001",
+        "F002",
+        "F003",
+        "F004",
+        "F005",
+        "M001",
+        "M002",
+        "M003",
+        "M004",
+        "M005"
+      ]
+    }
+  ]
+}

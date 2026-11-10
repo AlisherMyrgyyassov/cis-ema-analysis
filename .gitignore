@@ -1,0 +1,42 @@
+# ---- local path configuration (copy paths.example.toml -> paths.toml) ----
+paths.toml
+
+# ---- data: never committed -------------------------------------------------
+# The corpora are downloaded or obtained separately; see docs/DATA.md.
+data/
+**/features.csv
+**/features_mono*.csv
+**/*.wav
+**/*.npy
+**/*.npz
+**/*.TextGrid
+**/*.xlsx
+
+# ---- run artifacts ---------------------------------------------------------
+# Checkpoints and per-run logs are regenerated. The reference summaries that
+# verify_results.py compares against live in expected/ and ARE committed.
+runs/
+*.pth
+*.pt
+*.ckpt
+*.log
+
+# generated tables and figures
+paper/results/
+paper/figures/
+
+# ---- python ----------------------------------------------------------------
+__pycache__/
+*.py[cod]
+*.egg-info/
+.ipynb_checkpoints/
+.venv/
+venv/
+env/
+
+# ---- editors / OS ----------------------------------------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+paper/illustrations/

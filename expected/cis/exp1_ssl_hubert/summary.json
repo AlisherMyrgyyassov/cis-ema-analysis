@@ -1,0 +1,105 @@
+{
+  "model": "TencentGameMate/chinese-hubert-large",
+  "test_acc_mean": 0.9413127199931983,
+  "test_acc_std": 0.011109669138317511,
+  "test_f1_mean": 0.9373428613837165,
+  "test_f1_std": 0.013294980625083573,
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 0,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9543650793650794,
+      "test_acc": 0.941747572815534,
+      "test_f1": 0.9326536910549236
+    },
+    {
+      "fold": 0,
+      "seed": 1,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9384920634920635,
+      "test_acc": 0.9201725997842503,
+      "test_f1": 0.9117644656950546
+    },
+    {
+      "fold": 1,
+      "seed": 0,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9459016393442623,
+      "test_acc": 0.9541284403669725,
+      "test_f1": 0.9553318379957172
+    },
+    {
+      "fold": 1,
+      "seed": 1,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9393442622950819,
+      "test_acc": 0.9462647444298821,
+      "test_f1": 0.9476826461052956
+    },
+    {
+      "fold": 2,
+      "seed": 0,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9378068739770867,
+      "test_acc": 0.9330453563714903,
+      "test_f1": 0.9236440434217422
+    },
+    {
+      "fold": 2,
+      "seed": 1,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9492635024549918,
+      "test_acc": 0.9470842332613391,
+      "test_f1": 0.9441634530241279
+    },
+    {
+      "fold": 3,
+      "seed": 0,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9524752475247524,
+      "test_acc": 0.9394594594594594,
+      "test_f1": 0.9278949628671843
+    },
+    {
+      "fold": 3,
+      "seed": 1,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9584158415841584,
+      "test_acc": 0.9308108108108109,
+      "test_f1": 0.9244313340947875
+    },
+    {
+      "fold": 4,
+      "seed": 0,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9454225352112676,
+      "test_acc": 0.9586028460543338,
+      "test_f1": 0.9548271355667507
+    },
+    {
+      "fold": 4,
+      "seed": 1,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9401408450704225,
+      "test_acc": 0.9560155239327296,
+      "test_f1": 0.949610777668819
+    },
+    {
+      "fold": 5,
+      "seed": 0,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9653916211293261,
+      "test_acc": 0.9368421052631579,
+      "test_f1": 0.9438410449202814
+    },
+    {
+      "fold": 5,
+      "seed": 1,
+      "model": "TencentGameMate/chinese-hubert-large",
+      "val_acc": 0.9544626593806922,
+      "test_acc": 0.9315789473684211,
+      "test_f1": 0.9322689441899119
+    }
+  ]
+}

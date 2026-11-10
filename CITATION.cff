@@ -1,0 +1,74 @@
+cff-version: 1.2.0
+message: "If you use this code or these analyses, please cite the paper below."
+title: "CIS-EMA: observability analysis of an EMA-based silent speech interface"
+abstract: >-
+  Analysis code and reference results for a feature-attribution and observability
+  study of an EMA-based silent speech interface on 43 Cantonese isolated syllables,
+  including exact Shapley decomposition, linear probing, acoustic recoverability,
+  knowledge distillation, leave-one-coil-out sensor removal, and an external-validity
+  replication on the public SAIT-EMA Mandarin corpus.
+version: 1.0.0
+date-released: "2026-11-10"
+license: MIT
+
+authors:
+  - family-names: Myrgyyassov
+    given-names: Alisher
+    affiliation: "Department of Biomedical Engineering and Sports Technology, and Research Institute for Smart Ageing, The Hong Kong Polytechnic University, Hong Kong"
+    email: 24067038r@connect.polyu.hk
+    orcid: ""
+  - family-names: Wang
+    given-names: Bruce Xiao
+    affiliation: "Department of English and Communication, The Hong Kong Polytechnic University, Hong Kong"
+    email: brucex.wang@polyu.edu.hk
+    orcid: ""
+  - family-names: He
+    given-names: Lei
+    affiliation: "Institute of Modern Languages and Linguistics, Fudan University, Shanghai, China"
+    email: helei@fudan.edu.cn
+    orcid: ""
+  - family-names: Wong
+    given-names: Min Ney
+    affiliation: "Department of Language Science and Technology, The Hong Kong Polytechnic University, Hong Kong"
+    email: min.wong@polyu.edu.hk
+    orcid: ""
+  - family-names: Zheng
+    given-names: Yongping
+    affiliation: "Department of Biomedical Engineering and Sports Technology, and Research Institute for Smart Ageing, The Hong Kong Polytechnic University, Hong Kong"
+    email: yongping.zheng@polyu.edu.hk
+    orcid: ""
+
+preferred-citation:
+  type: article
+  title: >-
+    What Does an EMA-Based Silent Speech Interface Capture? A Feature-Attribution
+    and Observability Analysis of Cantonese Syllable Recognition
+  authors:
+    - family-names: Myrgyyassov
+      given-names: Alisher
+    - family-names: Wang
+      given-names: Bruce Xiao
+    - family-names: He
+      given-names: Lei
+    - family-names: Wong
+      given-names: Min Ney
+    - family-names: Zheng
+      given-names: Yongping
+  journal: "IEEE Transactions on Audio, Speech, and Language Processing"
+  year: 2026
+  status: submitted
+
+references:
+  - type: dataset
+    title: "SAIT-EMA: A Tridimensional Electromagnetic Articulography Database for Mandarin with Diverse Language Backgrounds"
+    authors:
+      - family-names: Jia
+        given-names: H.
+      - family-names: Xie
+        given-names: Y.
+      - family-names: Fang
+        given-names: Q.
+      - family-names: Sun
+        given-names: Y.
+    doi: "10.5281/zenodo.17506802"
+    year: 2026

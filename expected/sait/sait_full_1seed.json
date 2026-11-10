@@ -1,0 +1,68 @@
+{
+  "tag": "sait_full",
+  "task": "syllable",
+  "view": "full",
+  "scope": "native",
+  "n_classes": 405,
+  "n_features": 106,
+  "acc_mean": 74.92,
+  "acc_std": 13.26,
+  "f1_mean": 72.17,
+  "maj_mean": 0.87,
+  "folds": [
+    {
+      "fold": 0,
+      "seed": 0,
+      "test_acc": 81.87,
+      "test_f1": 81.77,
+      "maj_acc": 0.87,
+      "val_acc": 76.39,
+      "n_test": 1147
+    },
+    {
+      "fold": 1,
+      "seed": 0,
+      "test_acc": 78.83,
+      "test_f1": 75.56,
+      "maj_acc": 0.87,
+      "val_acc": 52.44,
+      "n_test": 1148
+    },
+    {
+      "fold": 2,
+      "seed": 0,
+      "test_acc": 45.56,
+      "test_f1": 41.69,
+      "maj_acc": 0.87,
+      "val_acc": 81.17,
+      "n_test": 1148
+    },
+    {
+      "fold": 3,
+      "seed": 0,
+      "test_acc": 82.74,
+      "test_f1": 79.77,
+      "maj_acc": 0.87,
+      "val_acc": 83.97,
+      "n_test": 1147
+    },
+    {
+      "fold": 4,
+      "seed": 0,
+      "test_acc": 82.67,
+      "test_f1": 79.97,
+      "maj_acc": 0.87,
+      "val_acc": 78.81,
+      "n_test": 1148
+    },
+    {
+      "fold": 5,
+      "seed": 0,
+      "test_acc": 77.86,
+      "test_f1": 74.26,
+      "maj_acc": 0.87,
+      "val_acc": 81.34,
+      "n_test": 1147
+    }
+  ]
+}

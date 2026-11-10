@@ -1,0 +1,9 @@
+# Normalise line endings so the repository is identical on Linux, macOS and Windows.
+* text=auto eol=lf
+
+*.png  binary
+*.jpg  binary
+*.pdf  binary
+*.npy  binary
+*.npz  binary
+*.pth  binary

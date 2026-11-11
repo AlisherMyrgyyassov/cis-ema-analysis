@@ -239,9 +239,9 @@ def grouped_confusion(out_path):
                 v = m[i, j]
                 ax.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=6.6,
                         color="white" if v > 55 else "0.2")
-        ax.set_xlabel("Predicted place")
+        ax.set_xlabel("Predicted Place")
         if key == "ema_only":
-            ax.set_ylabel("True place")
+            ax.set_ylabel("True Place")
         ax.text(0.5, 1.03, f"({letter})", transform=ax.transAxes, ha="center",
                 va="bottom", fontsize=9, fontweight="bold")
     fig.colorbar(im, ax=axes, fraction=0.025, pad=0.02,
@@ -277,7 +277,7 @@ def tone_control(out_path):
         ax.set_xticks(x)
         ax.set_xticklabels(labels)
         ax.set_ylim(0, 102)
-        ax.set_ylabel("Tone accuracy (%)")
+        ax.set_ylabel("Tone Accuracy (%)")
         _panel(ax, letter)
 
     tw = _load(os.path.join(RUNS_DIR, "tone", "tone_within_syllable.json"))
@@ -319,7 +319,7 @@ def shapley_stability(out_path):
     ax.set_yticks(range(len(groups)))
     ax.set_yticklabels([f"{g} {short[g]}" for g in groups], fontsize=8)
     ax.axvline(0, color="0.4", lw=0.8)
-    ax.set_xlabel("Shapley value (accuracy points)")
+    ax.set_xlabel("Shapley Value (Accuracy Points)")
     ax.legend(handles=[Patch(color=EMA_C, label="EMA"),
                        Patch(color=ACOUSTIC_C, label="Acoustic")],
               frameon=False, loc="lower right")
@@ -345,8 +345,8 @@ def _probing(out_path, src, letter):
         ax.plot(range(len(stages)), ys, marker="o", label=p.capitalize())
     ax.set_xticks(range(len(stages)))
     ax.set_xticklabels(stage_labels, fontsize=7.5)
-    ax.set_xlabel("Layer depth")
-    ax.set_ylabel("Probe accuracy (%)")
+    ax.set_xlabel("Layer Depth")
+    ax.set_ylabel("Probe Accuracy (%)")
     ax.set_ylim(0, 105)
     ax.legend(frameon=False, loc="lower right", fontsize=7.5)
     _panel(ax, letter)
@@ -373,7 +373,7 @@ def faithfulness(out_path):
     for name, style in styles.items():
         ax1.plot(xs, np.array(d["deletion"][name]["mean"]) * 100, style,
                  label=name.capitalize(), markersize=4)
-    ax1.set_xlabel("Groups removed")
+    ax1.set_xlabel("Groups Removed")
     ax1.set_ylabel("Accuracy (%)")
     ax1.set_xlim(0, n)
     ax1.set_ylim(0, 100)
@@ -387,7 +387,7 @@ def faithfulness(out_path):
     labels = ["EMA"] + [g.capitalize() for g in d["insertion_groups_added"]]
     ax2.set_xticks(xi)
     ax2.set_xticklabels(labels, rotation=30, ha="right", fontsize=7.5)
-    ax2.set_xlabel("Groups added (Shapley order)")
+    ax2.set_xlabel("Groups Added (Shapley Order)")
     ax2.set_ylabel("Accuracy (%)")
     ax2.set_ylim(0, 100)
     _panel(ax2, "(b)")
@@ -404,11 +404,11 @@ def mechanistic(out_path):
     ys = [r["joint_ridge_r2_in"] - r["single_ridge_r2_in"] for r in table]
     names = [r["acoustic_feature"].replace("MFCC_", "MFCC") for r in table]
     mech = {
-        "F0": ("Weakly linearly observable", "#C0504D"),
-        "F3": ("Weakly linearly observable", "#C0504D"),
-        "MFCC2": ("Jointly recoverable", "#30638E"),
-        "MFCC5": ("Jointly recoverable", "#30638E"),
-        "MFCC6": ("Jointly recoverable", "#30638E"),
+        "F0": ("Weakly Linearly Observable", "#C0504D"),
+        "F3": ("Weakly Linearly Observable", "#C0504D"),
+        "MFCC2": ("Jointly Recoverable", "#30638E"),
+        "MFCC5": ("Jointly Recoverable", "#30638E"),
+        "MFCC6": ("Jointly Recoverable", "#30638E"),
         "F2": ("Captured (1-D)", "#2E8B57"),
     }
     inter = ("Intermediate", "#9AA0A6")
@@ -429,13 +429,13 @@ def mechanistic(out_path):
         ax.annotate(disp, (x, y), textcoords="offset points", xytext=(dx, dy),
                     fontsize=8.5, ha=ha, va=va)
     ax.axhline(0, color="k", lw=0.8, zorder=1)
-    ax.set_xlabel("Single-channel ridge $R^2$")
-    ax.set_ylabel("Joint gain over single channel ($R^2$)")
-    order = ["Weakly linearly observable", "Intermediate",
-             "Jointly recoverable", "Captured (1-D)"]
+    ax.set_xlabel("Single-Channel Ridge $R^2$")
+    ax.set_ylabel("Joint Gain over Single Channel ($R^2$)")
+    order = ["Weakly Linearly Observable", "Intermediate",
+             "Jointly Recoverable", "Captured (1-D)"]
     ax.legend(handles=[Patch(color=seen[l], label=l) for l in order if l in seen],
               frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.22),
-              ncol=2, fontsize=7.5, columnspacing=1.1, handlelength=1.2)
+              ncol=2, fontsize=8.0, columnspacing=1.0, handlelength=1.1)
     fig.tight_layout()
     _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)

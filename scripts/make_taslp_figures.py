@@ -68,7 +68,7 @@ def fig_calibration():
     ax.errorbar(kx, ro, yerr=re, fmt="-s", color=ACO_C, ms=3.5, lw=1.2,
                 capsize=2, label="Robust $z$")
     ax.set_xticks(kx); ax.set_xticklabels(["1", "2", "3", "5", "10", "20", "All"])
-    ax.set_xlabel("Calibration utterances ($k$)")
+    ax.set_xlabel("Calibration Utterances ($k$)")
     ax.set_ylabel("Accuracy (%)")
     ax.set_ylim(20, 84)
     ax.legend(frameon=False, fontsize=8, loc="lower right")
@@ -98,7 +98,7 @@ def fig_shapley():
     ax.set_yticks(y)
     ax.set_yticklabels([f"{g} {names[g]}" for g in order], fontsize=8)
     ax.axvline(0, color="0.4", lw=0.8)
-    ax.set_xlabel("Shapley value (accuracy points)")
+    ax.set_xlabel("Shapley Value (Accuracy Points)")
     ax.set_xlim(-4, 58)
     ax.legend(handles=[Line2D([], [], marker="s", ls="", color=EMA_C, label="EMA"),
                        Line2D([], [], marker="s", ls="", color=ACO_C, label="Acoustic")],
@@ -125,7 +125,7 @@ def fig_crosscorpus():
     for i, (g, bi, si) in enumerate(zip(gs, b, s)):
         ax.annotate(g, (bi, si), textcoords="offset points",
                     xytext=(4, 3) if i % 2 == 0 else (4, -9), fontsize=7.5)
-    ax.set_xlabel("Cantonese Shapley (pts)"); ax.set_ylabel("Mandarin Shapley (pts)")
+    ax.set_xlabel("Cantonese Shapley (Points)"); ax.set_ylabel("Mandarin Shapley (Points)")
     ax.set_xlim(0, mx); ax.set_ylim(0, mx)
     ax.set_title("(a) Group attribution ($\\rho=0.74$)", fontsize=9.5)
 
@@ -140,7 +140,7 @@ def fig_crosscorpus():
     for xi, v in zip(xx + w / 2, mand):
         ax.text(xi, v + 0.4, f"+{v:.1f}", ha="center", fontsize=7.5)
     ax.set_xticks(xx); ax.set_xticklabels(lab, fontsize=8)
-    ax.set_ylabel("Accuracy gain (pts)"); ax.set_ylim(0, 24)
+    ax.set_ylabel("Accuracy Gain (Points)"); ax.set_ylim(0, 24)
     ax.legend(frameon=False, fontsize=8)
     ax.set_title("(b) Replicated levers", fontsize=9.5)
 

@@ -158,3 +158,10 @@ individual speakers, or any recorded signal is present — the only tracked file
 Every figure, table and claim in the paper can therefore be *checked* two ways: against the
 reference artifacts in `expected/` (no data needed), and end-to-end against public data for
 the whole method (SAIT-EMA).
+
+## Licence
+
+The **code** in this repository is MIT (`LICENSE`). That licence does not extend to any
+research data: CIS-EMA is not redistributed here, and SAIT-EMA remains under CC BY 4.0 from
+its own Zenodo record. The reference artifacts under `expected/` are result summaries
+produced by this code and carry the same MIT terms as the code.

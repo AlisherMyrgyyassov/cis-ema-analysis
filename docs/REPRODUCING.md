@@ -155,6 +155,10 @@ Two things this tells you:
 python verify_results.py --runs runs/verify_exp1 --tol 0.5
 ```
 
+The summary used by the README's panel (b) is committed as
+`expected/verification/table1_reproduced.json`, and the figure that draws it is regenerable
+without any data: `python scripts/make_readme_figures.py --out docs/figures`.
+
 Run against the reproduction above, that reports the two means as passing and the two
 EMA-only std values as off; read it that way rather than as a failure.
 

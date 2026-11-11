@@ -1,0 +1,23 @@
+{
+  "note": "Result of re-running Table I in the released environment (torch 2.11.0+cu128, Python 3.14.5, RTX 5070 Ti), 6 folds x 2 seeds per model. Pooled baselines are quoted from the run's summary; the neural rows are computed from the run artifacts.",
+  "ema_only": {
+    "mean": 78.22,
+    "std": 3.72,
+    "n_runs": 12
+  },
+  "full": {
+    "mean": 88.16,
+    "std": 3.34,
+    "n_runs": 12
+  },
+  "logreg": {
+    "mean": 84.03,
+    "std": 3.23,
+    "n_runs": 12
+  },
+  "rf": {
+    "mean": 82.78,
+    "std": 4.49,
+    "n_runs": 12
+  }
+}

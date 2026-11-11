@@ -18,6 +18,13 @@ recoverability, knowledge distillation and retrained sensor removal.
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
+![Accuracy ladder and the reproduction check](docs/figures/fig_overview.png)
+
+<div align="center"><sub>
+<b>(a)</b> the accuracy ladder — the orange segment is the 9.6-point acoustic contribution
+&nbsp;·&nbsp; <b>(b)</b> published values against a re-run in the documented environment
+</sub></div>
+
 **Every number in the paper is machine-checked.** `verify_results.py` recomputes all
 **63 claims** from the reference artifacts shipped in `expected/` and compares them with the
 value printed in the manuscript. It currently reports `63/63 checks passed`.
@@ -58,6 +65,39 @@ is fully checkable. Please read this table before filing an issue about missing 
 
 `docs/DATA.md` explains what is gated, why, and how a reader can obtain access.
 `docs/PROVENANCE.md` lists everything that is deliberately *not* in this repository.
+
+## What the analysis found
+
+**Where the accuracy comes from.** Exact Shapley values over the eight feature groups, the
+spectral envelope dominating and the derived geometry contributing nothing.
+
+![Group Shapley values](docs/figures/fig_shapley.png)
+
+**What is recoverable, and how.** Each acoustic target placed by its best single EMA
+correlate (x) against what the remaining channels add (y): F₂ is captured by one channel,
+MFCC₂/₅/₆ only jointly, F₀ and F₃ weakly.
+
+![Mechanistic recoverability](docs/figures/fig_mechanistic.png)
+
+**Which coils are actually needed.** Frozen attribution overstates every coil; retraining
+without one measures the real cost. The tongue dorsum is the only individually
+load-bearing coil, and four midsagittal coils match all six.
+
+![Coil necessity](docs/figures/fig_montage_necessity.png)
+
+**More speakers do not close the gap.** Training-set size for the EMA-only model: 6 → 23
+speakers moves 61.0 → 78.4, but the acoustic model stays roughly ten points above at every
+point on the curve.
+
+![Training-set size](docs/figures/fig_scaling.png)
+
+**What a new speaker costs.** Per-speaker offset removal is label-free and recovers most of
+the benefit from ~10 unlabeled utterances; robust statistics need about 20.
+
+![Deployment calibration](docs/figures/fig_calibration.png)
+
+All six are regenerated from the shipped artifacts by the scripts in
+[`docs/ARTIFACTS.md`](docs/ARTIFACTS.md); none of them draw on the recordings directly.
 
 ## Quickstart
 
@@ -121,6 +161,7 @@ src/exp1..exp6_*.py     one module per experiment; scripts/ are thin CLIs
 preprocessing/          raw corpus -> aligned 250 Hz feature table (CIS and SAIT)
 scripts/                experiment entry points, plus figure and table builders
 folds/cis_folds.json    the exact subject split used for every reported number
+docs/figures/           README figures, regenerated from expected/ (no corpus needed)
 expected/               reference artifacts + claims.json (the claims ledger)
 verify_results.py       recompute every claim; exit 1 on any disagreement
 paper/results/          generated tables (gitignored; reproduced from runs/)

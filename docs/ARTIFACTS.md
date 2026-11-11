@@ -91,6 +91,7 @@ manuscript. `expected/claims.json` is the machine-readable form of this table an
 | Table IV | linear vs nonlinear recoverability | `python scripts/nonlinear_recoverability.py` | `runs/paper/exp4/nonlinear_recoverability.json` |
 | Table VI | cross-corpus comparison | CIS: above + SAIT arm | `runs/paper/*` + SAIT `Dataset/runs/*` |
 | Table VII | place-of-articulation errors | `python scripts/grouped_confusion.py` | `paper/results/confusion_grouped.json` |
+| README hero | accuracy ladder + reproduction check | `python scripts/make_readme_figures.py` | `expected/claims.json`, `expected/verification/table1_reproduced.json` |
 
 ## Regenerating without retraining
 

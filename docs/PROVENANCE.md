@@ -41,6 +41,15 @@ Three things were edited:
    documents. Three lines were added. It changes no numeric result: the script now runs and
    reproduces the paper's tone numbers (below).
 
+5. **Figure labels.** Axis labels were title-cased to the convention used in the manuscript
+   ("Tongue Height", "Lip Aperture", "Normalized Time", "Front–Back", "Left–Right"), and
+   `src/figcheck.py` was added: every figure is checked for overlapping text before it is
+   written, and the save is refused if two labels collide. Running it over the existing
+   figures found one real defect — the place-of-articulation labels on the grouped-confusion
+   matrix overlapped each other at 45° once the panels were narrowed to a third of the
+   figure width — now rotated to 90°. **The manuscript's copies of that figure and of the
+   corpus figures should be regenerated from this code before the next submission.**
+
 No model, no preprocessing step, no metric and no hyperparameter was modified.
 
 ## Verification performed when building this repository

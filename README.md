@@ -18,11 +18,11 @@ recoverability, knowledge distillation and retrained sensor removal.
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
-![Accuracy ladder and the reproduction check](docs/figures/fig_overview.png)
+![The CIS-EMA montage across three landmarks of a single /daai/ utterance](docs/figures/fig_montage_daai_sequence.png)
 
 <div align="center"><sub>
-<b>(a)</b> the accuracy ladder — the orange segment is the 9.6-point acoustic contribution
-&nbsp;·&nbsp; <b>(b)</b> published values against a re-run in the documented environment
+One /daai/ utterance at three landmarks — constriction, vowel target and offglide — with the
+six-coil montage above and tongue-height and lip-aperture trajectories below.
 </sub></div>
 
 **Every number in the paper is machine-checked.** `verify_results.py` recomputes all
@@ -68,6 +68,12 @@ is fully checkable. Please read this table before filing an issue about missing 
 
 ## What the analysis found
 
+**The signal itself.** Mean tongue-height and lip-aperture trajectories for one bilabial, one
+alveolar and one velar syllable, normalised in time; the shaded bands are ±1 SD across
+tokens. Every classification result in the paper is a decision made on curves of this kind.
+
+![Mean trajectories by place of articulation](docs/figures/fig_trajectories.png)
+
 **Where the accuracy comes from.** Exact Shapley values over the eight feature groups, the
 spectral envelope dominating and the derived geometry contributing nothing.
 
@@ -96,8 +102,9 @@ the benefit from ~10 unlabeled utterances; robust statistics need about 20.
 
 ![Deployment calibration](docs/figures/fig_calibration.png)
 
-All six are regenerated from the shipped artifacts by the scripts in
-[`docs/ARTIFACTS.md`](docs/ARTIFACTS.md); none of them draw on the recordings directly.
+The first two come from the recordings (via the geometric `scaled6` frame); the rest are
+rebuilt from the result artifacts alone. [`docs/ARTIFACTS.md`](docs/ARTIFACTS.md) maps each
+one to its command.
 
 ## Quickstart
 
@@ -161,7 +168,7 @@ src/exp1..exp6_*.py     one module per experiment; scripts/ are thin CLIs
 preprocessing/          raw corpus -> aligned 250 Hz feature table (CIS and SAIT)
 scripts/                experiment entry points, plus figure and table builders
 folds/cis_folds.json    the exact subject split used for every reported number
-docs/figures/           README figures, regenerated from expected/ (no corpus needed)
+docs/figures/           the figures used above, with the source of each in ARTIFACTS.md
 expected/               reference artifacts + claims.json (the claims ledger)
 verify_results.py       recompute every claim; exit 1 on any disagreement
 paper/results/          generated tables (gitignored; reproduced from runs/)

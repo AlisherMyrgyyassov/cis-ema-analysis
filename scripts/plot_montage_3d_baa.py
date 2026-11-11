@@ -123,8 +123,8 @@ def _render_3d(xyz, limits, show_labels, dpi=220):
     z_lo, z_hi = limits["z"]
     ax.set_box_aspect((x_hi - x_lo, y_hi - y_lo, z_hi - z_lo), zoom=1.05)
     ax.tick_params(pad=1, labelsize=7.5)
-    ax.set_xlabel("Front-back", labelpad=2, fontsize=8)
-    ax.set_ylabel("Left-right", labelpad=2, fontsize=8)
+    ax.set_xlabel("Front–Back", labelpad=2, fontsize=8)
+    ax.set_ylabel("Left–Right", labelpad=2, fontsize=8)
     ax.set_zlabel("Height", labelpad=3, fontsize=8)
     if not show_labels:
         for txt in list(ax.texts):
@@ -282,8 +282,8 @@ def _build_figure(subj, rec, syl, title=True):
     ax_ul = fig.add_subplot(gs_bot[1, 0], sharex=ax_td)
     _plot_traj(ax_td, g, stages, "TDz", td_lim, False, phones)
     _plot_traj(ax_ul, g, stages, "Lip aperture", ap_lim, True, phones)
-    ax_td.set_ylabel("Tongue height")
-    ax_ul.set_ylabel("Lip aperture")
+    ax_td.set_ylabel("Tongue Height")
+    ax_ul.set_ylabel("Lip Aperture")
     t = g["time"].to_numpy(dtype=float)
     t_lo, t_hi = 0.0, float(t[-1] - t[0])
     for stage in STAGES:

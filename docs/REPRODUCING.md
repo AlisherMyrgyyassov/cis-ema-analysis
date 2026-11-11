@@ -155,9 +155,14 @@ Two things this tells you:
 python verify_results.py --runs runs/verify_exp1 --tol 0.5
 ```
 
-The summary used by the README's panel (b) is committed as
-`expected/verification/table1_reproduced.json`, and the figure that draws it is regenerable
-without any data: `python scripts/make_readme_figures.py --out docs/figures`.
+The full reproduction summary is committed as `expected/verification/table1_reproduced.json`
+(per-model mean and std from the re-run), so you can compare without rerunning anything.
+
+Every figure is passed through `src/figcheck.py` before it is written: it asks the renderer
+where each label actually landed and refuses to save a figure in which two of them overlap.
+If a layout change introduces a collision you get the offending strings and their overlap in
+pixels rather than a silently broken PNG; `FIGCHECK=warn` downgrades it to a warning while you
+iterate.
 
 Run against the reproduction above, that reports the two means as passing and the two
 EMA-only std values as off; read it that way rather than as a failure.

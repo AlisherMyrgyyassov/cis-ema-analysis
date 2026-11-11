@@ -381,7 +381,7 @@ def _plot_traj(ax, g, stages, col, ylim, show_xlabel, ylabel):
     ax.set_ylim(*ylim)
     ax.set_ylabel(ylabel, fontsize=8)
     if show_xlabel:
-        ax.set_xlabel("Normalized time", fontsize=8)
+        ax.set_xlabel("Normalized Time", fontsize=8)
         ax.set_xticks([0.0, 0.5, 1.0])
     else:
         ax.set_xticklabels([])
@@ -457,7 +457,7 @@ def _build_figure(subj, picked):
         ax_td = fig.add_subplot(gs_tr[0, c])
         ax_ul = fig.add_subplot(gs_tr[1, c])
         _plot_traj(ax_td, g, stages, "TDz", td_lim, False,
-                   "Tongue height" if c == 0 else "")
+                   "Tongue Height" if c == 0 else "")
         _plot_traj(ax_ul, g, stages, "ULz", ul_lim, True,
                    "Lip height" if c == 0 else "")
         if c != 0:

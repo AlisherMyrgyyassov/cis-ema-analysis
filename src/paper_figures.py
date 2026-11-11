@@ -24,6 +24,7 @@ from matplotlib.patches import FancyBboxPatch, Patch
 from matplotlib.ticker import FormatStrFormatter
 
 from src.config import RESULTS_DIR, DATA_DIR, RUNS_DIR, REPO_ROOT
+from src.figcheck import save as _save_fig
 
 plt.rcParams.update({
     "font.size": 9,
@@ -80,8 +81,8 @@ def montage_and_trajectories(out_path):
     colors = ["#2E5C8A", "#C77B30", "#4F8A5B"]
 
     fig, axes = plt.subplots(2, 1, figsize=(3.5, 2.8), sharex=True)
-    for ax, (col, ylab) in zip(axes, (("TDz", "Tongue height"),
-                                      ("Lip aperture", "Lip aperture"))):
+    for ax, (col, ylab) in zip(axes, (("TDz", "Tongue Height"),
+                                      ("Lip aperture", "Lip Aperture"))):
         for (syl, lab), c in zip(picks, colors):
             curves = []
             for _, g in pos[pos["syllable"] == syl].groupby("source"):
@@ -99,11 +100,11 @@ def montage_and_trajectories(out_path):
             ax.fill_between(xi, m - sd, m + sd, color=c, alpha=0.18, lw=0)
         ax.set_ylabel(ylab)
         ax.yaxis.set_major_formatter(FormatStrFormatter("%.2f"))
-    axes[1].set_xlabel("Normalized time")
+    axes[1].set_xlabel("Normalized Time")
     axes[1].legend(frameon=False, loc="lower center", bbox_to_anchor=(0.5, 0.0),
                    fontsize=7.5)
     fig.tight_layout()
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -126,8 +127,8 @@ def _style_3d_axes(ax):
     ax.set_yticks([0.0, 0.5, 1.0])
     ax.set_zticks([0.0, 0.5, 1.0])
     ax.tick_params(pad=2, labelsize=8)
-    ax.set_xlabel("Front-back", labelpad=10)
-    ax.set_ylabel("Left-right", labelpad=10)
+    ax.set_xlabel("Front–Back", labelpad=10)
+    ax.set_ylabel("Left–Right", labelpad=10)
     ax.set_zlabel("")
 
 
@@ -160,7 +161,7 @@ def daai_sequence(out_path):
     speakers = seq._collect_speakers(man, feat, vow._subj_folders())
     subj, picked = seq._choose(speakers, np.random.RandomState(seq.DEFAULT_SEED))
     fig, _ = baa._build_figure(subj, picked["daai"], "daai", title=False)
-    fig.savefig(out_path, facecolor="white")
+    _save_fig(fig, out_path, facecolor="white")
     plt.close(fig)
     return out_path
 
@@ -209,7 +210,7 @@ def observability_taxonomy(out_path):
     ax.text(50, -0.35, "Increasing difficulty of recovery from articulatory motion",
             ha="center", fontsize=8, color="0.35")
     fig.tight_layout()
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -228,7 +229,9 @@ def grouped_confusion(out_path):
         im = ax.imshow(m, cmap="Blues", vmin=0, vmax=100)
         ax.set_xticks(range(len(places)))
         ax.set_yticks(range(len(places)))
-        ax.set_xticklabels(abbr, rotation=45, ha="right", fontsize=7.0)
+        # 90 deg: at 45 deg the longer place names (Bilabial, Labiodental) run into
+        # each other once the panel is narrowed to a third of the figure width.
+        ax.set_xticklabels(abbr, rotation=90, ha="center", va="top", fontsize=7.0)
         ax.set_yticklabels(abbr if key == "ema_only" else [""] * len(places),
                            fontsize=7.0)
         for i in range(m.shape[0]):
@@ -243,7 +246,7 @@ def grouped_confusion(out_path):
                 va="bottom", fontsize=9, fontweight="bold")
     fig.colorbar(im, ax=axes, fraction=0.025, pad=0.02,
                  label="Row-normalized (%)")
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -287,7 +290,7 @@ def tone_control(out_path):
     panel(ax2, multi_vals, multi_base,
           "Per-syllable majority", "(b) Multi-tone syllables")
     fig.tight_layout()
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -321,7 +324,7 @@ def shapley_stability(out_path):
                        Patch(color=ACOUSTIC_C, label="Acoustic")],
               frameon=False, loc="lower right")
     fig.tight_layout()
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -348,7 +351,7 @@ def _probing(out_path, src, letter):
     ax.legend(frameon=False, loc="lower right", fontsize=7.5)
     _panel(ax, letter)
     fig.tight_layout()
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -389,7 +392,7 @@ def faithfulness(out_path):
     ax2.set_ylim(0, 100)
     _panel(ax2, "(b)")
     fig.tight_layout()
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -434,7 +437,7 @@ def mechanistic(out_path):
               frameon=False, loc="upper center", bbox_to_anchor=(0.5, -0.22),
               ncol=2, fontsize=7.5, columnspacing=1.1, handlelength=1.2)
     fig.tight_layout()
-    fig.savefig(out_path, bbox_inches="tight")
+    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 

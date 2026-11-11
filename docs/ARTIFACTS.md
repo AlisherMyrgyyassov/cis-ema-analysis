@@ -76,12 +76,20 @@ manuscript. `expected/claims.json` is the machine-readable form of this table an
 
 ## Figures
 
+**Shared style.** Every generated figure is drawn through `src/figstyle.py`, which sets one
+typographic and colour scheme: a Times stack with STIX maths so figure labels sit in the same
+face as the IEEEtran body text, hairline open frames, and a palette where navy is articulatory
+data and amber is the acoustic reference. Import it and call `apply()` at the top of a
+generator; `figstyle.chip()` gives the translucent rounded plate used behind a value that
+overlaps data. Figures 1 and 6 are hand-assembled and are not covered.
+
+
 | figure | what it shows | regenerate with | inputs |
 |---|---|---|---|
 | Fig. 1 | montage panels: six coils, /daai/ sequence | `python -m src.paper_figures --only fig_montage_daai_sequence.png` (needs the `scaled6` frame — see REPRODUCING) | — |
-| Fig. 2 | training-set-size curve | `python scripts/make_scaling_figure.py` | `runs/scaling/spk_k*.json` |
+| Fig. 2 | training-set-size curve: every fold x seed run, mean +/- SD, step gains | `python scripts/make_scaling_figure.py [--out DIR]` | `runs/scaling/spk_k*.json` (+ `_s1` seeds) |
 | Fig. 3 | deployment calibration k-curve | `python scripts/make_taslp_figures.py` | `runs/fair_deploy_*/fair_deploy.json` |
-| Fig. 4 | exact group Shapley | `python scripts/run_exp2.py` -> `python -m src.paper_figures` | `runs/paper/exp2/shapley.json` |
+| Fig. 4 | exact group Shapley | `python scripts/run_exp2.py` -> `python scripts/make_taslp_figures.py` | `runs/paper/exp2/shapley.json` |
 | Fig. 5 | mechanistic taxonomy | `python -m src.paper_figures` | `paper/results/exp4_correlation.json` |
 | Fig. 6 | cross-corpus coil importance | `python scripts/make_taslp_figures.py` | `runs/montage_subset/`, SAIT `sait_loo_*` |
 | Fig. 7 | which coils are needed | `python scripts/sensor_shapley.py`, `run_montage_subset.py`, `make_montage_figure.py` | `runs/paper/exp8_robust_z/`, `runs/montage_subset/` |

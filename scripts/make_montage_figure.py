@@ -33,6 +33,7 @@ from matplotlib.lines import Line2D
 from scipy import stats
 
 from src import figcheck  # noqa: E402
+from src import figstyle  # noqa: E402
 
 import argparse
 
@@ -41,8 +42,8 @@ MS = os.path.join(ROOT, "runs", "montage_subset")
 SHAP = os.path.join(ROOT, "runs", "paper", "exp8_robust_z", "sensor_shapley.json")
 OUT = os.path.join(ROOT, "paper", "illustrations", "fig_montage_necessity")
 
-TONGUE = "#2F6DB5"
-LIP = "#C36B4A"
+TONGUE = figstyle.NAVY
+LIP = figstyle.AMBER
 
 COILS = ["TD", "TT", "LL", "LC", "TL", "UL"]
 LADDER = [("all", "6 coils\n59 ch"), ("midsag4", "4 coils\n40 ch"),
@@ -99,15 +100,7 @@ def main():
                       "mean": float(vals.mean())})
     removed = [("TL", "LC"), ("LL",), ("UL",), ("TT",)]
 
-    plt.rcParams.update({
-        "font.size": 8.4, "axes.labelsize": 8.6, "axes.titlesize": 8.6,
-        "xtick.labelsize": 7.6, "ytick.labelsize": 8.0,
-        "axes.linewidth": 0.7, "xtick.major.width": 0.7,
-        "ytick.major.width": 0.7, "legend.fontsize": 7.6,
-        # TrueType (Type 42) instead of the default Type 3 glyph procedures:
-        # Type 3 renders thin and lossy when the PDF is embedded in LaTeX.
-        "pdf.fonttype": 42, "ps.fonttype": 42,
-    })
+    figstyle.apply(scale=1.05)
 
     fig = plt.figure(figsize=(3.5, 4.2 if clean else 4.5), dpi=300)
     gs = fig.add_gridspec(2, 2, height_ratios=[1.0, 1.12], width_ratios=[1.22, 1.0],

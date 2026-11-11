@@ -26,20 +26,12 @@ from matplotlib.ticker import FormatStrFormatter
 from src.config import RESULTS_DIR, DATA_DIR, RUNS_DIR, REPO_ROOT
 from src.figcheck import save as _save_fig
 
-plt.rcParams.update({
-    "font.size": 9,
-    "axes.labelsize": 9,
-    "legend.fontsize": 8,
-    "xtick.labelsize": 8,
-    "ytick.labelsize": 8,
-    "figure.dpi": 300,
-    "savefig.dpi": 300,
-    "axes.spines.top": False,
-    "axes.spines.right": False,
-})
+from src import figstyle  # noqa: E402
 
-EMA_C = "#3B6EA5"
-ACOUSTIC_C = "#D17B3F"
+figstyle.apply()
+
+EMA_C = figstyle.NAVY
+ACOUSTIC_C = figstyle.AMBER
 SSL_C = "#5B8C5A"
 FULL_C = "#8E6C8A"
 GRID_C = "#BBBBBB"

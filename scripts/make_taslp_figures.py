@@ -36,12 +36,12 @@ RUNS = os.path.join(REPO, "runs")
 SAIT = str(path("sait_dataset") / "runs")
 OUT = str(path("figures"))
 
-EMA_C, ACO_C, SSL_C = "#3B6FB6", "#D07A3A", "#4C9A5A"
-GREY = "#7A7A7A"
-plt.rcParams.update({
-    "font.size": 9, "axes.spines.top": False, "axes.spines.right": False,
-    "figure.dpi": 300, "savefig.dpi": 300, "font.family": "DejaVu Sans",
-})
+from src import figstyle  # noqa: E402
+
+figstyle.apply()
+
+EMA_C, ACO_C, SSL_C = figstyle.NAVY, figstyle.AMBER, figstyle.SLATE
+GREY = figstyle.GREY
 
 
 def load(path):
@@ -94,7 +94,8 @@ def fig_shapley():
     ax.barh(y, means, xerr=stds, color=cols, height=0.68, capsize=2,
             error_kw={"lw": 0.8})
     for yi, m, e in zip(y, means, stds):
-        ax.text(m + e + 1.2, yi, f"{m:+.1f}", va="center", ha="left", fontsize=7.5)
+        ax.text(m + e + 1.2, yi, f"{m:+.1f}".replace("-", "\u2212"), va="center",
+                ha="left", fontsize=7.5)
     ax.set_yticks(y)
     ax.set_yticklabels([f"{g} {names[g]}" for g in order], fontsize=8)
     ax.axvline(0, color="0.4", lw=0.8)

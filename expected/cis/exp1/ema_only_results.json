@@ -93,7 +93,7 @@
       "zi": 0.6666666666666666,
       "ziu": 0.6333333333333333
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold0_seed0_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold0_seed0_model.pth"
   },
   {
     "fold": 0,
@@ -189,7 +189,7 @@
       "zi": 0.7333333333333333,
       "ziu": 0.7
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold0_seed1_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold0_seed1_model.pth"
   },
   {
     "fold": 1,
@@ -285,7 +285,7 @@
       "zi": 0.5,
       "ziu": 0.6538461538461539
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold1_seed0_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold1_seed0_model.pth"
   },
   {
     "fold": 1,
@@ -381,7 +381,7 @@
       "zi": 0.625,
       "ziu": 0.6538461538461539
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold1_seed1_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold1_seed1_model.pth"
   },
   {
     "fold": 2,
@@ -477,7 +477,7 @@
       "zi": 0.7,
       "ziu": 0.7666666666666667
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold2_seed0_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold2_seed0_model.pth"
   },
   {
     "fold": 2,
@@ -573,7 +573,7 @@
       "zi": 0.6333333333333333,
       "ziu": 0.6666666666666666
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold2_seed1_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold2_seed1_model.pth"
   },
   {
     "fold": 3,
@@ -669,7 +669,7 @@
       "zi": 0.8333333333333334,
       "ziu": 0.7
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold3_seed0_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold3_seed0_model.pth"
   },
   {
     "fold": 3,
@@ -765,7 +765,7 @@
       "zi": 0.8666666666666667,
       "ziu": 0.6666666666666666
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold3_seed1_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold3_seed1_model.pth"
   },
   {
     "fold": 4,
@@ -861,7 +861,7 @@
       "zi": 0.56,
       "ziu": 0.625
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold4_seed0_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold4_seed0_model.pth"
   },
   {
     "fold": 4,
@@ -957,7 +957,7 @@
       "zi": 0.56,
       "ziu": 0.8333333333333334
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold4_seed1_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold4_seed1_model.pth"
   },
   {
     "fold": 5,
@@ -1053,7 +1053,7 @@
       "zi": 0.8421052631578947,
       "ziu": 0.5555555555555556
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold5_seed0_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold5_seed0_model.pth"
   },
   {
     "fold": 5,
@@ -1149,6 +1149,6 @@
       "zi": 0.5263157894736842,
       "ziu": 0.5
     },
-    "ckpt_path": "C:\\Alisher_Data\\Projects\\ema-syllables\\runs\\paper\\exp1\\ema_only\\fold5_seed1_model.pth"
+    "ckpt_path": "runs\\paper\\exp1\\ema_only\\fold5_seed1_model.pth"
   }
 ]

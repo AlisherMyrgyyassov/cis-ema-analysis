@@ -1,4 +1,4 @@
-"""Stage 1: extract & align the Bruce Speech EMA dataset.
+"""Stage 1: extract and align the CIS-EMA corpus.
 
 Reads raw EMA (posR/*.txt, 250 Hz head-rotated), per-utterance audio (wav/*.wav,
 48 kHz) and TextGrid labels (TG/*.TextGrid), and produces a clean, fully-aligned

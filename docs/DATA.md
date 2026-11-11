@@ -146,6 +146,15 @@ and orderings only.
 | CIS-EMA audio and voice-derived acoustic features | not published | voice is not anonymisable; same approval issue |
 | SAIT-EMA everything | public, CC BY 4.0 | upstream authors released it |
 
+### What this repository does disclose
+
+`folds/cis_folds.json` lists the 33 subject identifiers used in the paper, their sex, and
+their fold membership. These are pseudonymous integers (`1`–`33`); **no mapping from them to
+a person exists anywhere in this repository**, and the paper itself reports sex counts and
+per-fold results at the same level of detail. No names, audio, trajectories, transcripts of
+individual speakers, or any recorded signal is present — the only tracked file types are
+`.py`, `.json`, `.md`, `.txt`, `.toml`, `.cff`, and `LICENSE`.
+
 Every figure, table and claim in the paper can therefore be *checked* two ways: against the
 reference artifacts in `expected/` (no data needed), and end-to-end against public data for
 the whole method (SAIT-EMA).

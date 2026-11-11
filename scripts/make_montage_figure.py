@@ -1,4 +1,4 @@
-﻿"""Figure: which coils are needed (credit vs cost, then the montage ladder).
+"""Figure: which coils are needed (credit vs cost, then the montage ladder).
 
 Panel (a) puts the frozen-model Shapley credit of each coil beside the accuracy
 cost of removing that coil and retraining (positive = removal hurts). The two
@@ -21,6 +21,9 @@ Usage::
 """
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import matplotlib
 matplotlib.use("Agg")
@@ -28,6 +31,8 @@ import matplotlib.pyplot as plt
 import numpy as np
 from matplotlib.lines import Line2D
 from scipy import stats
+
+from src import figcheck  # noqa: E402
 
 import argparse
 
@@ -195,8 +200,8 @@ def main():
     ax.text(-0.02, 1.05, "(b)", transform=ax.transAxes, fontweight="bold",
             fontsize=8.5, va="bottom")
 
-    fig.savefig(out + ".png", facecolor="white")
-    fig.savefig(out + ".pdf", facecolor="white")
+    figcheck.save(fig, out + ".png", facecolor="white")
+    figcheck.save(fig, out + ".pdf", facecolor="white")
 
     # ---------------- collision self-check ----------------
     fig.canvas.draw()

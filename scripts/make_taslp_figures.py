@@ -22,6 +22,7 @@ import sys
 
 sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
+from src import figcheck
 from src.paths import get as path, REPO_ROOT  # noqa: E402
 
 import matplotlib
@@ -73,7 +74,7 @@ def fig_calibration():
     ax.legend(frameon=False, fontsize=8, loc="lower right")
     fig.tight_layout()
     p = os.path.join(OUT, "fig_calibration.png")
-    fig.savefig(p, bbox_inches="tight"); print("wrote", p)
+    figcheck.save(fig, p, bbox_inches="tight"); print("wrote", p)
     plt.close(fig)
 
 
@@ -103,7 +104,7 @@ def fig_shapley():
                        Line2D([], [], marker="s", ls="", color=ACO_C, label="Acoustic")],
               frameon=False, fontsize=8, loc="lower right")
     fig.tight_layout()
-    p = os.path.join(OUT, "fig_shapley.png"); fig.savefig(p, bbox_inches="tight"); print("wrote", p)
+    p = os.path.join(OUT, "fig_shapley.png"); figcheck.save(fig, p, bbox_inches="tight"); print("wrote", p)
     plt.close(fig)
 
 
@@ -119,8 +120,11 @@ def fig_crosscorpus():
     mx = max(b + s) * 1.15
     ax.plot([0, mx], [0, mx], ls=":", color="0.6", lw=1)
     ax.scatter(b, s, s=34, color=EMA_C, zorder=3)
-    for g, bi, si in zip(gs, b, s):
-        ax.annotate(g, (bi, si), textcoords="offset points", xytext=(4, 3), fontsize=7.5)
+    # Alternate the label above/below the marker: G5 and G8 land almost on top of each
+    # other, so a single fixed offset prints them into the same pixels.
+    for i, (g, bi, si) in enumerate(zip(gs, b, s)):
+        ax.annotate(g, (bi, si), textcoords="offset points",
+                    xytext=(4, 3) if i % 2 == 0 else (4, -9), fontsize=7.5)
     ax.set_xlabel("Cantonese Shapley (pts)"); ax.set_ylabel("Mandarin Shapley (pts)")
     ax.set_xlim(0, mx); ax.set_ylim(0, mx)
     ax.set_title("(a) Group attribution ($\\rho=0.74$)", fontsize=9.5)
@@ -141,7 +145,7 @@ def fig_crosscorpus():
     ax.set_title("(b) Replicated levers", fontsize=9.5)
 
     fig.tight_layout()
-    p = os.path.join(OUT, "fig_crosscorpus.png"); fig.savefig(p, bbox_inches="tight"); print("wrote", p)
+    p = os.path.join(OUT, "fig_crosscorpus.png"); figcheck.save(fig, p, bbox_inches="tight"); print("wrote", p)
     plt.close(fig)
 
 

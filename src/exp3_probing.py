@@ -1,4 +1,4 @@
-﻿"""Experiment 3a: probing classifiers across model layers (+ controls).
+"""Experiment 3a: probing classifiers across model layers (+ controls).
 
 Freezes the trained full-feature BiLSTM (Exp 1.4) and the EMA-only BiLSTM
 (Exp 1.3), extracts mean-pooled utterance representations at each depth (input

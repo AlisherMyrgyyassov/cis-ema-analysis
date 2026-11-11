@@ -12,11 +12,16 @@ Usage::
 import argparse
 import json
 import os
+import sys
+
+sys.path.insert(0, os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 import matplotlib
 matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
+
+from src import figcheck  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 RUNS = os.path.join(REPO, "runs", "scaling")
@@ -83,7 +88,7 @@ def main():
 
     fig.tight_layout(pad=0.3)
     p = os.path.join(args.out, "fig_scaling.png")
-    fig.savefig(p, bbox_inches="tight")
+    figcheck.save(fig, p, bbox_inches="tight")
     print("wrote", p)
     plt.close(fig)
 

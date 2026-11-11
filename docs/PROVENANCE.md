@@ -45,9 +45,10 @@ Three things were edited:
    ("Tongue Height", "Lip Aperture", "Normalized Time", "Front–Back", "Left–Right"), and
    `src/figcheck.py` was added: every figure is checked for overlapping text before it is
    written, and the save is refused if two labels collide. Running it over the existing
-   figures found one real defect — the place-of-articulation labels on the grouped-confusion
-   matrix overlapped each other at 45° once the panels were narrowed to a third of the
-   figure width — now rotated to 90°. **The manuscript's copies of that figure and of the
+   figures found two real defects: the place-of-articulation labels on the grouped-confusion
+   matrix overlapped each other at 45° once the panels were narrowed to a third of the figure
+   width (now 90°), and the G5/G8 group labels in the cross-corpus scatter printed into the
+   same pixels because the two points nearly coincide (labels now stagger above/below). **The manuscript's copies of that figure and of the
    corpus figures should be regenerated from this code before the next submission.**
 
 No model, no preprocessing step, no metric and no hyperparameter was modified.

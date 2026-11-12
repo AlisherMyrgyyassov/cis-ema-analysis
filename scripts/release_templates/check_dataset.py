@@ -56,6 +56,8 @@ ok(len(man) == 4884, "manifest rows", f"{len(man)} (expected 4884)")
 ok(man.subj.nunique() == 33, "subjects", str(man.subj.nunique()))
 ok(man.syllable.nunique() == 43, "syllable classes", str(man.syllable.nunique()))
 ok(set(man.sex.unique()) <= {"F", "M"}, "sex values in {F, M}")
+ok("qc_position_outlier" in man.columns and int(man.qc_position_outlier.sum()) == 2,
+   "quality flag present", "2 utterances marked")
 n114 = int((man["item"] == 114).sum())
 ok(int(man.tone.notna().sum()) == len(man) - n114, "tone labels joined, item 114 excluded",
    f"{int(man.tone.notna().sum())} of {len(man)} ({n114} excluded)")

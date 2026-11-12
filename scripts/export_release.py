@@ -180,9 +180,13 @@ Positions are in **millimetres** in the head-corrected frame of the articulograp
 
 | axis | meaning |
 |---|---|
-| x | front–back |
+| x | anterior–posterior (back–front) |
 | y | left–right |
-| z | height |
+| z | superior–inferior (height) |
+
+This is the instrument's own frame, taken from `posR`; no rotation beyond head-correction has
+been applied. If absolute orientation matters for your analysis, anchor it on the palate
+trace of your own speaker rather than on this convention.
 
 Six coils: **TD** tongue dorsum, **TL** tongue lateral, **TT** tongue tip, **UL** upper lip,
 **LL** lower lip, **LC** lip corner. Three channels per coil (`TDx`, `TDy`, `TDz`, …),
@@ -200,9 +204,9 @@ the table the accompanying paper trains on:
 normalised table is reproducible from the raw one. Two details matter:
 
 1. **The statistics are taken over unsmoothed frames and applied to smoothed ones**, exactly
-   as in the original pipeline. Recomputing them from `features_raw.csv.gz` therefore agrees
-   with `features_robust_z.csv.gz` to about 1e-3, not bit-exactly. Use the shipped statistics
-   for an exact match.
+   as in the original pipeline. Recomputing them from `features_raw.csv.gz` yourself agrees
+   with `features_robust_z.csv.gz` only to about 2e-4; the shipped statistics reproduce it to
+   1e-6. Use the shipped ones when you need the exact table.
 2. **In the normalised table, the derived channels are computed after normalisation.** Its
    velocity, acceleration and geometry are not rescaled copies of the raw ones: distances in
    particular are measured between normalised coordinates and are dimensionless. If you want
@@ -220,6 +224,16 @@ Consequently the acoustic-model results in the accompanying paper (and its HuBER
 and cross-modal distillation arms) cannot be reproduced from this record alone. Everything
 based on articulation — the EMA-only classifier, normalisation, Shapley attribution,
 probing, calibration and sensor removal — can.
+
+## Data quality
+
+The kinematic tables are released exactly as the published pipeline produced them, including
+its defects. Two of the {ctx['n_utt']} utterances (`sub_04_0059`, `sub_05_0010`) contain
+coil-tracking dropouts where a coordinate jumps to several hundred millimetres; they are
+marked `qc_position_outlier` in `manifest.csv`. Those two utterances also produce the extreme
+normalised values (|z| > 50) in `features_robust_z.csv.gz`; every other frame lies in a
+plausible range (0.1th–99.9th percentile of tongue-tip to tongue-dorsum separation is
+11–33 mm). Excluding them is a modelling choice, not a correction.
 
 ## Ethics
 
@@ -275,6 +289,7 @@ kinematic tables are pure ASCII).
 | `t_syl_start`, `t_syl_end` | float | syllable interval from the TextGrid |
 | `t_onset_start`, `t_onset_end` | float | onset interval |
 | `t_vowel_start`, `t_vowel_end` | float | vowel interval |
+| `qc_position_outlier` | bool | `True` for the 2 utterances whose trajectories leave the head volume (coil-tracking dropouts, coordinates up to 481 mm). Informational: those frames are still present, because the published pipeline used them |
 
 Times are in the section clock of the original recording; subtract `t_first` for a
 0-based utterance. Interval times come from the Praat TextGrids, converted to the EMA
@@ -322,6 +337,9 @@ coordinates and is dimensionless.
 | array | shape | unit |
 |---|---|---|
 | `time` | (T,) | seconds |
+
+The CSV tables store full float64 precision. The `.npz` arrays are **float32**, so they agree
+with the CSV to about 1e-7 relative — use the CSVs when you need the exact values.
 | `pos` | (T, 18) | mm, G1 order |
 | `vel` | (T, 18) | mm/s |
 | `acc` | (T, 18) | mm/s² |
@@ -396,9 +414,27 @@ keywords:
 # writers
 # --------------------------------------------------------------------------- #
 def write_csv_gz(df, path_out):
+    """Write gzipped CSV at full float precision.
+
+    No ``float_format``: rounding to six significant digits looks harmless on
+    normalised positions (order 1) but shifts velocity channels (order 10^3 mm/s)
+    by up to 5e-2, which would make the released table differ from the one the
+    paper trains on. Lossless is worth the extra megabytes.
+    """
     os.makedirs(os.path.dirname(path_out), exist_ok=True)
-    df.to_csv(path_out, index=False, float_format="%.6g", compression="gzip")
+    df.to_csv(path_out, index=False, compression="gzip", lineterminator="\n")
     return os.path.getsize(path_out)
+
+
+def write_lf(path_out, text):
+    """Write text with Unix line endings.
+
+    Windows text mode would emit CRLF, which silently breaks `sha256sum -c`
+    on Linux and macOS: the checksum line's filename picks up a trailing \r.
+    A published record has to verify on the machines other people use.
+    """
+    with open(path_out, "w", encoding="utf-8", newline="\n") as f:
+        f.write(text)
 
 
 def sha256(path_in):
@@ -435,7 +471,44 @@ kinematics/utterances/sub_XX/*.npz  per-utterance arrays, one file per utterance
 folds/cis_folds.json                the subject-disjoint 6-fold split
 check_dataset.py                    verifies this record is complete and consistent
 SCHEMA.md                           every column, its unit, and how it was computed
+README.md, LICENSE, CITATION.cff    this file, CC BY 4.0, machine-readable citation
+SHA256SUMS                          a checksum for every file above
 """
+
+def refresh_docs(out):
+    """Rewrite the prose and checksums of a record that is already built."""
+    man = pd.read_csv(os.path.join(out, "manifest.csv"))
+    n_frames = len(pd.read_csv(os.path.join(out, "kinematics", "features_raw.csv.gz"),
+                               usecols=["source"]))
+    per_speaker = man.drop_duplicates("subj").sex.value_counts()
+    ctx = dict(n_utt=f"{len(man):,}", n_subj=man.subj.nunique(),
+               n_f=int(per_speaker.get("F", 0)), n_m=int(per_speaker.get("M", 0)),
+               n_frames=f"{n_frames:,}",
+               n_syl=len(pd.read_csv(os.path.join(out, "annotations", "inventory.csv"))),
+               n_stim=len(pd.read_csv(os.path.join(out, "annotations", "stimuli.csv"))))
+    write_lf(Path(out) / "README.md", README.format(**ctx) + readme_rest(**ctx))
+    write_lf(Path(out) / "SCHEMA.md", SCHEMA)
+    write_lf(Path(out) / "LICENSE", LICENSE)
+    write_lf(Path(out) / "CITATION.cff", CITATION.format(**ctx))
+    tmpl = Path(__file__).resolve().parent / "release_templates"
+    write_lf(Path(out) / "check_dataset.py",
+             (tmpl / "check_dataset.py").read_text(encoding="utf-8").replace("\r\n", "\n"))
+    reseal(out)
+    print(f"docs refreshed in {out}")
+
+
+def reseal(out):
+    """Recompute SHA256SUMS over every file in the record."""
+    lines = []
+    for root, _, files in os.walk(out):
+        for f in sorted(files):
+            if f == "SHA256SUMS":
+                continue
+            fp = os.path.join(root, f)
+            lines.append(f"{sha256(fp)}  {os.path.relpath(fp, out).replace(chr(92), '/')}")
+    write_lf(Path(out) / "SHA256SUMS", "\n".join(sorted(lines)) + "\n")
+    return len(lines)
+
 
 # --------------------------------------------------------------------------- #
 # main
@@ -446,7 +519,12 @@ def main():
     ap.add_argument("--out", required=True, help="release directory to create/populate")
     ap.add_argument("--limit", type=int, default=0, help="rows (debug)")
     ap.add_argument("--skip-npz", action="store_true")
+    ap.add_argument("--docs-only", action="store_true",
+                    help="rewrite only the prose and checksums of an existing record")
     args = ap.parse_args()
+
+    if args.docs_only:
+        return refresh_docs(args.out)
 
     ds = require("cis_dataset")
     raw_dir = require("cis_raw")
@@ -500,6 +578,17 @@ def main():
             inside = (t0.min() >= iv[0] - 1e-3) and (t0.max() <= iv[1] + 1e-3)
             speak += int(inside)
     man = pd.DataFrame(rows)
+
+    # Quality flag, informational only: two utterances contain coil-tracking
+    # dropouts (coordinates up to 481 mm, i.e. outside the head volume). The
+    # values are kept as-is because they are what the published pipeline used;
+    # users who want clean trajectories can filter on this column.
+    out_of_volume = (raw[POS_COLS].abs() > 150).any(axis=1)
+    qc = raw.assign(_bad=out_of_volume).groupby("source")["_bad"].any()
+    man["qc_position_outlier"] = man.source.map(qc).fillna(False).astype(bool)
+    n_qc = int(man.qc_position_outlier.sum())
+    if n_qc:
+        print(f"quality flag: {n_qc} utterance(s) with out-of-volume coordinates")
     have_iv = man.t_syl_start.notna().sum()
     print(f"intervals recovered for {have_iv}/{len(man)} utterances; "
           f"frames inside their syllable interval for {speak}/{len(man)}")
@@ -516,11 +605,11 @@ def main():
     os.makedirs(os.path.join(out, "annotations"), exist_ok=True)
     os.makedirs(os.path.join(out, "folds"), exist_ok=True)
 
-    man.to_csv(os.path.join(out, "manifest.csv"), index=False)
+    man.to_csv(os.path.join(out, "manifest.csv"), index=False, lineterminator="\n")
     sz_raw = write_csv_gz(raw, os.path.join(out, "kinematics", "features_raw.csv.gz"))
     sz_z = write_csv_gz(rob, os.path.join(out, "kinematics", "features_robust_z.csv.gz"))
     stats.to_csv(os.path.join(out, "kinematics", "normalization_stats.csv"),
-                 index=False, float_format="%.10g")
+                 index=False, lineterminator="\n")
     print(f"features_raw.csv.gz {sz_raw/1e6:.1f} MB   features_robust_z.csv.gz {sz_z/1e6:.1f} MB")
 
     stim_out = stim[["Item No.", "Chinese.Name", "Transcription", "Transcription1",
@@ -534,14 +623,14 @@ def main():
     for _col in ("transcription", "target_syllable", "chinese_name", "onset", "vowel"):
         stim_out[_col] = stim_out[_col].astype(str).str.strip()
     stim_out.to_csv(os.path.join(out, "annotations", "stimuli.csv"), index=False,
-                    encoding="utf-8-sig")
+                    encoding="utf-8-sig", lineterminator="\n")
 
     inv = (man.groupby(["syllable", "onset", "vowel"], dropna=False)
               .agg(n_utterances=("source", "size"),
                    tones=("tone", lambda x: ",".join(str(int(t)) for t in sorted(set(x.dropna())))))
               .reset_index().sort_values("syllable"))
     inv.to_csv(os.path.join(out, "annotations", "inventory.csv"), index=False,
-               encoding="utf-8-sig")
+               encoding="utf-8-sig", lineterminator="\n")
     print(f"syllables: {len(inv)}   stimuli: {len(stim_out)}")
 
     folds_src = os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))),
@@ -571,28 +660,19 @@ def main():
     n_f, n_m = int(per_speaker.get("F", 0)), int(per_speaker.get("M", 0))
     ctx = dict(n_utt=f"{len(man):,}", n_subj=man.subj.nunique(), n_f=n_f, n_m=n_m,
                n_frames=f"{len(raw):,}", n_syl=len(inv), n_stim=len(stim_out))
-    (Path(out) / "README.md").write_text(README.format(**ctx) + readme_rest(**ctx),
-                                         encoding="utf-8")
-    (Path(out) / "SCHEMA.md").write_text(SCHEMA, encoding="utf-8")
-    (Path(out) / "LICENSE").write_text(LICENSE, encoding="utf-8")
-    (Path(out) / "CITATION.cff").write_text(CITATION.format(**ctx), encoding="utf-8")
+    write_lf(Path(out) / "README.md", README.format(**ctx) + readme_rest(**ctx))
+    write_lf(Path(out) / "SCHEMA.md", SCHEMA)
+    write_lf(Path(out) / "LICENSE", LICENSE)
+    write_lf(Path(out) / "CITATION.cff", CITATION.format(**ctx))
     tmpl = Path(__file__).resolve().parent / "release_templates"
-    (Path(out) / "check_dataset.py").write_bytes(
-        (tmpl / "check_dataset.py").read_bytes())
+    write_lf(Path(out) / "check_dataset.py",
+             (tmpl / "check_dataset.py").read_text(encoding="utf-8").replace("\r\n", "\n"))
 
     # ---- checksums -------------------------------------------------------
-    lines = []
-    for root, _, files in os.walk(out):
-        for f in sorted(files):
-            if f == "SHA256SUMS":
-                continue
-            fp = os.path.join(root, f)
-            rel = os.path.relpath(fp, out).replace("\\", "/")
-            lines.append(f"{sha256(fp)}  {rel}")
-    (Path(out) / "SHA256SUMS").write_text("\n".join(sorted(lines)) + "\n", encoding="utf-8")
+    n_sealed = reseal(out)
     total = sum(os.path.getsize(os.path.join(r, f))
                 for r, _, fs in os.walk(out) for f in fs)
-    print(f"record size: {total/1e6:.1f} MB, {len(lines)} files checksummed")
+    print(f"record size: {total/1e6:.1f} MB, {n_sealed} files checksummed")
     print(f"written to {out}")
 
 

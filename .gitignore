@@ -3,7 +3,8 @@ paths.toml
 
 # ---- data: never committed -------------------------------------------------
 # The corpora are downloaded or obtained separately; see docs/DATA.md.
-data/
+# Anchored on purpose: an unanchored `data/` also hides `src/data/`, which is code.
+/data/
 **/features.csv
 **/features_mono*.csv
 **/*.wav

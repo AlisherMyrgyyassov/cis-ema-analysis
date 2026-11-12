@@ -76,6 +76,7 @@ def main():
     args = ap.parse_args()
     clean = args.base                     # clean canvas for manual annotation
     out = OUT + ("_base" if clean else "")
+    os.makedirs(os.path.dirname(out), exist_ok=True)
 
     shap = json.load(open(SHAP, encoding="utf-8"))["aggregate"]
     base = fold_means(load("all"))

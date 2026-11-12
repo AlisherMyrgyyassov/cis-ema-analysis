@@ -154,4 +154,9 @@ if __name__ == "__main__":
     os.makedirs(OUT, exist_ok=True)
     fig_calibration()
     fig_shapley()
-    fig_crosscorpus()
+    # The cross-corpus panel needs the SAIT-EMA runs; the two submitted
+    # figures above do not, so a CIS-only checkout still produces Figs. 3-4.
+    if os.path.isfile(os.path.join(SAIT, "shapley_full.json")):
+        fig_crosscorpus()
+    else:
+        print("skip fig_crosscorpus: no SAIT-EMA runs under", SAIT)

@@ -5,7 +5,7 @@ Same layout for /baa/, /daai/, or /gu/. Default remains /baa/.
     python scripts/plot_montage_3d_baa.py
     python scripts/plot_montage_3d_baa.py --syl daai
 
-Does not touch ``plot_montage_3d_vowels.py`` or ``fig_montage_3d_sequence.png``.
+The manuscript's Fig. 1 is assembled from these panels plus hand-drawn anatomy.
 
 Writes ``paper/illustrations/3d/fig_montage_3d_{syl}_sequence.png``.
 """

@@ -6,9 +6,20 @@ axis labels and legends, single hyphens only, and compact readable annotations.
 
 Run with:
 
-    conda run -n audio-env python -m src.paper_figures --out <dir>
+    python -m src.paper_figures --out <dir>
 
 Only reads saved artifacts / the aligned dataset; no model training.
+
+Figures this module owns in the submitted manuscript:
+
+- ``fig_montage_daai_sequence.png`` : the Fig. 1 panels, one /daai/ token
+- ``fig_trajectories.png``          : mean height / lip-aperture trajectories (README)
+- ``fig_mechanistic.png``           : Fig. 5, mechanistic taxonomy of recoverability
+
+The other submitted figures are built elsewhere: Fig. 2 by
+``scripts/make_scaling_figure.py``, Figs. 3-4 by ``scripts/make_taslp_figures.py``,
+Fig. 7 by ``scripts/make_montage_figure.py``. Figs. 1 and 6 are assembled by hand
+from the panels those scripts emit.
 """
 import argparse
 import importlib.util
@@ -20,21 +31,16 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
-from matplotlib.patches import FancyBboxPatch, Patch
+from matplotlib.patches import Patch
 from matplotlib.ticker import FormatStrFormatter
 
-from src.config import RESULTS_DIR, DATA_DIR, RUNS_DIR, REPO_ROOT
+from src.config import RESULTS_DIR, DATA_DIR, REPO_ROOT
 from src.figcheck import save as _save_fig
 
 from src import figstyle  # noqa: E402
 
 figstyle.apply()
 
-EMA_C = figstyle.NAVY
-ACOUSTIC_C = figstyle.AMBER
-SSL_C = "#5B8C5A"
-FULL_C = "#8E6C8A"
-GRID_C = "#BBBBBB"
 TONGUE_C = "#2F6DB5"
 LIP_C = "#C36B4A"
 REF_C = "#6E6E6E"
@@ -43,13 +49,6 @@ REF_C = "#6E6E6E"
 def _load(path):
     with open(path) as f:
         return json.load(f)
-
-
-def _panel(ax, s, loc="upper left", color="black"):
-    x, y = (0.02, 0.97) if loc == "upper left" else (0.98, 0.97)
-    ha = "left" if loc == "upper left" else "right"
-    ax.text(x, y, s, transform=ax.transAxes, ha=ha, va="top",
-            fontsize=10, fontweight="bold", color=color)
 
 
 # --------------------------------------------------------------------------- #
@@ -125,6 +124,7 @@ def _style_3d_axes(ax):
 
 
 def _sensor_colors():
+    """Tongue coils blue, lip coils orange (shared with the Fig. 1 scripts)."""
     color = {n: TONGUE_C for n in ("TD", "TL", "TT")}
     color.update({n: LIP_C for n in ("UL", "LL", "LC")})
     return color
@@ -154,237 +154,6 @@ def daai_sequence(out_path):
     subj, picked = seq._choose(speakers, np.random.RandomState(seq.DEFAULT_SEED))
     fig, _ = baa._build_figure(subj, picked["daai"], "daai", title=False)
     _save_fig(fig, out_path, facecolor="white")
-    plt.close(fig)
-    return out_path
-
-
-# --------------------------------------------------------------------------- #
-# Fig: observability taxonomy (conceptual)
-# --------------------------------------------------------------------------- #
-def observability_taxonomy(out_path):
-    fig, ax = plt.subplots(figsize=(7.16, 2.15))
-    ax.set_xlim(0, 100)
-    ax.set_ylim(-1.0, 11.2)
-    ax.axis("off")
-    specs = [
-        ("#E9F0F7", EMA_C, "Directly observed",
-         "Position, velocity,\nacceleration, geometry"),
-        ("#DCE8E0", "#5F8F69", "Redundantly encoded",
-         "Position versus derivatives\nand geometry"),
-        ("#F7E8D8", ACOUSTIC_C, "Indirectly recoverable",
-         "F2, mid-band MFCCs"),
-        ("#F4DCDC", "#C0504D", "Weakly observable",
-         "F0/voicing, F3/rounding,\naspiration detail"),
-    ]
-    n, gap, x_left, x_right = 4, 1.8, 0.4, 99.6
-    width = ((x_right - x_left) - gap * (n - 1)) / n
-    boxes = []
-    for i, (fc, ec, title, body) in enumerate(specs):
-        x0 = x_left + i * (width + gap)
-        x1 = x0 + width
-        boxes.append((x0, x1))
-        ax.add_patch(FancyBboxPatch((x0, 2.35), width, 6.15,
-                                    boxstyle="round,pad=0.12,rounding_size=0.45",
-                                    linewidth=1.1, edgecolor=ec, facecolor=fc))
-        ax.text((x0 + x1) / 2, 7.75, title, ha="center", va="center",
-                fontsize=8.0, fontweight="bold", color=ec)
-        ax.text((x0 + x1) / 2, 4.65, body, ha="center", va="center", fontsize=7.5)
-    split = (boxes[1][1] + boxes[2][0]) / 2
-    ax.plot([split, split], [1.45, 9.55], color="0.3", lw=1.2, ls="--")
-    left_mid = (boxes[0][0] + boxes[1][1]) / 2
-    right_mid = (boxes[2][0] + boxes[3][1]) / 2
-    ax.text(left_mid, 9.55, "Measured or derived from the coils", ha="center",
-            va="bottom", fontsize=8, color="0.35", style="italic")
-    ax.text(right_mid, 9.55, "Not directly measured", ha="center",
-            va="bottom", fontsize=8, color="0.35", style="italic")
-    ax.annotate("", xy=(99.2, 1.05), xytext=(0.8, 1.05),
-                arrowprops=dict(arrowstyle="-|>", color="0.3", lw=1.2))
-    ax.text(50, -0.35, "Increasing difficulty of recovery from articulatory motion",
-            ha="center", fontsize=8, color="0.35")
-    fig.tight_layout()
-    _save_fig(fig, out_path, bbox_inches="tight")
-    plt.close(fig)
-    return out_path
-
-
-# --------------------------------------------------------------------------- #
-# Fig: grouped confusion by place of articulation
-# --------------------------------------------------------------------------- #
-def grouped_confusion(out_path):
-    cg = _load(os.path.join(RESULTS_DIR, "confusion_grouped.json"))
-    places = cg["places"]
-    abbr = [p.capitalize() for p in places]
-    models = [("ema_only", "EMA-only"), ("full", "Full"), ("hubert", "HuBERT")]
-    fig, axes = plt.subplots(1, 3, figsize=(7.0, 2.7))
-    for letter, (ax, (key, title)) in zip("abc", zip(axes, models)):
-        m = np.array(cg["models"][key]["grouped_norm_pct"])
-        im = ax.imshow(m, cmap="Blues", vmin=0, vmax=100)
-        ax.set_xticks(range(len(places)))
-        ax.set_yticks(range(len(places)))
-        # 90 deg: at 45 deg the longer place names (Bilabial, Labiodental) run into
-        # each other once the panel is narrowed to a third of the figure width.
-        ax.set_xticklabels(abbr, rotation=90, ha="center", va="top", fontsize=7.0)
-        ax.set_yticklabels(abbr if key == "ema_only" else [""] * len(places),
-                           fontsize=7.0)
-        for i in range(m.shape[0]):
-            for j in range(m.shape[1]):
-                v = m[i, j]
-                ax.text(j, i, f"{v:.0f}", ha="center", va="center", fontsize=6.6,
-                        color="white" if v > 55 else "0.2")
-        ax.set_xlabel("Predicted Place")
-        if key == "ema_only":
-            ax.set_ylabel("True Place")
-        ax.text(0.5, 1.03, f"({letter})", transform=ax.transAxes, ha="center",
-                va="bottom", fontsize=9, fontweight="bold")
-    fig.colorbar(im, ax=axes, fraction=0.025, pad=0.02,
-                 label="Row-normalized (%)")
-    _save_fig(fig, out_path, bbox_inches="tight")
-    plt.close(fig)
-    return out_path
-
-
-# --------------------------------------------------------------------------- #
-# Fig: tone probe confound (naive vs syllable-controlled)
-# --------------------------------------------------------------------------- #
-def tone_control(out_path):
-    """Syllable-controlled tone decoding (robust_z).
-
-    (a) On all utterances the probes sit *below* the syllable-to-tone majority
-        ceiling (90.2%). (b) Restricted to syllables that occur with >=2 tones,
-        the EMA probe and the full model are both *above* the per-syllable
-        majority baseline.
-    """
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7.0, 2.6))
-    labels = ["EMA-only", "Full"]
-    colors = [EMA_C, FULL_C]
-
-    def panel(ax, vals, base, base_label, letter):
-        x = np.arange(2)
-        ax.bar(x, vals, color=colors, width=0.6, alpha=0.92)
-        for xi, v in zip(x, vals):
-            ax.text(xi, v + 1.5, f"{v:.1f}", ha="center", fontsize=8)
-        ax.axhline(base, color="#C0504D", ls="--", lw=1.3)
-        ax.text(1.45, base + 1.5, base_label, ha="right", fontsize=7,
-                color="#C0504D")
-        ax.set_xticks(x)
-        ax.set_xticklabels(labels)
-        ax.set_ylim(0, 102)
-        ax.set_ylabel("Tone Accuracy (%)")
-        _panel(ax, letter)
-
-    tw = _load(os.path.join(RUNS_DIR, "tone", "tone_within_syllable.json"))
-    all_vals = [tw["naive_ema"]["probe_mean"] * 100, tw["naive_full"]["probe_mean"] * 100]
-    all_base = tw["naive_full"]["baseline_mean"] * 100
-    multi_vals = [tw["within_ema"]["probe_mean"] * 100, tw["within_full"]["probe_mean"] * 100]
-    multi_base = tw["within_full"]["baseline_mean"] * 100
-    panel(ax1, all_vals, all_base,
-          "Syllable-to-tone ceiling", "(a) All utterances")
-    panel(ax2, multi_vals, multi_base,
-          "Per-syllable majority", "(b) Multi-tone syllables")
-    fig.tight_layout()
-    _save_fig(fig, out_path, bbox_inches="tight")
-    plt.close(fig)
-    return out_path
-
-
-# --------------------------------------------------------------------------- #
-# Fig: Shapley stability across runs (per-run distribution)
-# --------------------------------------------------------------------------- #
-def shapley_stability(out_path):
-    d = _load(os.path.join(RUNS_DIR, "exp2", "shapley.json"))
-    agg = d["aggregate"]["shapley_acc"]
-    names = d["names"]
-    kind = d["kind"]
-    short = {"G1": "Position", "G2": "Velocity", "G3": "Acceleration",
-             "G4": "Geometry", "G5": "Voicing", "G6": "Formant",
-             "G7": "Spectral", "G8": "Energy"}
-    groups = sorted(d["groups"], key=lambda g: agg[g]["mean"])
-    fig, ax = plt.subplots(figsize=(3.6, 3.2))
-    rng = np.random.RandomState(0)
-    for i, g in enumerate(groups):
-        vals = np.array(agg[g]["values"]) * 100
-        c = EMA_C if kind[g] == "ema" else ACOUSTIC_C
-        ax.scatter(vals, i + rng.uniform(-0.14, 0.14, len(vals)), s=14,
-                   color=c, alpha=0.7, edgecolor="white", linewidth=0.3, zorder=2)
-        ax.plot([agg[g]["mean"] * 100] * 2, [i - 0.26, i + 0.26], color="k",
-                lw=1.6, zorder=3)
-    ax.set_yticks(range(len(groups)))
-    ax.set_yticklabels([f"{g} {short[g]}" for g in groups], fontsize=8)
-    ax.axvline(0, color="0.4", lw=0.8)
-    ax.set_xlabel("Shapley Value (Accuracy Points)")
-    ax.legend(handles=[Patch(color=EMA_C, label="EMA"),
-                       Patch(color=ACOUSTIC_C, label="Acoustic")],
-              frameon=False, loc="lower right")
-    fig.tight_layout()
-    _save_fig(fig, out_path, bbox_inches="tight")
-    plt.close(fig)
-    return out_path
-
-
-# --------------------------------------------------------------------------- #
-# Regenerated result figures (clean titles/labels)
-# --------------------------------------------------------------------------- #
-def _probing(out_path, src, letter):
-    d = _load(os.path.join(RUNS_DIR, "exp3", src))
-    stages = d["stages"]
-    props = d["props"]
-    stage_labels = ["Proj", "Layer 0", "Layer 1", "Pooled"]
-    fig, ax = plt.subplots(figsize=(3.5, 2.8))
-    for p in props:
-        if p == "tone":  # tone is confounded with syllable; handled separately
-            continue
-        ys = [d["aggregate"][f"{p}__{s}"]["acc_mean"] * 100 for s in stages]
-        ax.plot(range(len(stages)), ys, marker="o", label=p.capitalize())
-    ax.set_xticks(range(len(stages)))
-    ax.set_xticklabels(stage_labels, fontsize=7.5)
-    ax.set_xlabel("Layer Depth")
-    ax.set_ylabel("Probe Accuracy (%)")
-    ax.set_ylim(0, 105)
-    ax.legend(frameon=False, loc="lower right", fontsize=7.5)
-    _panel(ax, letter)
-    fig.tight_layout()
-    _save_fig(fig, out_path, bbox_inches="tight")
-    plt.close(fig)
-    return out_path
-
-
-def probing_full(out_path):
-    return _probing(out_path, "probing_full.json", "(a)")
-
-
-def probing_ema(out_path):
-    return _probing(out_path, "probing_ema.json", "(b)")
-
-
-def faithfulness(out_path):
-    d = _load(os.path.join(RUNS_DIR, "exp3", "faithfulness.json"))
-    fig, (ax1, ax2) = plt.subplots(1, 2, figsize=(7.0, 2.7))
-    n = len(d["shapley_order"])
-    xs = list(range(n + 1))
-    styles = {"shapley": "-o", "reverse": "-s", "random": "-^"}
-    for name, style in styles.items():
-        ax1.plot(xs, np.array(d["deletion"][name]["mean"]) * 100, style,
-                 label=name.capitalize(), markersize=4)
-    ax1.set_xlabel("Groups Removed")
-    ax1.set_ylabel("Accuracy (%)")
-    ax1.set_xlim(0, n)
-    ax1.set_ylim(0, 100)
-    ax1.legend(frameon=False, loc="center", fontsize=8,
-               handlelength=1.4, borderaxespad=0.2)
-    _panel(ax1, "(a)")
-
-    ins = d["insertion"]
-    xi = list(range(len(ins["mean"])))
-    ax2.plot(xi, np.array(ins["mean"]) * 100, "-o", color=SSL_C, markersize=4)
-    labels = ["EMA"] + [g.capitalize() for g in d["insertion_groups_added"]]
-    ax2.set_xticks(xi)
-    ax2.set_xticklabels(labels, rotation=30, ha="right", fontsize=7.5)
-    ax2.set_xlabel("Groups Added (Shapley Order)")
-    ax2.set_ylabel("Accuracy (%)")
-    ax2.set_ylim(0, 100)
-    _panel(ax2, "(b)")
-    fig.tight_layout()
-    _save_fig(fig, out_path, bbox_inches="tight")
     plt.close(fig)
     return out_path
 
@@ -437,13 +206,6 @@ def mechanistic(out_path):
 FIGURES = {
     "fig_montage_daai_sequence.png": daai_sequence,
     "fig_trajectories.png": montage_and_trajectories,
-    "fig_taxonomy.png": observability_taxonomy,
-    "fig_grouped_confusion.png": grouped_confusion,
-    "fig_tone_control.png": tone_control,
-    "fig_shapley_stability.png": shapley_stability,
-    "fig_probing_full.png": probing_full,
-    "fig_probing_ema.png": probing_ema,
-    "fig_faithfulness.png": faithfulness,
     "fig_mechanistic.png": mechanistic,
 }
 

@@ -42,18 +42,22 @@ Each step writes into `runs/paper/<exp>/`; later steps read earlier ones, so kee
 ```bash
 python scripts/run_exp1.py --seeds 0,1              # Table I          -> exp1/
 python scripts/run_exp2.py                          # Fig. 4           <- exp1/
-python scripts/run_exp3.py                          # Fig. 5, §IV-D    <- exp1/
-python scripts/run_exp4.py                          # Tables III-IV    <- exp1/
+python scripts/run_exp3.py                          # §IV-D probing    <- exp1/
+python scripts/run_exp4.py                          # Tables III-IV, Fig. 5  <- exp1/
 python scripts/run_exp5.py --lmbdas 0.3,1.0         # §IV-E aux loss
 python scripts/run_exp5_oracle.py                    # §IV-E oracle
-python scripts/run_exp6_sweep3.py                    # §IV-F KD
+python scripts/run_exp6_sweep3.py                    # §IV-F same-modality KD
+python scripts/run_exp6_crossmodal_sweep.py          # §IV-F cross-modal KD
+python scripts/exp6_paired_test.py                   # §IV-F KD paired tests
+python scripts/exp6_subject_stats.py                 # §IV-F KD subject-level CI
 python scripts/within_syllable_tone.py               # §IV-D tone       <- exp1/
 python scripts/f0_tone_baseline.py                   # §IV-D F0 ceiling
 python scripts/sensor_shapley.py                     # Fig. 7a          <- exp1/
 python scripts/run_montage_subset.py --sets midsag4,midsag3,min2,td1   # Fig. 7b
 python scripts/run_arch.py                           # §IV-A arch
 python scripts/run_scaling.py                        # Fig. 2
-python scripts/run_calib_sweep.py                    # Fig. 3
+python scripts/run_fair_deploy.py --mode center_only --seeds 0,1   # Fig. 3
+python scripts/run_fair_deploy.py --mode robust_z --seeds 0,1      # Fig. 3
 ```
 
 Then regenerate the tables and compare:
@@ -70,10 +74,10 @@ python verify_results.py --runs runs/paper
 ## 3. Figures
 
 ```bash
-python -m src.paper_figures --out paper/figures       # Figs. 3, 4, 5 (+ montage panels)
+python -m src.paper_figures --out paper/figures       # Fig. 5 + the Fig. 1 panels
 python scripts/make_scaling_figure.py                 # Fig. 2
 python scripts/make_montage_figure.py                 # Fig. 7
-python scripts/make_taslp_figures.py                  # Figs. 3, 4, 6 as submitted
+python scripts/make_taslp_figures.py                  # Figs. 3 and 4 (+ fig_crosscorpus.png, not submitted)
 ```
 
 **One quirk (Fig. 1).** The corpus figures use the *geometric* frame
@@ -108,7 +112,6 @@ python -m preprocessing.sait_ema.build_features --out data/SAIT-EMA/Dataset --no
 python scripts/sait_classify.py --features data/SAIT-EMA/Dataset/features_mono.csv \
     --view ema --task syllable --folds 6 --seeds 2 --native-only --out runs/sait/robust_z.json
 python scripts/sait_shapley.py      # group Shapley, rho = 0.74 vs CIS-EMA
-python scripts/sait_probe.py        # onset / final / tone selectivity
 python scripts/sait_domain.py       # native -> L2 as a domain shift
 python scripts/sait_calib.py        # calibration k-curve, saturates near k = 50
 ```

@@ -37,7 +37,7 @@ What was verified when this repository was assembled:
 | frozen folds vs the subject lists recorded in the original run artifacts | identical, all 6 folds |
 | Table I re-run, 12 fold-seeds, both models | EMA-only **78.22** (published 78.71), full **88.16** (88.28) |
 | SAIT-EMA 405-way re-run from public data | **39.45 ± 7.92** (published 39.31 ± 8.17) |
-| ten figure builders on the shipped artifacts | reproduce the manuscript figures |
+| eight figure builders on the shipped artifacts | reproduce the manuscript figures |
 | paired tests re-derived from artifacts | reproduce the paper's values exactly |
 | tone / F0 ceiling probes re-run | 73.07 EMA vs 73.03, 73.77 full vs 73.93 (probe-level sklearn drift) |
 

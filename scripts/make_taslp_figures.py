@@ -10,9 +10,9 @@ Usage::
 
 Figures produced
 ----------------
-- ``fig_gap_norm_calib.png`` : ceilings / normalization variants / calibration
-- ``fig_shapley.png``        : exact group Shapley (accuracy points)
-- ``fig_crosscorpus.png``    : Bruce vs SAIT group Shapley + replication gains
+- ``fig_calibration.png`` : deployment calibration, Fig. 3 of the manuscript
+- ``fig_shapley.png``     : exact group Shapley (accuracy points), Fig. 4
+- ``fig_crosscorpus.png`` : group Shapley, CIS vs SAIT (not in the submission)
 """
 import json
 import os

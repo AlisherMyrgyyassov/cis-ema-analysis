@@ -91,10 +91,10 @@ overlaps data. Figures 1 and 6 are hand-assembled and are not covered.
 | Fig. 3 | deployment calibration k-curve | `python scripts/make_taslp_figures.py` | `runs/fair_deploy_*/fair_deploy.json` |
 | Fig. 4 | exact group Shapley | `python scripts/run_exp2.py` -> `python scripts/make_taslp_figures.py` | `runs/paper/exp2/shapley.json` |
 | Fig. 5 | mechanistic taxonomy | `python -m src.paper_figures` | `paper/results/exp4_correlation.json` |
-| Fig. 6 | cross-corpus coil importance | `python scripts/make_taslp_figures.py` | `runs/montage_subset/`, SAIT `sait_loo_*` |
+| Fig. 6 | cross-corpus coil importance | no script: assembled by hand from the retrained leave-one-coil-out numbers (`make_taslp_figures.py` emits the group-Shapley comparison `fig_crosscorpus.png`, which is not in the submission) | `runs/montage_subset/drop_*`, SAIT `sait_loo_*` |
 | Fig. 7 | which coils are needed | `python scripts/sensor_shapley.py`, `run_montage_subset.py`, `make_montage_figure.py` | `runs/paper/exp8_robust_z/`, `runs/montage_subset/` |
 | Table I | performance ceilings | `python scripts/run_exp1.py --seeds 0,1` | `runs/paper/exp1/`, `exp1_ssl_*/`, `paper/results/exp1_ceilings.json` |
-| Table II | normalization ablation | `python scripts/build_variant_features.py`, `run_variant_ema.py` | `runs/paper/variant_ema_6coil/` |
+| Table II | normalization ablation | `python scripts/build_zscore_features.py --mode {raw,pu_z,proc,proc_ps_z,center_only,ps_z}`, then train each variant table (`scripts/run_exp1.py --data-dir <variant dir>`, with `manifest.csv` copied beside its `features.csv`; the thin wrapper used for the paper is not shipped) | `runs/paper/variant_ema_6coil/` |
 | Table III | mechanistic correlation | `python scripts/run_exp4.py` | `runs/paper/exp4/correlation.json` |
 | Table IV | linear vs nonlinear recoverability | `python scripts/nonlinear_recoverability.py` | `runs/paper/exp4/nonlinear_recoverability.json` |
 | Table VI | cross-corpus comparison | CIS: above + SAIT arm | `runs/paper/*` + SAIT `Dataset/runs/*` |
@@ -118,5 +118,9 @@ python scripts/make_scaling_figure.py && python scripts/make_montage_figure.py
 python scripts/make_taslp_figures.py
 ```
 
-All thirteen generated figures match the manuscript's files at pixel-dimension level
+`expected/cis/exp4/correlation.json` and `expected/cis/results/exp4_correlation.json` are the same
+file at two paths, on purpose: `verify_results.py` reads the run-mirror path and the Fig. 5
+builder reads the `paper/results/` path. Keep both.
+
+All eight generated figures match the manuscript's files at pixel-dimension level
 (two differ by a few pixels of text layout from a matplotlib version change).

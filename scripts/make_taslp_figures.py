@@ -55,7 +55,7 @@ def mean_pct(runs, key="test_acc"):
 
 
 def fig_calibration():
-    """Single-panel deployment calibration: centering vs robust z."""
+    """Single-panel deployment calibration: mean removal vs robust z-scoring."""
     cd = load(os.path.join(RUNS, "fair_deploy_center_only", "fair_deploy.json"))["curve"]
     rd = load(os.path.join(RUNS, "fair_deploy_robust_z", "fair_deploy.json"))["curve"]
     ks = ["1", "2", "3", "5", "10", "20", "all"]
@@ -64,9 +64,9 @@ def fig_calibration():
     ro = [100 * rd[k][0] for k in ks]; re = [100 * rd[k][1] for k in ks]
     fig, ax = plt.subplots(figsize=(3.5, 2.8))
     ax.errorbar(kx, co, yerr=ce, fmt="-o", color=EMA_C, ms=3.5, lw=1.2,
-                capsize=2, label="Centering")
+                capsize=2, label="Mean removal")
     ax.errorbar(kx, ro, yerr=re, fmt="-s", color=ACO_C, ms=3.5, lw=1.2,
-                capsize=2, label="Robust $z$")
+                capsize=2, label="Robust $z$-scoring")
     ax.set_xticks(kx); ax.set_xticklabels(["1", "2", "3", "5", "10", "20", "All"])
     ax.set_xlabel("Calibration Utterances ($k$)")
     ax.set_ylabel("Accuracy (%)")

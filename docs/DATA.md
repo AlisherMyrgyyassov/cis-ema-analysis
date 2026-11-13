@@ -104,8 +104,9 @@ ambiguous tonal reading), is documented in the paper's Section III-A and impleme
 ## SAIT-EMA — Mandarin, public
 
 18 speakers (12 native Mandarin, 6 L2), 6,885 monosyllabic items, 405 distinct tone-less
-syllables, AG501 at 250 Hz. Six coils, a different montage from CIS-EMA: TT, TB (tongue
-body), TD, LI (lower incisor, under the tongue), UL, LL — no lip corner, no tongue lateral.
+syllables, AG501 at 250 Hz. Six coils, a different sensor configuration from CIS-EMA: TT,
+TB (tongue blade), TD, LI (lower incisor, fixed to the lower teeth), UL, LL — no lip corner,
+no tongue lateral.
 
 > Jia, H., Xie, Y., Fang, Q., and Sun, Y. *SAIT-EMA: A Tridimensional Electromagnetic
 > Articulography Database for Mandarin with Diverse Language Backgrounds.* Scientific Data

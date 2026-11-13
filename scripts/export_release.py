@@ -217,8 +217,8 @@ normalised table is reproducible from the raw one. Two details matter:
 * **Audio.** The recordings are not distributed.
 * **Voice-derived acoustic measurements** — F0, formants, MFCCs, energy. These are
   voice-derived and can support speaker identification, so they are held back under the
-  ethics approval governing the recordings. They are available to named researchers under a
-  data-use agreement from the corresponding author; write to the contact on the record.
+  ethics approval governing the recordings and are not part of this record. Such
+  measurements are handled separately, on request to the corresponding author.
 
 Consequently the acoustic-model results in the accompanying paper (and its HuBERT ceiling
 and cross-modal distillation arms) cannot be reproduced from this record alone. Everything
@@ -244,9 +244,9 @@ with sex; no name, date, age or other identifying field is present in this recor
 
 ## Licence and citation
 
-Data: **CC BY 4.0** — see `LICENSE`. Please cite the dataset and the paper (see
-`CITATION.cff`). If you use these data, cite the record's DOI, which is minted on
-publication.
+Data: **CC BY-NC 4.0** — non-commercial use only. See `LICENSE` for the licence and
+`DATA_USE_TERMS.md` for the terms an approved request accepts. Cite the record's DOI, which
+is minted on publication, and the accompanying paper (see `CITATION.cff`).
 
 ## Integrity
 
@@ -355,39 +355,85 @@ early-stopping on `.val`, and reporting on `.test`, with two seeds per fold.
 """
 
 
-LICENSE = """CIS-EMA: Cantonese Isolated-Syllable Electromagnetic Articulography corpus
+LICENSE = """CIS-EMA: Extracted Articulatory Kinematics and Annotations from a Cantonese
+Isolated-Syllable EMA Study
 Copyright (c) 2026 Bruce Xiao Wang, Alisher Myrgyyassov, Lei He, Min Ney Wong
 
-This dataset is licensed under the Creative Commons Attribution 4.0 International
-Licence (CC BY 4.0). You are free to share and adapt the material for any purpose,
-including commercially, provided you give appropriate credit, provide a link to the
-licence, and indicate if changes were made.
+This dataset is licensed under the Creative Commons Attribution-NonCommercial 4.0
+International Licence (CC BY-NC 4.0). You may share and adapt the material for
+non-commercial purposes, provided you give appropriate credit, provide a link to the
+licence, and indicate if changes were made. You may not use the material for
+commercial purposes.
 
-Full legal code: https://creativecommons.org/licenses/by/4.0/legalcode
+Full legal code: https://creativecommons.org/licenses/by-nc/4.0/legalcode
 
 Suggested attribution:
 
   Wang, B. X., Myrgyyassov, A., He, L., and Wong, M. N. (2026).
-  CIS-EMA: Cantonese Isolated-Syllable Electromagnetic Articulography corpus.
-  Zenodo. https://doi.org/<DOI>
+  CIS-EMA: Extracted Articulatory Kinematics and Annotations from a Cantonese
+  Isolated-Syllable EMA Study. Zenodo. https://doi.org/<DOI>
 
-This licence covers the data files in this record. It does not grant access to the
-original audio recordings, which are not distributed, nor to the voice-derived
-acoustic measurements, which are available separately under a data-use agreement.
+Access to the files requires acceptance of the terms in DATA_USE_TERMS.md.
 """
 
 
+DATA_USE = """# Terms of use
+
+These files are derived measurements from a study of Cantonese speech production approved
+by the Human Subjects Ethics Sub-Committee of The Hong Kong Polytechnic University (HSESC
+reference HSEARS20230531001). They are made available to support research and teaching, and
+to allow the accompanying analysis to be checked.
+
+By requesting or using the files you agree to the following.
+
+## Permitted
+
+* Non-commercial research, including replication, benchmarking and secondary analysis.
+* Teaching and student projects.
+* Publication of results obtained with the data, with citation.
+
+## Not permitted
+
+* Commercial use of any kind, including product development, training models for commercial
+  systems, and use by for-profit organisations without written permission.
+* Redistribution to third parties. Pass on the record's DOI instead; every user obtains
+  access under these same terms.
+* Any attempt to re-identify a speaker, or to link these data to recordings or other data
+  held elsewhere.
+* Presenting the data, or a model trained on them, as your own collection.
+
+## Conditions
+
+* Cite the dataset DOI and the accompanying paper in any publication that uses the data.
+* Acknowledge the source of the data in derivative work.
+* Tell the corresponding author about publications that use the data, so the record can
+  list them.
+
+## No warranty
+
+The data are provided as they are, without warranty of any kind. The authors are not liable
+for any use of, or conclusions drawn from, the data.
+
+## Governing terms
+
+These terms are governed by the laws of the Hong Kong Special Administrative Region.
+Requests are reviewed by the corresponding author, whose decision is final.
+"""
+
 CITATION = """cff-version: 1.2.0
-message: "If you use this corpus, please cite it as below."
-title: "CIS-EMA: Cantonese Isolated-Syllable Electromagnetic Articulography corpus"
+message: "If you use this dataset, please cite it as below."
+title: "CIS-EMA: Extracted Articulatory Kinematics and Annotations from a Cantonese
+  Isolated-Syllable EMA Study"
 abstract: >-
   Articulatory kinematics (six electromagnetic articulography coils, 250 Hz) and
   phonetic annotation for {n_utt} isolated Cantonese syllables from {n_subj} speakers,
-  with a frozen subject-disjoint cross-validation split.
+  with a frozen subject-disjoint cross-validation split. These are derived measurements
+  shared for the verification and reuse of the accompanying analysis; the recordings
+  are not included.
 type: dataset
 version: 1.0.0
 date-released: "2026"
-license: CC-BY-4.0
+license: CC-BY-NC-4.0
 authors:
   - family-names: Wang
     given-names: Bruce Xiao
@@ -448,15 +494,24 @@ def sha256(path_in):
 # --------------------------------------------------------------------------- #
 # documentation written into the record
 # --------------------------------------------------------------------------- #
-README = """# CIS-EMA: Cantonese Isolated-Syllable Electromagnetic Articulography corpus
+README = """# CIS-EMA: Extracted Articulatory Kinematics and Annotations from a
+Cantonese Isolated-Syllable EMA Study
 
 Synchronized articulatory kinematics and phonetic annotation for **{n_utt} isolated
 Cantonese syllables** produced by **{n_subj} healthy adults** ({n_f} female, {n_m} male),
 recorded with an AG501 electromagnetic articulograph (Carstens Medizinelektronik) at **250 Hz**.
 
-This record contains the articulator trajectories and the annotations. It does **not**
-contain the audio recordings, and it does not contain the voice-derived acoustic
-measurements (F0, formants, MFCCs, energy); see *What is not included* below.
+These are the derived measurements from that study, shared so the accompanying analysis
+can be checked and extended: the articulator trajectories, their derivatives, and the
+phonetic annotation. They are not the recordings, and the voice-derived acoustic
+measurements are not part of this record; see *What is not included* below.
+
+## Access
+
+The files are **restricted**. Use the access-request button on the record page; requests
+are reviewed by the corresponding author and granted under the terms in
+`DATA_USE_TERMS.md` — research and teaching only, no commercial use, no redistribution,
+no re-identification. The DOI and this metadata are public either way.
 
 ## What is included
 
@@ -471,9 +526,12 @@ kinematics/utterances/sub_XX/*.npz  per-utterance arrays, one file per utterance
 folds/cis_folds.json                the subject-disjoint 6-fold split
 check_dataset.py                    verifies this record is complete and consistent
 SCHEMA.md                           every column, its unit, and how it was computed
-README.md, LICENSE, CITATION.cff    this file, CC BY 4.0, machine-readable citation
+DATA_USE_TERMS.md                   the terms an approved request accepts
+README.md, LICENSE, CITATION.cff    this file, CC BY-NC 4.0, machine-readable citation
 SHA256SUMS                          a checksum for every file above
+```
 """
+
 
 def refresh_docs(out):
     """Rewrite the prose and checksums of a record that is already built."""
@@ -489,6 +547,7 @@ def refresh_docs(out):
     write_lf(Path(out) / "README.md", README.format(**ctx) + readme_rest(**ctx))
     write_lf(Path(out) / "SCHEMA.md", SCHEMA)
     write_lf(Path(out) / "LICENSE", LICENSE)
+    write_lf(Path(out) / "DATA_USE_TERMS.md", DATA_USE)
     write_lf(Path(out) / "CITATION.cff", CITATION.format(**ctx))
     tmpl = Path(__file__).resolve().parent / "release_templates"
     write_lf(Path(out) / "check_dataset.py",
@@ -596,7 +655,7 @@ def main():
         print("  WARNING: clock mismatch between TextGrid intervals and frame times")
 
     # ---- normalisation statistics ---------------------------------------
-    # manifest["path"] already reads "utterances/sub_XX/0002.npz", relative to the corpus root
+    # manifest["path"] already reads "utterances/sub_XX/0002.npz", relative to the dataset root
     stats = normalization_stats(manifest, str(ds))
     print(f"normalisation stats: {len(stats)} rows ({stats.subj.nunique()} subjects)")
 
@@ -663,6 +722,7 @@ def main():
     write_lf(Path(out) / "README.md", README.format(**ctx) + readme_rest(**ctx))
     write_lf(Path(out) / "SCHEMA.md", SCHEMA)
     write_lf(Path(out) / "LICENSE", LICENSE)
+    write_lf(Path(out) / "DATA_USE_TERMS.md", DATA_USE)
     write_lf(Path(out) / "CITATION.cff", CITATION.format(**ctx))
     tmpl = Path(__file__).resolve().parent / "release_templates"
     write_lf(Path(out) / "check_dataset.py",

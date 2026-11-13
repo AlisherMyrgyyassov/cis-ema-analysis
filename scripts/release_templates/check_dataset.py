@@ -39,7 +39,8 @@ def ok(cond, label, detail=""):
 print("CIS-EMA record check")
 print(f"  root: {ROOT}\n")
 
-need = ["README.md", "SCHEMA.md", "LICENSE", "CITATION.cff", "manifest.csv",
+need = ["README.md", "SCHEMA.md", "LICENSE", "DATA_USE_TERMS.md", "CITATION.cff",
+        "manifest.csv",
         "annotations/stimuli.csv", "annotations/inventory.csv",
         "kinematics/features_raw.csv.gz", "kinematics/features_robust_z.csv.gz",
         "kinematics/normalization_stats.csv", "folds/cis_folds.json", "SHA256SUMS"]

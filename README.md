@@ -26,14 +26,14 @@ six-coil montage above and tongue-height and lip-aperture trajectories below.
 </sub></div>
 
 **Every number in the paper is machine-checked.** `verify_results.py` recomputes all
-**63 claims** from the reference artifacts shipped in `expected/` and compares them with the
-value printed in the manuscript. It currently reports `63/63 checks passed`.
+**64 claims** from the reference artifacts shipped in `expected/` and compares them with the
+value printed in the manuscript. It currently reports `64/64 checks passed`.
 
 What was verified when this repository was assembled:
 
 | check | result |
 |---|---|
-| claims ledger against shipped artifacts | **63/63** pass, no corpus needed |
+| claims ledger against shipped artifacts | **64/64** pass, no corpus needed |
 | frozen folds vs the subject lists recorded in the original run artifacts | identical, all 6 folds |
 | Table I re-run, 12 fold-seeds, both models | EMA-only **78.22** (published 78.71), full **88.16** (88.28) |
 | SAIT-EMA 405-way re-run from public data | **39.45 ± 7.92** (published 39.31 ± 8.17) |

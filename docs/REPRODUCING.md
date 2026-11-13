@@ -6,10 +6,10 @@ root and that `paths.toml` points at the corpora (`docs/DATA.md`).
 ## 0. Before anything: is the checkout consistent?
 
 ```bash
-python verify_results.py            # 63 claims, no corpus needed
+python verify_results.py            # 64 claims, no corpus needed
 ```
 
-This reads only `expected/`. If it does not print `63/63 checks passed`, the repository
+This reads only `expected/`. If it does not print `64/64 checks passed`, the repository
 itself is damaged — do not debug your data setup yet.
 
 ```bash

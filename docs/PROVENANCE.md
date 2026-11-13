@@ -50,6 +50,12 @@ Three things were edited:
    width (now 90°), and the G5/G8 group labels in the cross-corpus scatter printed into the
    same pixels because the two points nearly coincide (labels now stagger above/below). **The manuscript's copies of that figure and of the
    corpus figures should be regenerated from this code before the next submission.**
+6. **Two artifacts added later.** `expected/cis/y_analysis/` holds `robust_z_noy.json` (the
+   EMA-only model retrained without the medial–lateral channels) and
+   `y_recoverability.json` (ridge $R^2$ for F0–F3 from the $y$ channels alone). Both come
+   from the source commit's `runs/paper/exp9_calib/` and back numbers the paper quotes but
+   the first release could not check (the y-drop gain of §IV-B and the F3 $R^2$). See
+   `ARTIFACTS.md` for the recomputation. One claim, `y_rec_f3`, was added to the ledger.
 
 No model, no preprocessing step, no metric and no hyperparameter was modified.
 
@@ -60,7 +66,7 @@ No model, no preprocessing step, no metric and no hyperparameter was modified.
 | every script imports and exposes `--help` | pass; 6 scripts (`build_scaled6`, `build_center_calib`, `f0_tone_baseline`, `make_taslp_figures`, `make_scaling_figure`, `within_syllable_tone`) have no argument parser and do work on invocation, so they were checked by running them against the reference artifacts instead |
 | `python scripts/run_exp1.py --fold 0 --seeds 0 --epochs 1` | pass; pooled baselines reproduced to 0.01 (LogReg 84.03 vs 84.04, RF 82.78 vs 82.77) |
 | full Table I re-run (6 folds × 2 seeds, both models) | EMA-only **78.22** vs 78.71 published; full **88.16** vs 88.28; mean Δ −0.49 / −0.12, per-run scatter ±4 with both signs — training noise on a newer torch, not a shifted pipeline (numbers in `REPRODUCING.md`) |
-| `python verify_results.py` (ledger vs `expected/`) | 63/63 claims pass |
+| `python verify_results.py` (ledger vs `expected/`) | 64/64 claims pass |
 | figure builders on the shipped artifacts | all eight generated figures match the manuscript's at pixel-dimension level |
 | `python -m src.analysis_stats` on the shipped artifacts | reproduces the paper's paired tests exactly (+4.14 p=0.001, +1.47 p=0.011, +0.97 p=0.087, +8.20 p=0.010, +9.10 p=0.001) |
 | `scripts/within_syllable_tone.py` after the import fix | runs; reproduces §IV-D tone (73.07 EMA / 73.77 full vs 73.03 / 73.93, probed with sklearn 1.9 instead of the original version) |

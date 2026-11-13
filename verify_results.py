@@ -166,10 +166,12 @@ def check_claims(ledger, runs_dir, tol, quiet):
         if ok and got_std is not None and std is not None:
             ok = abs(std - float(got_std)) <= tol
 
-        shown = f"{value:.2f}" + (f"±{std:.2f}" if std is not None else "")
-        target = f"{want:.2f}" + (f"±{float(got_std):.2f}" if got_std is not None else "")
+        # two decimals prints sub-0.1 claims as "0.00"; widen those so the line is readable
+        fmt = (lambda v: f"{v:.4f}" if abs(v) < 0.1 else f"{v:.2f}")
+        shown = fmt(value) + (f"±{fmt(std)}" if std is not None else "")
+        target = fmt(want) + (f"±{fmt(float(got_std))}" if got_std is not None else "")
         rows.append((claim["id"], claim["where"], "ok" if ok else "MISMATCH",
-                     shown, target, "" if ok else f"Δ={d_value:.2f}"))
+                     shown, target, "" if ok else f"Δ={fmt(d_value)}"))
         failures += 0 if ok else 1
     return rows, failures, skipped
 

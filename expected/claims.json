@@ -8,7 +8,7 @@
     {
       "id": "t1_chance",
       "label": "Chance level",
-      "where": "Table I, row 1",
+      "where": "Table III, row 1",
       "artifact": "cis/results/exp1_ceilings.json",
       "extract": {
         "kind": "dotted",
@@ -23,7 +23,7 @@
     {
       "id": "t1_majority",
       "label": "Majority baseline",
-      "where": "Table I, row 2",
+      "where": "Table III, row 2",
       "artifact": "cis/results/exp1_ceilings.json",
       "extract": {
         "kind": "summary_pair",
@@ -41,7 +41,7 @@
     {
       "id": "t1_logreg",
       "label": "Pooled logistic regression, 424 stats",
-      "where": "Table I, row 3",
+      "where": "Table III, row 3",
       "artifact": "cis/results/exp1_ceilings.json",
       "extract": {
         "kind": "summary_pair",
@@ -59,7 +59,7 @@
     {
       "id": "t1_rf",
       "label": "Pooled random forest, 424 stats",
-      "where": "Table I, row 4",
+      "where": "Table III, row 4",
       "artifact": "cis/results/exp1_ceilings.json",
       "extract": {
         "kind": "summary_pair",
@@ -77,7 +77,7 @@
     {
       "id": "t1_ema",
       "label": "BiLSTM EMA-only (59 ch)",
-      "where": "Table I, row 5",
+      "where": "Table III, row 5",
       "artifact": "cis/exp1/ema_only_results.json",
       "extract": {
         "kind": "run_mean_std",
@@ -93,7 +93,7 @@
     {
       "id": "t1_full",
       "label": "BiLSTM full (106 ch)",
-      "where": "Table I, row 6",
+      "where": "Table III, row 6",
       "artifact": "cis/exp1/full_results.json",
       "extract": {
         "kind": "run_mean_std",
@@ -109,7 +109,7 @@
     {
       "id": "t1_hubert",
       "label": "HuBERT-large audio ceiling",
-      "where": "Table I, row 7",
+      "where": "Table III, row 7",
       "artifact": "cis/exp1_ssl_hubert/summary.json",
       "extract": {
         "kind": "summary_pair",
@@ -126,7 +126,7 @@
     {
       "id": "t1_xlsr",
       "label": "XLSR-53 audio ceiling",
-      "where": "Table I, row 8",
+      "where": "Table III, row 8",
       "artifact": "cis/exp1_ssl_xlsr/summary.json",
       "extract": {
         "kind": "summary_pair",
@@ -143,7 +143,7 @@
     {
       "id": "t1_wav2vec",
       "label": "wav2vec 2.0 audio ceiling",
-      "where": "Table I, row 9",
+      "where": "Table III, row 9",
       "artifact": "cis/exp1_ssl/summary.json",
       "extract": {
         "kind": "summary_pair",
@@ -161,7 +161,7 @@
     {
       "id": "t2_raw",
       "label": "Head-corrected, no per-speaker normalization",
-      "where": "Table II",
+      "where": "Table IV",
       "artifact": "cis/variant_ema_6coil/raw.json",
       "extract": {
         "kind": "run_mean_std",
@@ -177,7 +177,7 @@
     {
       "id": "t2_pu_z",
       "label": "Per-utterance z",
-      "where": "Table II",
+      "where": "Table IV",
       "artifact": "cis/variant_ema_6coil/pu_z.json",
       "extract": {
         "kind": "run_mean_std",
@@ -193,7 +193,7 @@
     {
       "id": "t2_proc",
       "label": "Procrustes",
-      "where": "Table II",
+      "where": "Table IV",
       "artifact": "cis/variant_ema_6coil/proc.json",
       "extract": {
         "kind": "run_mean_std",
@@ -209,7 +209,7 @@
     {
       "id": "t2_proc_ps_z",
       "label": "Procrustes + per-speaker z",
-      "where": "Table II",
+      "where": "Table IV",
       "artifact": "cis/variant_ema_6coil/proc_ps_z.json",
       "extract": {
         "kind": "run_mean_std",
@@ -225,7 +225,7 @@
     {
       "id": "t2_center",
       "label": "Per-speaker centering",
-      "where": "Table II",
+      "where": "Table IV",
       "artifact": "cis/variant_ema_6coil/center_only.json",
       "extract": {
         "kind": "run_mean_std",
@@ -241,7 +241,7 @@
     {
       "id": "t2_ps_z",
       "label": "Per-speaker z",
-      "where": "Table II",
+      "where": "Table IV",
       "artifact": "cis/variant_ema_6coil/ps_z.json",
       "extract": {
         "kind": "run_mean_std",
@@ -257,7 +257,7 @@
     {
       "id": "t2_robust",
       "label": "Per-speaker robust z (main)",
-      "where": "Table II",
+      "where": "Table IV",
       "artifact": "cis/exp1/ema_only_results.json",
       "extract": {
         "kind": "run_mean_std",
@@ -273,7 +273,7 @@
     {
       "id": "tm_f0",
       "label": "F0 joint ridge R2",
-      "where": "Table III, row F0",
+      "where": "Table V, row F0",
       "artifact": "cis/exp4/correlation.json",
       "extract": {
         "kind": "table_row",
@@ -290,7 +290,7 @@
     {
       "id": "tm_f2",
       "label": "F2 joint ridge R2",
-      "where": "Table III, row F2",
+      "where": "Table V, row F2",
       "artifact": "cis/exp4/correlation.json",
       "extract": {
         "kind": "table_row",
@@ -307,7 +307,7 @@
     {
       "id": "tm_f3",
       "label": "F3 joint ridge R2",
-      "where": "Table III, row F3",
+      "where": "Table V, row F3",
       "artifact": "cis/exp4/correlation.json",
       "extract": {
         "kind": "table_row",
@@ -762,7 +762,7 @@
     {
       "id": "sait_raw",
       "label": "SAIT raw, 59 ch",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/sait_norm_raw_2seed.json",
       "extract": {
         "kind": "summary_pair",
@@ -779,7 +779,7 @@
     {
       "id": "sait_center",
       "label": "SAIT center_only, 59 ch",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/sait_norm_center_only_2seed.json",
       "extract": {
         "kind": "summary_pair",
@@ -796,7 +796,7 @@
     {
       "id": "sait_robust",
       "label": "SAIT robust_z, 59 ch",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/sait_norm_robust_z_2seed.json",
       "extract": {
         "kind": "summary_pair",
@@ -813,7 +813,7 @@
     {
       "id": "sait_center_dropy",
       "label": "SAIT center_only, 41 ch (-y) [artifact tag: sait_syllable_native]",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/sait_syllable_native_2seed.json",
       "extract": {
         "kind": "summary_pair",
@@ -830,7 +830,7 @@
     {
       "id": "sait_full",
       "label": "SAIT full model, 106 ch",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/sait_full_2seed.json",
       "extract": {
         "kind": "summary_pair",
@@ -847,7 +847,7 @@
     {
       "id": "sait_sh_g7",
       "label": "SAIT group Shapley, spectral (G7)",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/shapley_full.json",
       "extract": {
         "kind": "nested_pair",
@@ -862,7 +862,7 @@
     {
       "id": "sait_dom_n2l",
       "label": "SAIT native to L2 transfer",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/domain_native_l2.json",
       "extract": {
         "kind": "dotted",
@@ -877,7 +877,7 @@
     {
       "id": "sait_dom_l2n",
       "label": "SAIT L2 to native transfer",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/domain_native_l2.json",
       "extract": {
         "kind": "dotted",
@@ -892,7 +892,7 @@
     {
       "id": "sait_cal_k1",
       "label": "SAIT calibration, k=1",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/calib_fair.json",
       "extract": {
         "kind": "dotted",
@@ -907,7 +907,7 @@
     {
       "id": "sait_cal_k50",
       "label": "SAIT calibration, k=50",
-      "where": "Section IV-G",
+      "where": "Section IV-H",
       "artifact": "sait/calib_fair.json",
       "extract": {
         "kind": "dotted",
@@ -1008,6 +1008,20 @@
         81.25
       ],
       "tol": 0.05
+    },
+    {
+      "id": "y_rec_f3",
+      "label": "F3 recovered from the y channels alone (ridge R2)",
+      "where": "Section IV-B",
+      "artifact": "cis/y_analysis/y_recoverability.json",
+      "extract": {
+        "kind": "dotted",
+        "path": "F3.y_only"
+      },
+      "paper": [
+        0.005
+      ],
+      "tol": 0.001
     }
   ]
 }

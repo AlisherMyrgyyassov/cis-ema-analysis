@@ -1,1027 +1,1018 @@
 {
-  "note": "The numbers this paper claims, each tied to the artifact that produced it. verify_results.py recomputes every entry from expected/ and reports any disagreement with the value quoted in the manuscript.",
-  "provenance": {
-    "source_repo_commit": "7d87075048eeb9b0bfa82517502bec9395bd14a8",
-    "generated": "2026-11-10"
+ "note": "The numbers this paper claims, each tied to the artifact that produced it. verify_results.py recomputes every entry from expected/ and reports any disagreement with the value quoted in the manuscript.",
+ "provenance": {
+  "source_repo_commit": "7d87075048eeb9b0bfa82517502bec9395bd14a8",
+  "dataset": "CIS-EMA-v2 (3 sessions re-paired, 255 repaired + 70 excluded)",
+  "generated": "2026-11-16"
+ },
+ "claims": [
+  {
+   "id": "t1_chance",
+   "label": "Chance level",
+   "where": "Table III, row 1",
+   "artifact": "cis/results/exp1_ceilings.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "chance.chance_acc",
+    "scale": 100
+   },
+   "paper": [
+    2.33
+   ],
+   "tol": 0.05
   },
-  "claims": [
-    {
-      "id": "t1_chance",
-      "label": "Chance level",
-      "where": "Table III, row 1",
-      "artifact": "cis/results/exp1_ceilings.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "chance.chance_acc",
-        "scale": 100
-      },
-      "paper": [
-        2.33
-      ],
-      "tol": 0.05
+  {
+   "id": "t1_majority",
+   "label": "Majority baseline",
+   "where": "Table III, row 2",
+   "artifact": "cis/results/exp1_ceilings.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "majority_acc_mean",
+    "std": "majority_acc_std",
+    "prefix": "chance",
+    "scale": 100
+   },
+   "paper": [
+    3.37,
+    0.198
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t1_logreg",
+   "label": "Pooled logistic regression, 424 stats",
+   "where": "Table III, row 3",
+   "artifact": "cis/results/exp1_ceilings.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "test_acc_mean",
+    "std": "test_acc_std",
+    "scale": 100,
+    "prefix": "logistic_regression"
+   },
+   "paper": [
+    88.93,
+    1.65
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t1_rf",
+   "label": "Pooled random forest, 424 stats",
+   "where": "Table III, row 4",
+   "artifact": "cis/results/exp1_ceilings.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "test_acc_mean",
+    "std": "test_acc_std",
+    "scale": 100,
+    "prefix": "random_forest"
+   },
+   "paper": [
+    87.03,
+    1.22
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t1_ema",
+   "label": "BiLSTM EMA-only (59 ch)",
+   "where": "Table III, row 5",
+   "artifact": "cis/exp1/ema_only_results.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    84.93,
+    2.14
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t1_full",
+   "label": "BiLSTM full (106 ch)",
+   "where": "Table III, row 6",
+   "artifact": "cis/exp1/full_results.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    92.67,
+    0.73
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t1_hubert",
+   "label": "HuBERT-large audio ceiling",
+   "where": "Table III, row 7",
+   "artifact": "cis/exp1_ssl_hubert/summary.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "test_acc_mean",
+    "std": "test_acc_std",
+    "scale": 100
+   },
+   "paper": [
+    94.13,
+    1.11
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t1_xlsr",
+   "label": "XLSR-53 audio ceiling",
+   "where": "Table III, row 8",
+   "artifact": "cis/exp1_ssl_xlsr/summary.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "test_acc_mean",
+    "std": "test_acc_std",
+    "scale": 100
+   },
+   "paper": [
+    92.8,
+    0.801
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t1_wav2vec",
+   "label": "wav2vec 2.0 audio ceiling",
+   "where": "Table III, row 9",
+   "artifact": "cis/exp1_ssl/summary.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "test_acc_mean",
+    "std": "test_acc_std",
+    "prefix": "wav2vec2_reference",
+    "scale": 100
+   },
+   "paper": [
+    85.0,
+    1.98
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t2_raw",
+   "label": "Head-corrected, no per-speaker normalization",
+   "where": "Table IV",
+   "artifact": "cis/variant_ema_6coil/raw.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    73.79,
+    7.39
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t2_pu_z",
+   "label": "Per-utterance z",
+   "where": "Table IV",
+   "artifact": "cis/variant_ema_6coil/pu_z.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    77.75,
+    1.33
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t2_proc",
+   "label": "Procrustes",
+   "where": "Table IV",
+   "artifact": "cis/variant_ema_6coil/proc.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    80.35,
+    4.12
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t2_proc_ps_z",
+   "label": "Procrustes + per-speaker z",
+   "where": "Table IV",
+   "artifact": "cis/variant_ema_6coil/proc_ps_z.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    82.4,
+    3.53
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t2_center",
+   "label": "Per-speaker centering",
+   "where": "Table IV",
+   "artifact": "cis/variant_ema_6coil/center_only.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    84.29,
+    2.96
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t2_ps_z",
+   "label": "Per-speaker z",
+   "where": "Table IV",
+   "artifact": "cis/variant_ema_6coil/ps_z.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    84.99,
+    2.89
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "t2_robust",
+   "label": "Per-speaker robust z (main)",
+   "where": "Table IV",
+   "artifact": "cis/exp1/ema_only_results.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    84.93,
+    2.14
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tm_f0",
+   "label": "F0 joint ridge R2",
+   "where": "Table V, row F0",
+   "artifact": "cis/exp4/correlation.json",
+   "extract": {
+    "kind": "table_row",
+    "match": {
+     "acoustic_feature": "F0"
     },
-    {
-      "id": "t1_majority",
-      "label": "Majority baseline",
-      "where": "Table III, row 2",
-      "artifact": "cis/results/exp1_ceilings.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "majority_acc_mean",
-        "std": "majority_acc_std",
-        "prefix": "chance",
-        "scale": 100
-      },
-      "paper": [
-        3.33,
-        0.13
-      ],
-      "tol": 0.05
+    "field": "joint_ridge_r2_in"
+   },
+   "paper": [
+    0.158
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tm_f2",
+   "label": "F2 joint ridge R2",
+   "where": "Table V, row F2",
+   "artifact": "cis/exp4/correlation.json",
+   "extract": {
+    "kind": "table_row",
+    "match": {
+     "acoustic_feature": "F2"
     },
-    {
-      "id": "t1_logreg",
-      "label": "Pooled logistic regression, 424 stats",
-      "where": "Table III, row 3",
-      "artifact": "cis/results/exp1_ceilings.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "test_acc_mean",
-        "std": "test_acc_std",
-        "scale": 100,
-        "prefix": "logistic_regression"
-      },
-      "paper": [
-        84.04,
-        3.25
-      ],
-      "tol": 0.05
+    "field": "joint_ridge_r2_in"
+   },
+   "paper": [
+    0.576
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tm_f3",
+   "label": "F3 joint ridge R2",
+   "where": "Table V, row F3",
+   "artifact": "cis/exp4/correlation.json",
+   "extract": {
+    "kind": "table_row",
+    "match": {
+     "acoustic_feature": "F3"
     },
-    {
-      "id": "t1_rf",
-      "label": "Pooled random forest, 424 stats",
-      "where": "Table III, row 4",
-      "artifact": "cis/results/exp1_ceilings.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "test_acc_mean",
-        "std": "test_acc_std",
-        "scale": 100,
-        "prefix": "random_forest"
-      },
-      "paper": [
-        82.77,
-        4.45
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t1_ema",
-      "label": "BiLSTM EMA-only (59 ch)",
-      "where": "Table III, row 5",
-      "artifact": "cis/exp1/ema_only_results.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        78.71,
-        4.41
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t1_full",
-      "label": "BiLSTM full (106 ch)",
-      "where": "Table III, row 6",
-      "artifact": "cis/exp1/full_results.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        88.28,
-        3.36
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t1_hubert",
-      "label": "HuBERT-large audio ceiling",
-      "where": "Table III, row 7",
-      "artifact": "cis/exp1_ssl_hubert/summary.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "test_acc_mean",
-        "std": "test_acc_std",
-        "scale": 100
-      },
-      "paper": [
-        94.13,
-        1.11
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t1_xlsr",
-      "label": "XLSR-53 audio ceiling",
-      "where": "Table III, row 8",
-      "artifact": "cis/exp1_ssl_xlsr/summary.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "test_acc_mean",
-        "std": "test_acc_std",
-        "scale": 100
-      },
-      "paper": [
-        92.8,
-        0.8
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t1_wav2vec",
-      "label": "wav2vec 2.0 audio ceiling",
-      "where": "Table III, row 9",
-      "artifact": "cis/exp1_ssl/summary.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "test_acc_mean",
-        "std": "test_acc_std",
-        "prefix": "wav2vec2_reference",
-        "scale": 100
-      },
-      "paper": [
-        85.0,
-        1.98
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t2_raw",
-      "label": "Head-corrected, no per-speaker normalization",
-      "where": "Table IV",
-      "artifact": "cis/variant_ema_6coil/raw.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        68.92,
-        8.82
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t2_pu_z",
-      "label": "Per-utterance z",
-      "where": "Table IV",
-      "artifact": "cis/variant_ema_6coil/pu_z.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        72.01,
-        3.01
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t2_proc",
-      "label": "Procrustes",
-      "where": "Table IV",
-      "artifact": "cis/variant_ema_6coil/proc.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        73.93,
-        5.97
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t2_proc_ps_z",
-      "label": "Procrustes + per-speaker z",
-      "where": "Table IV",
-      "artifact": "cis/variant_ema_6coil/proc_ps_z.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        76.02,
-        5.43
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t2_center",
-      "label": "Per-speaker centering",
-      "where": "Table IV",
-      "artifact": "cis/variant_ema_6coil/center_only.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        77.71,
-        4.24
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t2_ps_z",
-      "label": "Per-speaker z",
-      "where": "Table IV",
-      "artifact": "cis/variant_ema_6coil/ps_z.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        78.39,
-        4.08
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "t2_robust",
-      "label": "Per-speaker robust z (main)",
-      "where": "Table IV",
-      "artifact": "cis/exp1/ema_only_results.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        78.71,
-        4.41
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tm_f0",
-      "label": "F0 joint ridge R2",
-      "where": "Table V, row F0",
-      "artifact": "cis/exp4/correlation.json",
-      "extract": {
-        "kind": "table_row",
-        "match": {
-          "acoustic_feature": "F0"
-        },
-        "field": "joint_ridge_r2_in"
-      },
-      "paper": [
-        0.14
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tm_f2",
-      "label": "F2 joint ridge R2",
-      "where": "Table V, row F2",
-      "artifact": "cis/exp4/correlation.json",
-      "extract": {
-        "kind": "table_row",
-        "match": {
-          "acoustic_feature": "F2"
-        },
-        "field": "joint_ridge_r2_in"
-      },
-      "paper": [
-        0.54
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tm_f3",
-      "label": "F3 joint ridge R2",
-      "where": "Table V, row F3",
-      "artifact": "cis/exp4/correlation.json",
-      "extract": {
-        "kind": "table_row",
-        "match": {
-          "acoustic_feature": "F3"
-        },
-        "field": "joint_ridge_r2_in"
-      },
-      "paper": [
-        0.04
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sh_g7",
-      "label": "Group Shapley, spectral (G7)",
-      "where": "Section IV-C / Fig. 4",
-      "artifact": "cis/exp2/shapley.json",
-      "extract": {
-        "kind": "nested_pair",
-        "path": "aggregate.shapley_acc.G7",
-        "scale": 100
-      },
-      "paper": [
-        49.4
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sh_g6",
-      "label": "Group Shapley, formant (G6)",
-      "where": "Section IV-C / Fig. 4",
-      "artifact": "cis/exp2/shapley.json",
-      "extract": {
-        "kind": "nested_pair",
-        "path": "aggregate.shapley_acc.G6",
-        "scale": 100
-      },
-      "paper": [
-        12.7
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sh_g1",
-      "label": "Group Shapley, position (G1)",
-      "where": "Section IV-C / Fig. 4",
-      "artifact": "cis/exp2/shapley.json",
-      "extract": {
-        "kind": "nested_pair",
-        "path": "aggregate.shapley_acc.G1",
-        "scale": 100
-      },
-      "paper": [
-        6.5
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sh_g4",
-      "label": "Group Shapley, geometry (G4)",
-      "where": "Section IV-C / Fig. 4",
-      "artifact": "cis/exp2/shapley.json",
-      "extract": {
-        "kind": "nested_pair",
-        "path": "aggregate.shapley_acc.G4",
-        "scale": 100
-      },
-      "paper": [
-        -0.2
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sh_g5",
-      "label": "Group Shapley, voicing (G5)",
-      "where": "Section IV-C / Fig. 4",
-      "artifact": "cis/exp2/shapley.json",
-      "extract": {
-        "kind": "nested_pair",
-        "path": "aggregate.shapley_acc.G5",
-        "scale": 100
-      },
-      "paper": [
-        3.2
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "pr_vowel_ema",
-      "label": "Vowel probe, EMA representation",
-      "where": "Section IV-D",
-      "artifact": "cis/exp3/probing_ema.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "aggregate.vowel__pooled.acc_mean",
-        "scale": 100
-      },
-      "paper": [
-        90.8
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "pr_vowel_full",
-      "label": "Vowel probe, full representation",
-      "where": "Section IV-D",
-      "artifact": "cis/exp3/probing_full.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "aggregate.vowel__pooled.acc_mean",
-        "scale": 100
-      },
-      "paper": [
-        95.9
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "pr_onset_ema",
-      "label": "Onset probe, EMA representation",
-      "where": "Section IV-D",
-      "artifact": "cis/exp3/probing_ema.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "aggregate.onset__pooled.acc_mean",
-        "scale": 100
-      },
-      "paper": [
-        79.7
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "pr_onset_full",
-      "label": "Onset probe, full representation",
-      "where": "Section IV-D",
-      "artifact": "cis/exp3/probing_full.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "aggregate.onset__pooled.acc_mean",
-        "scale": 100
-      },
-      "paper": [
-        90.1
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tone_ema",
-      "label": "Syllable-controlled tone probe, EMA",
-      "where": "Section IV-D",
-      "artifact": "cis/tone/tone_within_syllable.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "within_ema.probe_mean",
-        "scale": 100
-      },
-      "paper": [
-        73.03
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tone_prior",
-      "label": "Per-syllable majority prior",
-      "where": "Section IV-D",
-      "artifact": "cis/tone/tone_within_syllable.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "within_ema.baseline_mean",
-        "scale": 100
-      },
-      "paper": [
-        64.83
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tone_full",
-      "label": "Syllable-controlled tone probe, full",
-      "where": "Section IV-D",
-      "artifact": "cis/tone/tone_within_syllable.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "within_full.probe_mean",
-        "scale": 100
-      },
-      "paper": [
-        73.93
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "mo_all",
-      "label": "Six-coil EMA-only baseline",
-      "where": "Section V-C",
-      "artifact": "cis/montage_subset/all.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        78.71,
-        4.41
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "mo_midsag4",
-      "label": "Four midsagittal coils (TD,TT,UL,LL)",
-      "where": "Section V-C / Fig. 7b",
-      "artifact": "cis/montage_subset/midsag4.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        78.37
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "mo_td1",
-      "label": "Tongue dorsum alone",
-      "where": "Section V-C / Fig. 7b",
-      "artifact": "cis/montage_subset/td1.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        55.68
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "ar_tcn_ema",
-      "label": "TCN, EMA-only",
-      "where": "Section IV-A",
-      "artifact": "cis/arch/tcn_ema.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        79.02
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "ar_tcn_full",
-      "label": "TCN, full",
-      "where": "Section IV-A",
-      "artifact": "cis/arch/tcn_full.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        90.61
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "ar_tr_ema",
-      "label": "Transformer, EMA-only",
-      "where": "Section IV-A",
-      "artifact": "cis/arch/transformer_ema.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        79.09
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "ar_tr_full",
-      "label": "Transformer, full",
-      "where": "Section IV-A",
-      "artifact": "cis/arch/transformer_full.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        89.47
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sc_k06",
-      "label": "6 training speakers (two seeds merged)",
-      "where": "Section IV-A / Fig. 2",
-      "artifact": "cis/scaling/spk_k06.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        61.02
-      ],
-      "tol": 0.05,
-      "artifacts": [
-        "cis/scaling/spk_k06.json",
-        "cis/scaling/spk_k06_s1.json"
-      ]
-    },
-    {
-      "id": "sc_k12",
-      "label": "12 training speakers (two seeds merged)",
-      "where": "Section IV-A / Fig. 2",
-      "artifact": "cis/scaling/spk_k12.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        72.29
-      ],
-      "tol": 0.05,
-      "artifacts": [
-        "cis/scaling/spk_k12.json",
-        "cis/scaling/spk_k12_s1.json"
-      ]
-    },
-    {
-      "id": "sc_k18",
-      "label": "18 training speakers (two seeds merged)",
-      "where": "Section IV-A / Fig. 2",
-      "artifact": "cis/scaling/spk_k18.json",
-      "extract": {
-        "kind": "run_mean_std",
-        "field": "test_acc",
-        "scale": 100
-      },
-      "paper": [
-        76.03
-      ],
-      "tol": 0.05,
-      "artifacts": [
-        "cis/scaling/spk_k18.json",
-        "cis/scaling/spk_k18_s1.json"
-      ]
-    },
-    {
-      "id": "kd_ens",
-      "label": "Same-modality KD student",
-      "where": "Section IV-F",
-      "artifact": "cis/exp6/sweep3_summary.json",
-      "extract": {
-        "kind": "named_entry",
-        "name": "ensC_a09_ck",
-        "field": "acc",
-        "scale": 100
-      },
-      "paper": [
-        80.26
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "kd_single",
-      "label": "Single EMA teacher student",
-      "where": "Section IV-F",
-      "artifact": "cis/exp6/sweep3_summary.json",
-      "extract": {
-        "kind": "named_entry",
-        "name": "ensC_single_a09",
-        "field": "acc",
-        "scale": 100
-      },
-      "paper": [
-        80.14
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "kd_diff",
-      "label": "KD gain, fold level",
-      "where": "Section IV-F",
-      "artifact": "cis/exp6/paired_vs_baseline.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "fold_level.mean_diff",
-        "scale": 100
-      },
-      "paper": [
-        1.55
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "cal_center_k1",
-      "label": "Offset-only normalization, k=1",
-      "where": "Section IV-B / Fig. 3",
-      "artifact": "cis/fair_deploy_center_only/fair_deploy.json",
-      "extract": {
-        "kind": "curve",
-        "key": "1",
-        "which": 0,
-        "scale": 100
-      },
-      "paper": [
-        57.0
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "cal_center_k5",
-      "label": "Offset-only normalization, k=5",
-      "where": "Section IV-B / Fig. 3",
-      "artifact": "cis/fair_deploy_center_only/fair_deploy.json",
-      "extract": {
-        "kind": "curve",
-        "key": "5",
-        "which": 0,
-        "scale": 100
-      },
-      "paper": [
-        72.5
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "cal_center_k10",
-      "label": "Offset-only normalization, k=10",
-      "where": "Section IV-B / Fig. 3",
-      "artifact": "cis/fair_deploy_center_only/fair_deploy.json",
-      "extract": {
-        "kind": "curve",
-        "key": "10",
-        "which": 0,
-        "scale": 100
-      },
-      "paper": [
-        75.9
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_raw",
-      "label": "SAIT raw, 59 ch",
-      "where": "Section IV-H",
-      "artifact": "sait/sait_norm_raw_2seed.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "acc_mean",
-        "std": "acc_std",
-        "scale": 1
-      },
-      "paper": [
-        23.93,
-        12.28
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_center",
-      "label": "SAIT center_only, 59 ch",
-      "where": "Section IV-H",
-      "artifact": "sait/sait_norm_center_only_2seed.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "acc_mean",
-        "std": "acc_std",
-        "scale": 1
-      },
-      "paper": [
-        44.44,
-        5.16
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_robust",
-      "label": "SAIT robust_z, 59 ch",
-      "where": "Section IV-H",
-      "artifact": "sait/sait_norm_robust_z_2seed.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "acc_mean",
-        "std": "acc_std",
-        "scale": 1
-      },
-      "paper": [
-        39.31,
-        8.17
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_center_dropy",
-      "label": "SAIT center_only, 41 ch (-y) [artifact tag: sait_syllable_native]",
-      "where": "Section IV-H",
-      "artifact": "sait/sait_syllable_native_2seed.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "acc_mean",
-        "std": "acc_std",
-        "scale": 1
-      },
-      "paper": [
-        47.36,
-        7.41
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_full",
-      "label": "SAIT full model, 106 ch",
-      "where": "Section IV-H",
-      "artifact": "sait/sait_full_2seed.json",
-      "extract": {
-        "kind": "summary_pair",
-        "mean": "acc_mean",
-        "std": "acc_std",
-        "scale": 1
-      },
-      "paper": [
-        74.83,
-        12.47
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_sh_g7",
-      "label": "SAIT group Shapley, spectral (G7)",
-      "where": "Section IV-H",
-      "artifact": "sait/shapley_full.json",
-      "extract": {
-        "kind": "nested_pair",
-        "path": "shapley.G7",
-        "scale": 100
-      },
-      "paper": [
-        38.2
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_dom_n2l",
-      "label": "SAIT native to L2 transfer",
-      "where": "Section IV-H",
-      "artifact": "sait/domain_native_l2.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "directions.native->l2.acc_mean",
-        "scale": 1
-      },
-      "paper": [
-        42.47
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_dom_l2n",
-      "label": "SAIT L2 to native transfer",
-      "where": "Section IV-H",
-      "artifact": "sait/domain_native_l2.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "directions.l2->native.acc_mean",
-        "scale": 1
-      },
-      "paper": [
-        34.19
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_cal_k1",
-      "label": "SAIT calibration, k=1",
-      "where": "Section IV-H",
-      "artifact": "sait/calib_fair.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "curve.1.mean",
-        "scale": 1
-      },
-      "paper": [
-        23.76
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "sait_cal_k50",
-      "label": "SAIT calibration, k=50",
-      "where": "Section IV-H",
-      "artifact": "sait/calib_fair.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "curve.50.mean",
-        "scale": 1
-      },
-      "paper": [
-        46.18
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tone_oracle_ema",
-      "label": "Syllable-oracle representation probe, EMA",
-      "where": "Section IV-D",
-      "artifact": "cis/f0_baseline/tone_syllable_oracle.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "ema_syl.probe_mean",
-        "scale": 100
-      },
-      "paper": [
-        73.94
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "tone_oracle_full",
-      "label": "Syllable-oracle representation probe, full",
-      "where": "Section IV-D",
-      "artifact": "cis/f0_baseline/tone_syllable_oracle.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "full_syl.probe_mean",
-        "scale": 100
-      },
-      "paper": [
-        73.97
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "f0_psz_nosyl",
-      "label": "F0 statistics without syllable identity",
-      "where": "Section IV-D",
-      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "variants.psz_full.probe_mean",
-        "scale": 100
-      },
-      "paper": [
-        65.69
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "f0_psz_prior",
-      "label": "Per-syllable prior on the F0 probe subset",
-      "where": "Section IV-D",
-      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "variants.psz_full.baseline_mean",
-        "scale": 100
-      },
-      "paper": [
-        64.98
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "f0_psz_syl",
-      "label": "F0 statistics with syllable identity",
-      "where": "Section IV-D",
-      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "variants.psz_syl_full.probe_mean",
-        "scale": 100
-      },
-      "paper": [
-        82.11
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "f0_mean_only",
-      "label": "Mean pitch alone with syllable identity",
-      "where": "Section IV-D",
-      "artifact": "cis/f0_baseline/f0_tone_baseline.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "variants.psz_syl_mean_only.probe_mean",
-        "scale": 100
-      },
-      "paper": [
-        81.25
-      ],
-      "tol": 0.05
-    },
-    {
-      "id": "y_rec_f3",
-      "label": "F3 recovered from the y channels alone (ridge R2)",
-      "where": "Section IV-B",
-      "artifact": "cis/y_analysis/y_recoverability.json",
-      "extract": {
-        "kind": "dotted",
-        "path": "F3.y_only"
-      },
-      "paper": [
-        0.005
-      ],
-      "tol": 0.001
-    }
-  ]
+    "field": "joint_ridge_r2_in"
+   },
+   "paper": [
+    0.05
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sh_g7",
+   "label": "Group Shapley, spectral (G7)",
+   "where": "Section IV-C / Fig. 4",
+   "artifact": "cis/exp2/shapley.json",
+   "extract": {
+    "kind": "nested_pair",
+    "path": "aggregate.shapley_acc.G7",
+    "scale": 100
+   },
+   "paper": [
+    33.36
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sh_g6",
+   "label": "Group Shapley, formant (G6)",
+   "where": "Section IV-C / Fig. 4",
+   "artifact": "cis/exp2/shapley.json",
+   "extract": {
+    "kind": "nested_pair",
+    "path": "aggregate.shapley_acc.G6",
+    "scale": 100
+   },
+   "paper": [
+    7.81
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sh_g1",
+   "label": "Group Shapley, position (G1)",
+   "where": "Section IV-C / Fig. 4",
+   "artifact": "cis/exp2/shapley.json",
+   "extract": {
+    "kind": "nested_pair",
+    "path": "aggregate.shapley_acc.G1",
+    "scale": 100
+   },
+   "paper": [
+    20.65
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sh_g4",
+   "label": "Group Shapley, geometry (G4)",
+   "where": "Section IV-C / Fig. 4",
+   "artifact": "cis/exp2/shapley.json",
+   "extract": {
+    "kind": "nested_pair",
+    "path": "aggregate.shapley_acc.G4",
+    "scale": 100
+   },
+   "paper": [
+    0.193
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sh_g5",
+   "label": "Group Shapley, voicing (G5)",
+   "where": "Section IV-C / Fig. 4",
+   "artifact": "cis/exp2/shapley.json",
+   "extract": {
+    "kind": "nested_pair",
+    "path": "aggregate.shapley_acc.G5",
+    "scale": 100
+   },
+   "paper": [
+    3.29
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "pr_vowel_ema",
+   "label": "Vowel probe, EMA representation",
+   "where": "Section IV-D",
+   "artifact": "cis/exp3/probing_ema.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "aggregate.vowel__pooled.acc_mean",
+    "scale": 100
+   },
+   "paper": [
+    97.12
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "pr_vowel_full",
+   "label": "Vowel probe, full representation",
+   "where": "Section IV-D",
+   "artifact": "cis/exp3/probing_full.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "aggregate.vowel__pooled.acc_mean",
+    "scale": 100
+   },
+   "paper": [
+    97.9
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "pr_onset_ema",
+   "label": "Onset probe, EMA representation",
+   "where": "Section IV-D",
+   "artifact": "cis/exp3/probing_ema.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "aggregate.onset__pooled.acc_mean",
+    "scale": 100
+   },
+   "paper": [
+    86.38
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "pr_onset_full",
+   "label": "Onset probe, full representation",
+   "where": "Section IV-D",
+   "artifact": "cis/exp3/probing_full.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "aggregate.onset__pooled.acc_mean",
+    "scale": 100
+   },
+   "paper": [
+    93.94
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tone_ema",
+   "label": "Syllable-controlled tone probe, EMA",
+   "where": "Section IV-D",
+   "artifact": "cis/tone/tone_within_syllable.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "within_ema.probe_mean",
+    "scale": 100
+   },
+   "paper": [
+    77.64
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tone_prior",
+   "label": "Per-syllable majority prior",
+   "where": "Section IV-D",
+   "artifact": "cis/tone/tone_within_syllable.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "within_ema.baseline_mean",
+    "scale": 100
+   },
+   "paper": [
+    65.0
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tone_full",
+   "label": "Syllable-controlled tone probe, full",
+   "where": "Section IV-D",
+   "artifact": "cis/tone/tone_within_syllable.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "within_full.probe_mean",
+    "scale": 100
+   },
+   "paper": [
+    78.11
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "mo_all",
+   "label": "Six-coil EMA-only baseline",
+   "where": "Section V-C",
+   "artifact": "cis/montage_subset/all.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    84.93,
+    2.14
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "mo_midsag4",
+   "label": "Four midsagittal coils (TD,TT,UL,LL)",
+   "where": "Section V-C / Fig. 7b",
+   "artifact": "cis/montage_subset/midsag4.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    84.96
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "mo_td1",
+   "label": "Tongue dorsum alone",
+   "where": "Section V-C / Fig. 7b",
+   "artifact": "cis/montage_subset/td1.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    61.42
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "ar_tcn_ema",
+   "label": "TCN, EMA-only",
+   "where": "Section IV-A",
+   "artifact": "cis/arch/tcn_ema.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    86.61
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "ar_tcn_full",
+   "label": "TCN, full",
+   "where": "Section IV-A",
+   "artifact": "cis/arch/tcn_full.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    94.54
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "ar_tr_ema",
+   "label": "Transformer, EMA-only",
+   "where": "Section IV-A",
+   "artifact": "cis/arch/transformer_ema.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    85.97
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "ar_tr_full",
+   "label": "Transformer, full",
+   "where": "Section IV-A",
+   "artifact": "cis/arch/transformer_full.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    93.4
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sc_k06",
+   "label": "6 training speakers (six folds x two seeds)",
+   "where": "Section IV-A / Fig. 2",
+   "artifact": "cis/scaling/spk_k06.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    73.13
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sc_k12",
+   "label": "12 training speakers (six folds x two seeds)",
+   "where": "Section IV-A / Fig. 2",
+   "artifact": "cis/scaling/spk_k12.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    80.46
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sc_k18",
+   "label": "18 training speakers (six folds x two seeds)",
+   "where": "Section IV-A / Fig. 2",
+   "artifact": "cis/scaling/spk_k18.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    84.05
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "kd_ens",
+   "label": "Same-modality KD student",
+   "where": "Section IV-F",
+   "artifact": "cis/exp6/sweep3_summary.json",
+   "extract": {
+    "kind": "named_entry",
+    "name": "ensC_a09_ck",
+    "field": "acc",
+    "scale": 100
+   },
+   "paper": [
+    86.36
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "kd_diff",
+   "label": "KD gain, fold level",
+   "where": "Section IV-F",
+   "artifact": "cis/exp6/paired_vs_baseline.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "fold_level.mean_diff",
+    "scale": 100
+   },
+   "paper": [
+    1.43
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "cal_center_k1",
+   "label": "Offset-only normalization, k=1",
+   "where": "Section IV-B / Fig. 3",
+   "artifact": "cis/fair_deploy_center_only/fair_deploy.json",
+   "extract": {
+    "kind": "curve",
+    "key": "1",
+    "which": 0,
+    "scale": 100
+   },
+   "paper": [
+    56.93
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "cal_center_k5",
+   "label": "Offset-only normalization, k=5",
+   "where": "Section IV-B / Fig. 3",
+   "artifact": "cis/fair_deploy_center_only/fair_deploy.json",
+   "extract": {
+    "kind": "curve",
+    "key": "5",
+    "which": 0,
+    "scale": 100
+   },
+   "paper": [
+    73.24
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "cal_center_k10",
+   "label": "Offset-only normalization, k=10",
+   "where": "Section IV-B / Fig. 3",
+   "artifact": "cis/fair_deploy_center_only/fair_deploy.json",
+   "extract": {
+    "kind": "curve",
+    "key": "10",
+    "which": 0,
+    "scale": 100
+   },
+   "paper": [
+    75.78
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_raw",
+   "label": "SAIT raw, 59 ch",
+   "where": "Section IV-H",
+   "artifact": "sait/sait_norm_raw_2seed.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "acc_mean",
+    "std": "acc_std",
+    "scale": 1
+   },
+   "paper": [
+    23.93,
+    12.28
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_center",
+   "label": "SAIT center_only, 59 ch",
+   "where": "Section IV-H",
+   "artifact": "sait/sait_norm_center_only_2seed.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "acc_mean",
+    "std": "acc_std",
+    "scale": 1
+   },
+   "paper": [
+    44.44,
+    5.16
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_robust",
+   "label": "SAIT robust_z, 59 ch",
+   "where": "Section IV-H",
+   "artifact": "sait/sait_norm_robust_z_2seed.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "acc_mean",
+    "std": "acc_std",
+    "scale": 1
+   },
+   "paper": [
+    39.31,
+    8.17
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_center_dropy",
+   "label": "SAIT center_only, 41 ch (-y) [artifact tag: sait_syllable_native]",
+   "where": "Section IV-H",
+   "artifact": "sait/sait_syllable_native_2seed.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "acc_mean",
+    "std": "acc_std",
+    "scale": 1
+   },
+   "paper": [
+    47.36,
+    7.41
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_full",
+   "label": "SAIT full model, 106 ch",
+   "where": "Section IV-H",
+   "artifact": "sait/sait_full_2seed.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "acc_mean",
+    "std": "acc_std",
+    "scale": 1
+   },
+   "paper": [
+    74.83,
+    12.47
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_sh_g7",
+   "label": "SAIT group Shapley, spectral (G7)",
+   "where": "Section IV-H",
+   "artifact": "sait/shapley_full.json",
+   "extract": {
+    "kind": "nested_pair",
+    "path": "shapley.G7",
+    "scale": 100
+   },
+   "paper": [
+    38.19
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_dom_n2l",
+   "label": "SAIT native to L2 transfer",
+   "where": "Section IV-H",
+   "artifact": "sait/domain_native_l2.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "directions.native->l2.acc_mean",
+    "scale": 1
+   },
+   "paper": [
+    42.47
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_dom_l2n",
+   "label": "SAIT L2 to native transfer",
+   "where": "Section IV-H",
+   "artifact": "sait/domain_native_l2.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "directions.l2->native.acc_mean",
+    "scale": 1
+   },
+   "paper": [
+    34.19
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_cal_k1",
+   "label": "SAIT calibration, k=1",
+   "where": "Section IV-H",
+   "artifact": "sait/calib_fair.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "curve.1.mean",
+    "scale": 1
+   },
+   "paper": [
+    23.76
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "sait_cal_k50",
+   "label": "SAIT calibration, k=50",
+   "where": "Section IV-H",
+   "artifact": "sait/calib_fair.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "curve.50.mean",
+    "scale": 1
+   },
+   "paper": [
+    46.18
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tone_oracle_ema",
+   "label": "Syllable-oracle representation probe, EMA",
+   "where": "Section IV-D",
+   "artifact": "cis/f0_baseline/tone_syllable_oracle.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "ema_syl.probe_mean",
+    "scale": 100
+   },
+   "paper": [
+    77.91
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "tone_oracle_full",
+   "label": "Syllable-oracle representation probe, full",
+   "where": "Section IV-D",
+   "artifact": "cis/f0_baseline/tone_syllable_oracle.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "full_syl.probe_mean",
+    "scale": 100
+   },
+   "paper": [
+    78.02
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "f0_psz_nosyl",
+   "label": "F0 statistics without syllable identity",
+   "where": "Section IV-D",
+   "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "variants.psz_full.probe_mean",
+    "scale": 100
+   },
+   "paper": [
+    65.91
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "f0_psz_prior",
+   "label": "Per-syllable prior on the F0 probe subset",
+   "where": "Section IV-D",
+   "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "variants.psz_full.baseline_mean",
+    "scale": 100
+   },
+   "paper": [
+    65.03
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "f0_psz_syl",
+   "label": "F0 statistics with syllable identity",
+   "where": "Section IV-D",
+   "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "variants.psz_syl_full.probe_mean",
+    "scale": 100
+   },
+   "paper": [
+    82.39
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "f0_mean_only",
+   "label": "Mean pitch alone with syllable identity",
+   "where": "Section IV-D",
+   "artifact": "cis/f0_baseline/f0_tone_baseline.json",
+   "extract": {
+    "kind": "dotted",
+    "path": "variants.psz_syl_mean_only.probe_mean",
+    "scale": 100
+   },
+   "paper": [
+    81.62
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "mo_midsag3",
+   "label": "Three midsagittal coils (TD,TT,UL) \u2014 four-coil set minus LL",
+   "where": "Section V-C",
+   "artifact": "cis/montage_subset/midsag3.json",
+   "extract": {
+    "kind": "run_mean_std",
+    "field": "test_acc",
+    "scale": 100
+   },
+   "paper": [
+    81.18
+   ],
+   "tol": 0.05
+  },
+  {
+   "id": "y_noy",
+   "label": "EMA-only with the medial-lateral (y) channels removed, 41 ch",
+   "where": "Section IV-B",
+   "artifact": "cis/y_analysis/robust_z_noy.json",
+   "extract": {
+    "kind": "summary_pair",
+    "mean": "test_acc_mean",
+    "std": "test_acc_std",
+    "scale": 100
+   },
+   "paper": [
+    86.71,
+    2.37
+   ],
+   "tol": 0.05
+  }
+ ]
 }

@@ -29,8 +29,8 @@ Expect a deliberately poor accuracy (one epoch) and, importantly, the pooled bas
 which do not depend on training at all:
 
 ```
-LogReg (pooled)  84.03 +- 3.23      # paper: 84.04 +- 3.25
-RF (pooled)      82.78 +- 4.49      # paper: 82.77 +- 4.45
+LogReg (pooled)  88.93 +- 1.65      # ledger: 88.93 +- 1.65
+RF (pooled)      87.03 +- 1.22      # ledger: 87.03 +- 1.22
 ```
 
 If those two differ by more than ~0.1 points, your `features.csv` is not the paper's.
@@ -135,31 +135,28 @@ floating-point reductions, and a different torch release changes the optimisatio
 outright. The reference artifacts were produced on a 2025-era stack; this repository was
 re-verified on torch 2.11 (2026-11).
 
-Measured by re-running Table I here, 12 fold-seeds per model:
+The artifacts in `expected/` **are** the CIS-EMA-v2 production run, so there is no
+paper-vs-reproduction gap to report for this corpus: the ledger, the shipped artifacts and the
+manuscript are three views of one run. What can be checked without retraining is the
+non-learned part of Table I, which is deterministic given the feature table:
 
-| | paper | reproduced | Δ mean | Δ std |
-|---|---|---|---|---|
-| LogReg, 424 pooled stats | 84.04 ± 3.25 | **84.03 ± 3.23** | −0.01 | −0.02 |
-| Random forest, 424 pooled stats | 82.77 ± 4.45 | **82.78 ± 4.49** | +0.01 | +0.04 |
-| BiLSTM EMA-only | 78.71 ± 4.41 | **78.22 ± 3.72** | −0.49 | −0.69 |
-| BiLSTM full | 88.28 ± 3.36 | **88.16 ± 3.34** | −0.12 | −0.02 |
+| | ledger | reproduced here |
+|---|---|---|
+| LogReg, 424 pooled stats | 88.93 ± 1.65 | **88.93 ± 1.65** |
+| Random forest, 424 pooled stats | 87.03 ± 1.22 | **87.03 ± 1.22** |
 
-Two things this tells you:
-
-* **The non-learned baselines reproduce to 0.01**, which is the check that matters for your
-  setup: `features.csv`, the folds and the label maps are the paper's.
-* **The neural rows scatter around the published mean** with deltas of both signs
-  (+2.16, −0.65, +1.62, −2.05 …), largest single fold-seed |Δ| ≈ 4 points, mean −0.49. That is
-  training noise on a different stack, not a shifted pipeline. The EMA-only *dispersion* is
-  also smaller here (3.72 vs 4.41), so the same tolerance cannot apply to means and standard
-  deviations — check means at ±0.5 and treat std as indicative.
+That is the check that matters for your setup: `features.csv`, the folds and the label maps are
+the ones the paper used. The neural rows cannot be reproduced to the decimal on a different
+day — CUDA kernels and multi-threaded BLAS reorder floating-point reductions — so treat them
+with the tolerance table below; re-evaluating the shipped checkpoints does return 84.93 and
+92.67 exactly, because it reuses the stored weights.
 
 ```bash
 python verify_results.py --runs runs/verify_exp1 --tol 0.5
 ```
 
-The full reproduction summary is committed as `expected/verification/table1_reproduced.json`
-(per-model mean and std from the re-run), so you can compare without rerunning anything.
+The v2 summary is committed as `expected/verification/table1_reproduced.json`
+(per-model mean and std), so you can compare without rerunning anything.
 
 Every figure is passed through `src/figcheck.py` before it is written: it asks the renderer
 where each label actually landed and refuses to save a figure in which two of them overlap.

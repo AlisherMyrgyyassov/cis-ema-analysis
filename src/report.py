@@ -318,7 +318,7 @@ def main():
         if "bilstm_ema_broadcast_means" in o:
             rows.append(["BiLSTM EMA + broadcast true means",
                          _acc("bilstm_ema_broadcast_means"),
-                         "vs EMA-only baseline 78.71% (Exp 1)"])
+                         "vs EMA-only baseline 84.93% (Exp 1)"])
         parts.append(pd.DataFrame(rows, columns=["Model", "Test acc", "Notes"]).to_markdown(index=False))
         parts.append("")
         parts.append(
@@ -376,7 +376,7 @@ def main():
         "identity 0.05) and has been superseded.\n"
         "- **Masked-model insertion curve.** The insertion curve's 'EMA-only' start "
         "point (~20%) is the frozen *full* model with acoustic groups zeroed, not the "
-        "true EMA-only-trained accuracy (78.71%). This is a known SAGE/Shapley masking "
+        "true EMA-only-trained accuracy (84.93%). This is a known SAGE/Shapley masking "
         "artifact; the *ordering* of the deletion/insertion curves remains valid.\n"
         "- **Exp 5 aux alignment fix.** The earlier Exp-5 code attached the auxiliary "
         "MSE target by sequential batch chunking, which mismatches the bucketed "

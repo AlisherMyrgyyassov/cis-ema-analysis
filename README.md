@@ -3,18 +3,18 @@
 Code and reference results for *"What Does an EMA-Based Silent Speech Interface Capture? A
 Feature-Attribution and Observability Analysis of Cantonese Syllable Recognition."*
 
-An EMA-only BiLSTM reaches **78.71 %** on 43-way Cantonese syllable recognition, **88.28 %**
+An EMA-only BiLSTM reaches **84.93 %** on 43-way Cantonese syllable recognition, **92.67 %**
 with hand-crafted acoustics and **94.13 %** for fine-tuned HuBERT. The paper asks where the
 remaining gap comes from — a better decoder, or sensors that never observed the information —
 and separates the two with exact Shapley attribution, linear probes, ridge/gradient-boosted
-recoverability, knowledge distillation and retrained sensor removal.
+recoverability and retrained sensor removal.
 
 ```
 ┌──────────────────────────────────────────────────────────────────────────────────┐
-│  78.71 %   EMA-only BiLSTM, 59 channels, 6-fold subject-disjoint CV, 2 seeds      │
-│  88.28 %   same backbone + 47 hand-crafted acoustic channels                      │
+│  84.93 %   EMA-only BiLSTM, 59 channels, 6-fold subject-disjoint CV, 2 seeds      │
+│  92.67 %   same backbone + 47 hand-crafted acoustic channels                      │
 │  94.13 %   HuBERT-large on raw audio (the acoustic ceiling)                       │
-│   9.57 %   the gap this repository is about                                       │
+│   7.74 %   the gap this repository is about                                       │
 └──────────────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -35,11 +35,11 @@ What was verified when this repository was assembled:
 |---|---|
 | claims ledger against shipped artifacts | **64/64** pass, no corpus needed |
 | frozen folds vs the subject lists recorded in the original run artifacts | identical, all 6 folds |
-| Table I re-run, 12 fold-seeds, both models | EMA-only **78.22** (published 78.71), full **88.16** (88.28) |
+| Table I, re-derived from the shipped checkpoints | EMA-only **84.93**, full **92.67** — exact match to the ledger |
 | SAIT-EMA 405-way re-run from public data | **39.45 ± 7.92** (published 39.31 ± 8.17) |
 | eight figure builders on the shipped artifacts | reproduce the manuscript figures |
 | paired tests re-derived from artifacts | reproduce the paper's values exactly |
-| tone / F0 ceiling probes re-run | 73.07 EMA vs 73.03, 73.77 full vs 73.93 (probe-level sklearn drift) |
+| tone / F0 ceiling probes re-run on v2 | EMA **77.64** vs prior 65.00; full **78.11** |
 
 ---
 
@@ -53,7 +53,7 @@ is fully checkable. Please read this table before filing an issue about missing 
 | | Result | Public data enough? | Needs CIS-EMA? |
 |---|---|---|---|
 | **Method** — folds, BiLSTM, exact Shapley, probing, calibration, leave-one-coil-out | all of it | ✅ on SAIT-EMA (section IV-G) | — |
-| Table I | ceilings: 78.71 / 88.28 / 94.13 | — | ✅ |
+| Table I | ceilings: 84.93 / 92.67 / 94.13 | — | ✅ |
 | Table II | normalization ablation | ✅ SAIT equivalents (IV-G) | ✅ for the CIS column |
 | Table III | mechanistic ridge recoverability | — | ✅ |
 | Table IV | linear vs nonlinear recoverability | — | ✅ |
@@ -138,7 +138,7 @@ python scripts/run_exp2.py                                # group Shapley   -> F
 python scripts/run_exp3.py                                # probing + faithfulness
 python scripts/run_exp4.py                                # mechanistic tables III-IV
 python scripts/run_exp5.py --lmbdas 0.3,1.0               # auxiliary-loss null
-python scripts/run_exp6_sweep3.py                         # distillation
+python scripts/run_exp6_sweep3.py                         # distillation (kept in the repo; not reported in the paper)
 python scripts/within_syllable_tone.py                    # tone, syllable-controlled
 python scripts/sensor_shapley.py                          # Fig. 7a
 python scripts/sait_classify.py --features <features_mono.csv> --view ema ...
@@ -179,7 +179,7 @@ runs/                   checkpoints and per-run JSON (gitignored)
 
 | corpus | what it is | status |
 |---|---|---|
-| **CIS-EMA** | 33 speakers, 4,884 isolated Cantonese syllables, six coils (TD TL TT UL LL LC), AG501, 250 Hz, synchronized audio | not public — see `docs/DATA.md` |
+| **CIS-EMA** | 33 speakers, 4,814 isolated Cantonese syllables, six coils (TD TL TT UL LL LC), AG501, 250 Hz, synchronized audio | not public — see `docs/DATA.md` |
 | **SAIT-EMA** | 18 speakers (12 native, 6 L2), Mandarin, six coils (TT TB TD LI UL LL), 250 Hz | public, CC BY 4.0 |
 
 Both are described in `docs/DATA.md`, including the exact files the code expects.

@@ -29,7 +29,8 @@ import numpy as np
 from src import figstyle  # noqa: E402
 
 REPO = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-RUNS = os.path.join(REPO, "runs", "scaling")
+RUNS = os.path.join(os.environ.get("EMA_RUNS_DIR") or os.path.join(REPO, "runs"),
+                    "scaling")
 OUT_DEFAULT = os.path.join(REPO, "paper", "illustrations")
 
 #: Full 106-D acoustic model, 6 folds x 2 seeds (paper/results/exp1_ceilings.json).
@@ -100,7 +101,7 @@ def main():
     ax.set_xticks(x)
     ax.set_xticklabels([str(k) for k in ks])
     ax.set_xlim(-0.52, len(ks) - 0.42)
-    ax.set_ylim(55, 92)
+    ax.set_ylim(55, 96)
     ax.set_yticks([60, 70, 80, 90])
     ax.set_xlabel("Training Speakers")
     ax.set_ylabel("Accuracy (%)")

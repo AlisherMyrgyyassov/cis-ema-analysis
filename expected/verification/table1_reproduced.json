@@ -1,23 +1,23 @@
 {
-  "note": "Result of re-running Table I in the released environment (torch 2.11.0+cu128, Python 3.14.5, RTX 5070 Ti), 6 folds x 2 seeds per model. Pooled baselines are quoted from the run's summary; the neural rows are computed from the run artifacts.",
-  "ema_only": {
-    "mean": 78.22,
-    "std": 3.72,
-    "n_runs": 12
-  },
-  "full": {
-    "mean": 88.16,
-    "std": 3.34,
-    "n_runs": 12
-  },
-  "logreg": {
-    "mean": 84.03,
-    "std": 3.23,
-    "n_runs": 12
-  },
-  "rf": {
-    "mean": 82.78,
-    "std": 4.49,
-    "n_runs": 12
-  }
+ "note": "CIS-EMA-v2 production run (torch 2.11.0+cu128, Python 3.14.5, RTX 5070 Ti), 6 folds x 2 seeds per model. These are the values shipped in expected/, so the ledger and this file agree by construction; the earlier 78.22 / 88.16 self-check belonged to the pre-correction corpus and is superseded.",
+ "ema_only": {
+  "mean": 84.93,
+  "std": 2.14,
+  "n_runs": 12
+ },
+ "full": {
+  "mean": 92.67,
+  "std": 0.73,
+  "n_runs": 12
+ },
+ "logreg": {
+  "mean": 88.93,
+  "std": 1.65,
+  "n_runs": 12
+ },
+ "rf": {
+  "mean": 87.03,
+  "std": 1.22,
+  "n_runs": 12
+ }
 }

@@ -1,29 +1,29 @@
 {
-  "student": "ensC_a09_ck",
-  "baseline": "ema_only_results.json",
-  "phase_offsets_note": "per-run accuracy, not the 2-seed logit ensemble",
-  "fold_level": {
-    "comparison": "student vs EMA-only, fold-level (n=6)",
-    "n_pairs": 6,
-    "candidate_mean": 0.8025839860395602,
-    "baseline_mean": 0.7871282300100929,
-    "mean_diff": 0.015455756029467175,
-    "std_diff": 0.014503851107061518,
-    "paired_t": 2.6102526550832255,
-    "paired_t_p": 0.04765524454934257,
-    "wilcoxon_p": 0.09375,
-    "cohens_d": 1.065631184043014
-  },
-  "run_level": {
-    "comparison": "student vs EMA-only, run-level (n=12, seed-matched)",
-    "n_pairs": 12,
-    "candidate_mean": 0.80258398603956,
-    "baseline_mean": 0.7871282300100929,
-    "mean_diff": 0.015455756029467175,
-    "std_diff": 0.01488525776053797,
-    "paired_t": 3.5968681420346007,
-    "paired_t_p": 0.004192865399741581,
-    "wilcoxon_p": 0.0068359375,
-    "cohens_d": 1.0383263949518775
-  }
+ "student": "ensC_a09_ck",
+ "baseline": "ema_only_results.json",
+ "phase_offsets_note": "per-run accuracy, not the 2-seed logit ensemble",
+ "fold_level": {
+  "comparison": "student vs EMA-only, fold-level (n=6)",
+  "n_pairs": 6,
+  "candidate_mean": 0.8636171121622317,
+  "baseline_mean": 0.8493401262222003,
+  "mean_diff": 0.014276985940031135,
+  "std_diff": 0.009935269783004663,
+  "paired_t": 3.5199175645726406,
+  "paired_t_p": 0.016920606946952396,
+  "wilcoxon_p": 0.03125,
+  "cohens_d": 1.4370003283105046
+ },
+ "run_level": {
+  "comparison": "student vs EMA-only, run-level (n=12, seed-matched)",
+  "n_pairs": 12,
+  "candidate_mean": 0.8636171121622316,
+  "baseline_mean": 0.8493401262222003,
+  "mean_diff": 0.014276985940031099,
+  "std_diff": 0.015047746050106163,
+  "paired_t": 3.286666979192663,
+  "paired_t_p": 0.007247479110451449,
+  "wilcoxon_p": 0.0068359375,
+  "cohens_d": 0.948779032586769
+ }
 }

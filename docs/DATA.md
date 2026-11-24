@@ -7,7 +7,7 @@ about a missing file.
 data/
 ├── CIS-EMA/                 restricted — not distributed with this repository
 │   ├── features.csv         361,835 frames x 106 features
-│   ├── manifest.csv         4,884 utterances
+│   ├── manifest.csv         4,814 utterances
 │   ├── meta.json            column-name lists, inventories
 │   └── utterances/sub_XX/*.npz
 ├── raw/CIS-EMA/             restricted — the original recordings
@@ -24,10 +24,17 @@ else in the repository contains an absolute path. See `paths.example.toml`.
 
 ## CIS-EMA — Cantonese Isolated-Syllable EMA corpus
 
-33 healthy adult speakers (17 F / 16 M), 4,884 isolated Cantonese syllables, 43 distinct
+33 healthy adult speakers (17 F / 16 M), 4,814 isolated Cantonese syllables, 43 distinct
 syllables, 155 scripted street-name stimuli, six articulatory coils on an AG501 at 250 Hz
 with synchronized audio at 48 kHz. Coordinates are already head-corrected (the AG501
 `posR` frame).
+
+> **Corpus version.** These artifacts were produced from **CIS-EMA-v2**. In three of the 33
+> sessions the kinematic exports were numbered one step out of alignment with the audio
+> (sub_15 from sweep 11, sub_18 from sweep 47, offset +1; sub_21's sweeps 87–156 could not be
+> re-paired). 255 utterances were re-paired and 70 excluded, giving 4,814. The other 30
+> sessions are numerically identical to the earlier distribution. `expected/` and every
+> number in the manuscript reflect the corrected corpus.
 
 | | |
 |---|---|

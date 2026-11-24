@@ -38,9 +38,13 @@ from src import figstyle  # noqa: E402
 import argparse
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-MS = os.path.join(ROOT, "runs", "montage_subset")
-SHAP = os.path.join(ROOT, "runs", "paper", "exp8_robust_z", "sensor_shapley.json")
-OUT = os.path.join(ROOT, "paper", "illustrations", "fig_montage_necessity")
+_RUNS = os.environ.get("EMA_RUNS_DIR") or os.path.join(ROOT, "runs")
+_PAPER = os.environ.get("EMA_PAPER_SUBDIR") or "paper"
+MS = os.path.join(_RUNS, "montage_subset")
+SHAP = (os.environ.get("EMA_SENSOR_SHAPLEY")
+        or os.path.join(_RUNS, _PAPER, "exp8_robust_z", "sensor_shapley.json"))
+OUT = os.path.join(os.environ.get("EMA_FIG_DIR") or os.path.join(ROOT, "paper", "illustrations"),
+                   "fig_montage_necessity")
 
 TONGUE = figstyle.NAVY
 LIP = figstyle.AMBER
